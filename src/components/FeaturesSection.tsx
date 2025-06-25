@@ -59,13 +59,13 @@ function FeatureCard({ feature, index }: { feature: typeof features[0], index: n
           />
         )}
         
-        <div className={`bg-gradient-to-r ${feature.gradient} p-4 rounded-lg inline-block mb-6`}>
+        <div className="mb-6">
           <Image 
             src={feature.iconImage} 
             alt={feature.title}
-            width={48}
-            height={48}
-            className="w-12 h-12"
+            width={80}
+            height={80}
+            className="w-20 h-20 rounded-lg"
           />
         </div>
         
