@@ -2,24 +2,24 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { FaBrain, FaRocket, FaShieldAlt, FaChartLine, FaCode, FaCloud } from 'react-icons/fa'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 const features = [
   {
-    icon: FaChartLine,
+    iconImage: '/LC1.png',
     title: '戦略的SNSグロース',
     description: 'データ分析とトレンド洞察に基づき、単なる「運用」ではなく、事業成果に繋がる「成長戦略」を設計・実行します。アカウントのコンセプト設計から日々の運用、効果測定まで、SNS成長の全てをサポートします。',
     gradient: 'from-blue-500 to-cyan-500',
   },
   {
-    icon: FaRocket,
+    iconImage: '/LC2.png',
     title: 'コンバージョン特化型Webサイト/LP制作',
     description: 'SNSからのアクセスを、一滴も無駄にしない"受け皿"を構築します。デザイン性はもちろん、確実に「問い合わせ」や「購入」に繋げる、成果コミット型のウェブサイト及びランディングページを制作します。',
     gradient: 'from-purple-500 to-pink-500',
   },
   {
-    icon: FaBrain,
+    iconImage: '/LC3.png',
     title: '業務効率化のためのカスタム開発',
     description: '属人的な作業や非効率なプロセスを、テクノロジーで解決します。業務を効率化するAIチャットボットや、SNSと連携する予約システムなど、貴社の課題に合わせたオーダーメイドのツールを開発します。',
     gradient: 'from-orange-500 to-red-500',
@@ -60,7 +60,13 @@ function FeatureCard({ feature, index }: { feature: typeof features[0], index: n
         )}
         
         <div className={`bg-gradient-to-r ${feature.gradient} p-4 rounded-lg inline-block mb-6`}>
-          <feature.icon className="text-3xl text-white" />
+          <Image 
+            src={feature.iconImage} 
+            alt={feature.title}
+            width={48}
+            height={48}
+            className="w-12 h-12"
+          />
         </div>
         
         <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
