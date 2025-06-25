@@ -106,11 +106,27 @@ class APIClient {
 }`,
 }
 
+const partnerships = [
+  { 
+    name: 'StuDXIA', 
+    description: '国内最大級のDXコミュニティ',
+    details: '慶應義塾大学を中心に、東京大学、早稲田大学の学生、上場企業・テック企業が連携',
+    imageName: 'StudXIA',
+    color: 'from-blue-500 to-cyan-500' 
+  },
+  { 
+    name: '羅針盤', 
+    description: '東京大学キャリア支援団体',
+    details: '公式ウェブサイト制作を担当し、学生のキャリア形成を技術面でサポート',
+    imageName: 'rashinban',
+    color: 'from-purple-500 to-pink-500' 
+  },
+]
+
 const achievements = [
-  { icon: FaReact, name: 'StuDXIA', description: '慶應・東大・早稲田等\n国内最大級DXコミュニティ', color: 'text-blue-400' },
-  { icon: SiTypescript, name: '羅針盤', description: '東京大学\nキャリア支援団体', color: 'text-blue-600' },
-  { icon: FaChartLine, name: 'CVR向上', description: 'お問い合わせ転換率\n平均+15%以上', color: 'text-green-500' },
-  { icon: FaRocket, name: 'リード獲得', description: '戦略的SNS運用による\n月間新規+30件以上', color: 'text-yellow-400' },
+  { icon: FaChartLine, name: 'CVR向上', description: 'LP改修による\nお問い合わせ転換率\n平均+15%以上', color: 'text-green-500' },
+  { icon: FaRocket, name: 'リード獲得', description: '戦略的SNS運用による\n月間新規リード獲得\n+30件以上', color: 'text-yellow-400' },
+  { icon: FaReact, name: '業務効率化', description: 'カスタムツール導入による\n特定業務の作業時間\n50%削減', color: 'text-purple-500' },
 ]
 
 export default function TechShowcase() {
@@ -125,20 +141,78 @@ export default function TechShowcase() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-5xl font-bold text-center mb-4">
+          <h2 className="text-5xl font-bold text-center mb-6">
             <span className="text-gradient">信頼の源泉</span>
           </h2>
-          <p className="text-center text-gray-400 mb-12 text-lg">
-            次世代をリードするコミュニティからの、確かな信頼
-          </p>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+          <div className="max-w-4xl mx-auto mb-12">
+            <h3 className="text-2xl font-bold text-center mb-6 text-neon-blue">
+              次世代をリードするコミュニティからの、確かな信頼。
+            </h3>
+            
+            <div className="glass-effect rounded-lg p-8 mb-8">
+              <p className="text-lg leading-relaxed text-gray-300 mb-6">
+                私たちの技術力とデザイン性は、次世代をリードするコミュニティからの確かな信頼に裏付けられています。
+              </p>
+              
+              <p className="text-lg leading-relaxed text-gray-300 mb-6">
+                代表が創設した<span className="text-neon-blue font-bold">『StuDXIA』</span>は、慶應義塾大学を中心に、東京大学や早稲田大学の学生、さらには上場企業やテック企業とも連携する、<span className="text-gradient font-semibold">国内最大級のDXコミュニティ</span>です。
+              </p>
+              
+              <p className="text-lg leading-relaxed text-gray-300">
+                また、東京大学のキャリア支援団体<span className="text-neon-purple font-bold">『羅針盤』</span>の公式ウェブサイト制作も担当。これらの実績こそが、我々が信頼できるプロフェッショナルな開発パートナーであることの何よりの証明です。
+              </p>
+            </div>
+          </div>
+          
+          {/* パートナーシップセクション */}
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {partnerships.map((partner, index) => (
+              <motion.div
+                key={partner.name}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: index * 0.1 }}
+                className="glass-effect p-8 rounded-lg hover-lift"
+              >
+                <div className="flex items-center gap-6">
+                  <div className="w-20 h-20 flex-shrink-0">
+                    <div className={`w-full h-full bg-gradient-to-br ${partner.color} rounded-lg flex items-center justify-center border border-white/20`}>
+                      <div className="text-white text-xs font-bold text-center px-2">
+                        {partner.imageName}
+                        <br />
+                        LOGO
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex-1">
+                    <h4 className="text-2xl font-bold mb-2 text-gradient">{partner.name}</h4>
+                    <p className="text-lg font-semibold mb-3 text-neon-blue">{partner.description}</p>
+                    <p className="text-sm text-gray-400 leading-relaxed">{partner.details}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* 実績セクション */}
+          <div className="mb-8">
+            <h3 className="text-2xl font-bold text-center mb-6 text-neon-purple">
+              私たちが提供する"成果"の一例。
+            </h3>
+            <p className="text-center text-gray-400 mb-8">
+              我々は、全てのプロジェクトにおいて、計測可能な「数字」の改善にコミットします。
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
             {achievements.map((achievement, index) => (
               <motion.div
                 key={achievement.name}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: (partnerships.length * 0.1) + (index * 0.1) }}
                 className="glass-effect p-6 rounded-lg hover-lift text-center"
               >
                 <achievement.icon className={`text-5xl ${achievement.color} mx-auto mb-3`} />
