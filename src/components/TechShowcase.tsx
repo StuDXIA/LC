@@ -6,6 +6,7 @@ import { useInView } from 'react-intersection-observer'
 import dynamic from 'next/dynamic'
 import { FaReact, FaRocket, FaChartLine } from 'react-icons/fa'
 import { SiTypescript, SiGraphql, SiKubernetes, SiTensorflow } from 'react-icons/si'
+import AlternatingImages from './AlternatingImages'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
@@ -154,8 +155,15 @@ export default function TechShowcase() {
             
             <div className="flex flex-col lg:flex-row items-center gap-8">
               <div className="lg:w-1/3">
-                <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 flex items-center justify-center text-6xl text-white/70">
-                  👤
+                <div className="relative w-48 h-48 mx-auto">
+                  <AlternatingImages
+                    images={['me1', 'me2']}
+                    alt="山本公才 / Kousai Yamamoto"
+                    width={192}
+                    height={192}
+                    className="rounded-full border-4 border-neon-blue/30 drop-shadow-[0_0_30px_rgba(0,217,255,0.5)]"
+                    interval={3000}
+                  />
                 </div>
               </div>
               

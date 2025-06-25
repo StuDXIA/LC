@@ -36,12 +36,13 @@ export default function ImageWithFallback({
     // すべての拡張子を試した後、フォールバック表示
     return (
       <div 
-        className={`bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 rounded-lg flex items-center justify-center ${className}`}
+        className={`bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 rounded-lg flex items-center justify-center border border-neon-blue/30 ${className}`}
         style={fill ? {} : { width, height }}
       >
-        <div className="text-white/50 text-center">
-          <div className="text-2xl mb-2">👤</div>
-          <div className="text-xs">Image</div>
+        <div className="text-white/70 text-center">
+          <div className="text-4xl mb-2 animate-pulse">🌟</div>
+          <div className="text-xs font-mono">Luminous Core</div>
+          <div className="text-xs text-neon-blue/70">{baseName}</div>
         </div>
       </div>
     )
