@@ -230,12 +230,12 @@ export default function TechShowcase() {
             
             <div className="flex flex-col lg:flex-row items-center gap-8">
               <div className="lg:w-1/3">
-                <div className="relative w-48 h-48 mx-auto">
+                <div className="relative w-48 h-48 lg:w-80 lg:h-80 mx-auto">
                   <AlternatingImages
                     images={['me1', 'me2']}
                     alt="山本公才 / Kousai Yamamoto"
-                    width={192}
-                    height={192}
+                    width={320}
+                    height={320}
                     className="rounded-full border-4 border-neon-blue/30 drop-shadow-[0_0_30px_rgba(0,217,255,0.5)]"
                     interval={3000}
                   />
