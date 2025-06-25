@@ -32,6 +32,10 @@ export default function ImageWithFallback({
     sources = ['/me2.JPG', '/me2.jpg', '/me2.png']
   } else if (baseName === 'Luminous Core') {
     sources = ['/Luminous Core.png', '/Luminous Core.jpg', '/luminous-core.png']
+  } else if (baseName === 'StudXIA') {
+    sources = ['/StuDXIA.jpg', '/StuDXIA.png', '/StudXIA.jpg', '/StudXIA.png']
+  } else if (baseName === 'rashinban') {
+    sources = ['/rashinban.png', '/rashinban.jpg', '/rashinban.PNG']
   } else {
     const extensions = ['.jpg', '.jpeg', '.png', '.webp', '.JPG', '.JPEG', '.PNG']
     sources = extensions.map(ext => `/${baseName}${ext}`)

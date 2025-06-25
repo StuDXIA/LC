@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic'
 import { FaReact, FaRocket, FaChartLine } from 'react-icons/fa'
 import { SiTypescript, SiGraphql, SiKubernetes, SiTensorflow } from 'react-icons/si'
 import AlternatingImages from './AlternatingImages'
+import ImageWithFallback from './ImageWithFallback'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
@@ -177,13 +178,13 @@ export default function TechShowcase() {
               >
                 <div className="flex items-center gap-6">
                   <div className="w-20 h-20 flex-shrink-0">
-                    <div className={`w-full h-full bg-gradient-to-br ${partner.color} rounded-lg flex items-center justify-center border border-white/20`}>
-                      <div className="text-white text-xs font-bold text-center px-2">
-                        {partner.imageName}
-                        <br />
-                        LOGO
-                      </div>
-                    </div>
+                    <ImageWithFallback
+                      baseName={partner.imageName}
+                      alt={`${partner.name} Logo`}
+                      width={80}
+                      height={80}
+                      className="rounded-lg border border-white/20"
+                    />
                   </div>
                   
                   <div className="flex-1">
