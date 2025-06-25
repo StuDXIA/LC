@@ -44,7 +44,7 @@ function CountUpNumber({ target, duration = 2000, prefix = '', suffix = '' }: {
   const [count, setCount] = useState(0)
   const [hasStarted, setHasStarted] = useState(false)
   const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { triggerOnce: true })
+  const inView = useInView(ref)
 
   useEffect(() => {
     if (inView && !hasStarted) {
