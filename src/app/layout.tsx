@@ -5,6 +5,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://lc-platform.vercel.app'),
   title: 'LC - Future Technology Platform',
   description: 'Experience the future of technology with cutting-edge innovations',
   keywords: 'technology, innovation, AI, future, platform',

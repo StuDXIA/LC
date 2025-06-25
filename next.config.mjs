@@ -5,9 +5,6 @@ const nextConfig = {
   images: {
     domains: ['images.unsplash.com', 'cdn.jsdelivr.net'],
   },
-  experimental: {
-    optimizeCss: true,
-  },
 }
 
 export default nextConfig

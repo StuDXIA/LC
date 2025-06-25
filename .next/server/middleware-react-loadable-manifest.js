@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST='{"../node_modules/@react-three/drei/core/VideoTexture.js -> hls.js":{"id":null,"files":[]},"../node_modules/@react-three/drei/web/FaceLandmarker.js -> @mediapipe/tasks-vision":{"id":null,"files":[]},"app/page.tsx -> @/components/ParticleBackground":{"id":787,"files":["static/chunks/b536a0f1.5acff86f321294fb.js","static/chunks/202.9ec30b27f67e7dfc.js","static/chunks/787.f56b5ec49fe16cde.js"]},"components/TechShowcase.tsx -> @monaco-editor/react":{"id":2289,"files":["static/chunks/289.51a49341fce7936e.js"]}}';
