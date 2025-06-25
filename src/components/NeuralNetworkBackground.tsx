@@ -137,6 +137,7 @@ export default function NeuralNetworkBackground() {
 
       const time = Date.now() * 0.001
       const mouse = mouseRef.current
+      const perspective = 800
 
       // Update and draw nodes
       nodes.forEach((node, index) => {
@@ -151,7 +152,6 @@ export default function NeuralNetworkBackground() {
         const mouseInfluence = Math.max(0, 1 - distance / 200)
 
         // 3D perspective calculation
-        const perspective = 800
         const scale = perspective / (perspective + node.z)
         const screenX = node.x * scale + (1 - scale) * canvas.width / 2
         const screenY = node.y * scale + (1 - scale) * canvas.height / 2
