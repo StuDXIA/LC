@@ -8,6 +8,7 @@ import { FaReact, FaRocket, FaChartLine } from 'react-icons/fa'
 import { SiTypescript, SiGraphql, SiKubernetes, SiTensorflow } from 'react-icons/si'
 import AlternatingImages from './AlternatingImages'
 import ImageWithFallback from './ImageWithFallback'
+import PremiumAchievements from './PremiumAchievements'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
@@ -124,11 +125,6 @@ const partnerships = [
   },
 ]
 
-const achievements = [
-  { icon: FaChartLine, name: 'CVR向上', description: 'LP改修による\nお問い合わせ転換率\n平均+15%以上', color: 'text-green-500' },
-  { icon: FaRocket, name: 'リード獲得', description: '戦略的SNS運用による\n月間新規リード獲得\n+30件以上', color: 'text-yellow-400' },
-  { icon: FaReact, name: '業務効率化', description: 'カスタムツール導入による\n特定業務の作業時間\n50%削減', color: 'text-purple-500' },
-]
 
 export default function TechShowcase() {
   const [selectedLang, setSelectedLang] = useState<keyof typeof codeExamples>('react')
@@ -197,31 +193,8 @@ export default function TechShowcase() {
             ))}
           </div>
           
-          {/* 実績セクション */}
-          <div className="mb-8">
-            <h3 className="text-2xl font-bold text-center mb-6 text-neon-purple">
-              私たちが提供する"成果"の一例。
-            </h3>
-            <p className="text-center text-gray-400 mb-8">
-              我々は、全てのプロジェクトにおいて、計測可能な「数字」の改善にコミットします。
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            {achievements.map((achievement, index) => (
-              <motion.div
-                key={achievement.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: (partnerships.length * 0.1) + (index * 0.1) }}
-                className="glass-effect p-6 rounded-lg hover-lift text-center"
-              >
-                <achievement.icon className={`text-5xl ${achievement.color} mx-auto mb-3`} />
-                <p className="font-bold text-lg mb-2">{achievement.name}</p>
-                <p className="text-sm text-gray-400 whitespace-pre-line">{achievement.description}</p>
-              </motion.div>
-            ))}
-          </div>
+          {/* Premium Achievements Section */}
+          <PremiumAchievements />
           
           <div className="glass-effect rounded-lg p-8">
             <h3 className="text-3xl font-bold text-center mb-6">
