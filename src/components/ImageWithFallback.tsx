@@ -23,8 +23,19 @@ export default function ImageWithFallback({
   fill = false,
 }: ImageWithFallbackProps) {
   const [currentSrc, setCurrentSrc] = useState(0)
-  const extensions = ['.jpg', '.jpeg', '.png', '.webp']
-  const sources = extensions.map(ext => `/${baseName}${ext}`)
+  
+  // 実際のファイル名に合わせて調整
+  let sources: string[] = []
+  if (baseName === 'me1') {
+    sources = ['/me1.JPG', '/me1.jpg', '/me1.png']
+  } else if (baseName === 'me2') {
+    sources = ['/me2.JPG', '/me2.jpg', '/me2.png']
+  } else if (baseName === 'Luminous Core') {
+    sources = ['/Luminous Core.png', '/Luminous Core.jpg', '/luminous-core.png']
+  } else {
+    const extensions = ['.jpg', '.jpeg', '.png', '.webp', '.JPG', '.JPEG', '.PNG']
+    sources = extensions.map(ext => `/${baseName}${ext}`)
+  }
   
   const handleError = () => {
     if (currentSrc < sources.length - 1) {
