@@ -236,7 +236,7 @@ function AchievementCard({ achievement, index }: { achievement: typeof achieveme
 
 export default function PremiumAchievements() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const inView = useInView(sectionRef, { threshold: 0.1, triggerOnce: true })
+  const inView = useInView(sectionRef)
 
   return (
     <div ref={sectionRef} className="mb-16">
