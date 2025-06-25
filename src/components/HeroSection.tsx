@@ -4,6 +4,9 @@ import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { FaArrowDown } from 'react-icons/fa'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
+
+const NeuralNetworkBackground = dynamic(() => import('./NeuralNetworkBackground'), { ssr: false })
 
 export default function HeroSection() {
   const titleRef = useRef<HTMLHeadingElement>(null)
@@ -23,9 +26,13 @@ export default function HeroSection() {
   
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-radial from-neon-blue/20 via-transparent to-transparent" />
+      {/* Neural Network Background */}
+      <NeuralNetworkBackground />
       
-      <div className="container mx-auto px-6 relative z-10">
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-radial from-neon-blue/10 via-transparent to-black/30 z-10" />
+      
+      <div className="container mx-auto px-6 relative z-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -97,7 +104,7 @@ export default function HeroSection() {
         </motion.div>
       </div>
       
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-blue to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-blue to-transparent z-20" />
     </section>
   )
 }
