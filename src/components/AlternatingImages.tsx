@@ -36,7 +36,7 @@ export default function AlternatingImages({
   if (images.length === 0) return null
   
   return (
-    <div className={`relative overflow-hidden ${className}`} style={{ width, height }}>
+    <div className={`relative overflow-hidden w-full h-full ${className}`} style={width && height ? { width, height } : {}}>
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
@@ -52,13 +52,13 @@ export default function AlternatingImages({
           <ImageWithFallback
             baseName={images[currentIndex].replace(/^\//, '').replace(/\.[^.]+$/, '')}
             alt={`${alt} ${currentIndex + 1}`}
-            width={width}
-            height={height}
-            className="object-cover rounded-lg"
+            width={width || 400}
+            height={height || 400}
+            className="object-cover w-full h-full"
             priority={currentIndex === 0}
             fill
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20 rounded-lg" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20" />
         </motion.div>
       </AnimatePresence>
       
