@@ -32,27 +32,53 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative py-20 px-6 border-t border-gray-800">
-      <div className="absolute inset-0 bg-gradient-to-t from-cyber-black to-transparent opacity-50" />
-      
-      <div className="container mx-auto relative z-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
+    <>
+      {/* CTA Section */}
+      <section className="relative py-20 px-6 bg-gradient-to-b from-cyber-gray to-cyber-black">
+        <div className="absolute inset-0 bg-gradient-radial from-neon-blue/10 via-transparent to-transparent" />
+        
+        <div className="container mx-auto relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl font-bold mb-6">
+              <span className="text-gradient">さあ、あなたのビジネスを、次世代へ。</span>
+            </h2>
+            
+            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+              まずは30分、貴社の現状と課題をお聞かせください。<br/>
+              我々が、その未来をどう変えられるかをお見せします。
+            </p>
+            
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-12 py-4 bg-gradient-to-r from-neon-blue to-neon-purple rounded-lg font-bold text-xl hover-lift glass-effect neon-border transition-all duration-300"
+            >
+              30分間の無料相談に申し込む
+            </motion.button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="relative py-12 px-6 border-t border-gray-800">
+        <div className="container mx-auto relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-3">
               <Image
                 src="/Luminous Core.png"
                 alt="Luminous Core Logo"
-                width={40}
-                height={40}
+                width={30}
+                height={30}
                 className="drop-shadow-[0_0_10px_rgba(0,217,255,0.4)]"
               />
-              <h3 className="text-3xl font-bold glitch" data-text="LC">
-                <span className="text-gradient">LC</span>
-              </h3>
+              <span className="text-xl font-bold text-gradient">Luminous Core</span>
             </div>
-            <p className="text-gray-400 mb-6">
-              Building the future of technology, one innovation at a time.
-            </p>
+            
             <div className="flex gap-4">
               {socialLinks.map((social, index) => (
                 <motion.a
@@ -60,47 +86,19 @@ export default function Footer() {
                   href={social.href}
                   whileHover={{ scale: 1.2, rotate: 360 }}
                   transition={{ duration: 0.3 }}
-                  className="w-10 h-10 glass-effect rounded-lg flex items-center justify-center hover:border-neon-blue"
+                  className="w-8 h-8 glass-effect rounded-lg flex items-center justify-center hover:border-neon-blue text-sm"
                 >
-                  <social.icon className="text-lg" />
+                  <social.icon />
                 </motion.a>
               ))}
             </div>
-          </div>
-          
-          {footerLinks.map((section, index) => (
-            <div key={section.title}>
-              <h4 className="font-semibold mb-4 text-neon-blue">{section.title}</h4>
-              <ul className="space-y-2">
-                {section.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-gray-400 hover:text-white transition-colors duration-200"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        
-        <div className="border-t border-gray-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            
             <p className="text-gray-400 text-sm">
-              © 2024 LC Platform. All rights reserved.
+              © 2024 Luminous Core. All rights reserved.
             </p>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-sm text-gray-400">All systems operational</span>
-              </div>
-            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   )
 }

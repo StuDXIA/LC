@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import dynamic from 'next/dynamic'
-import { FaReact, FaNodeJs, FaPython, FaDocker } from 'react-icons/fa'
+import { FaReact, FaRocket, FaChartLine } from 'react-icons/fa'
 import { SiTypescript, SiGraphql, SiKubernetes, SiTensorflow } from 'react-icons/si'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
@@ -105,15 +105,11 @@ class APIClient {
 }`,
 }
 
-const technologies = [
-  { icon: FaReact, name: 'React', color: 'text-blue-400' },
-  { icon: SiTypescript, name: 'TypeScript', color: 'text-blue-600' },
-  { icon: FaNodeJs, name: 'Node.js', color: 'text-green-500' },
-  { icon: FaPython, name: 'Python', color: 'text-yellow-400' },
-  { icon: SiGraphql, name: 'GraphQL', color: 'text-pink-500' },
-  { icon: FaDocker, name: 'Docker', color: 'text-blue-500' },
-  { icon: SiKubernetes, name: 'Kubernetes', color: 'text-blue-600' },
-  { icon: SiTensorflow, name: 'TensorFlow', color: 'text-orange-500' },
+const achievements = [
+  { icon: FaReact, name: 'StuDXIA', description: '慶應・東大・早稲田等\n国内最大級DXコミュニティ', color: 'text-blue-400' },
+  { icon: SiTypescript, name: '羅針盤', description: '東京大学\nキャリア支援団体', color: 'text-blue-600' },
+  { icon: FaChartLine, name: 'CVR向上', description: 'お問い合わせ転換率\n平均+15%以上', color: 'text-green-500' },
+  { icon: FaRocket, name: 'リード獲得', description: '戦略的SNS運用による\n月間新規+30件以上', color: 'text-yellow-400' },
 ]
 
 export default function TechShowcase() {
@@ -129,59 +125,60 @@ export default function TechShowcase() {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-5xl font-bold text-center mb-4">
-            <span className="text-gradient">Technology Stack</span>
+            <span className="text-gradient">信頼の源泉</span>
           </h2>
           <p className="text-center text-gray-400 mb-12 text-lg">
-            Powered by cutting-edge technologies
+            次世代をリードするコミュニティからの、確かな信頼
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-            {technologies.map((tech, index) => (
+            {achievements.map((achievement, index) => (
               <motion.div
-                key={tech.name}
+                key={achievement.name}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: index * 0.1 }}
                 className="glass-effect p-6 rounded-lg hover-lift text-center"
               >
-                <tech.icon className={`text-5xl ${tech.color} mx-auto mb-3`} />
-                <p className="font-semibold">{tech.name}</p>
+                <achievement.icon className={`text-5xl ${achievement.color} mx-auto mb-3`} />
+                <p className="font-bold text-lg mb-2">{achievement.name}</p>
+                <p className="text-sm text-gray-400 whitespace-pre-line">{achievement.description}</p>
               </motion.div>
             ))}
           </div>
           
-          <div className="glass-effect rounded-lg p-6">
-            <div className="flex gap-4 mb-6">
-              {Object.keys(codeExamples).map((lang) => (
-                <button
-                  key={lang}
-                  onClick={() => setSelectedLang(lang as keyof typeof codeExamples)}
-                  className={`px-4 py-2 rounded-lg transition-all ${
-                    selectedLang === lang
-                      ? 'bg-gradient-to-r from-neon-blue to-neon-purple'
-                      : 'glass-effect hover:border-neon-blue'
-                  }`}
-                >
-                  {lang.charAt(0).toUpperCase() + lang.slice(1)}
-                </button>
-              ))}
-            </div>
+          <div className="glass-effect rounded-lg p-8">
+            <h3 className="text-3xl font-bold text-center mb-6">
+              <span className="text-gradient">代表者について</span>
+            </h3>
             
-            <div className="h-[400px] rounded-lg overflow-hidden neon-border">
-              <MonacoEditor
-                height="100%"
-                language={selectedLang === 'react' ? 'javascript' : selectedLang}
-                theme="vs-dark"
-                value={codeExamples[selectedLang]}
-                options={{
-                  readOnly: true,
-                  minimap: { enabled: false },
-                  scrollBeyondLastLine: false,
-                  fontSize: 14,
-                  wordWrap: 'on',
-                  automaticLayout: true,
-                }}
-              />
+            <div className="flex flex-col lg:flex-row items-center gap-8">
+              <div className="lg:w-1/3">
+                <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 flex items-center justify-center text-6xl text-white/70">
+                  👤
+                </div>
+              </div>
+              
+              <div className="lg:w-2/3 text-center lg:text-left">
+                <h4 className="text-2xl font-bold mb-2 text-neon-blue">山本 公才 / Kousai Yamamoto</h4>
+                <p className="text-lg font-semibold mb-4 text-neon-purple">Luminous Core 主宰</p>
+                
+                <div className="text-gray-300 leading-relaxed space-y-4">
+                  <p>
+                    慶應義塾大学経済学部出身。在学中より経理代行事業での起業を経験し、ビジネスの現場におけるリアルな課題解決に取り組む。
+                  </p>
+                  <p>
+                    その経験からデジタル分野の可能性を確信し、多様な才能を集めて学生団体「StuDXIA」を創設。
+                  </p>
+                  <p>
+                    現在は、論理的なビジネス・AIの知見と、モデルとしても活動する表現力を掛け合わせ、独自の視点で企業の課題解決に挑む。
+                    <span className="text-neon-blue font-semibold">IT資格や簿記資格</span>も、その多角的な視点を支えている。
+                  </p>
+                  <p>
+                    アカデミックな知見とビジネスの最前線を繋ぎ、データとAIを駆使してクライアントの事業価値を最大化することを使命とする。
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>

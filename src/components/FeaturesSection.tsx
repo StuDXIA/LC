@@ -7,40 +7,22 @@ import { useEffect, useState } from 'react'
 
 const features = [
   {
-    icon: FaBrain,
-    title: 'AI-Powered Intelligence',
-    description: 'Advanced machine learning algorithms that adapt and evolve with your needs',
-    gradient: 'from-purple-500 to-pink-500',
-  },
-  {
-    icon: FaRocket,
-    title: 'Lightning Fast Performance',
-    description: 'Optimized for speed with cutting-edge caching and edge computing',
+    icon: FaChartLine,
+    title: '戦略的SNSグロース',
+    description: 'データ分析とトレンド洞察に基づき、単なる「運用」ではなく、事業成果に繋がる「成長戦略」を設計・実行します。アカウントのコンセプト設計から日々の運用、効果測定まで、SNS成長の全てをサポートします。',
     gradient: 'from-blue-500 to-cyan-500',
   },
   {
-    icon: FaShieldAlt,
-    title: 'Enterprise Security',
-    description: 'Military-grade encryption and zero-trust architecture',
-    gradient: 'from-green-500 to-emerald-500',
+    icon: FaRocket,
+    title: 'コンバージョン特化型Webサイト/LP制作',
+    description: 'SNSからのアクセスを、一滴も無駄にしない"受け皿"を構築します。デザイン性はもちろん、確実に「問い合わせ」や「購入」に繋げる、成果コミット型のウェブサイト及びランディングページを制作します。',
+    gradient: 'from-purple-500 to-pink-500',
   },
   {
-    icon: FaChartLine,
-    title: 'Real-time Analytics',
-    description: 'Powerful insights with live data visualization and predictive modeling',
+    icon: FaBrain,
+    title: '業務効率化のためのカスタム開発',
+    description: '属人的な作業や非効率なプロセスを、テクノロジーで解決します。業務を効率化するAIチャットボットや、SNSと連携する予約システムなど、貴社の課題に合わせたオーダーメイドのツールを開発します。',
     gradient: 'from-orange-500 to-red-500',
-  },
-  {
-    icon: FaCode,
-    title: 'Developer First',
-    description: 'Comprehensive APIs and SDKs for seamless integration',
-    gradient: 'from-indigo-500 to-purple-500',
-  },
-  {
-    icon: FaCloud,
-    title: 'Cloud Native',
-    description: 'Built for scale with auto-scaling and global distribution',
-    gradient: 'from-teal-500 to-blue-500',
   },
 ]
 
@@ -120,14 +102,15 @@ export default function FeaturesSection() {
           className="text-center mb-12"
         >
           <h2 className="text-5xl font-bold mb-4">
-            <span className="text-gradient">Revolutionary Features</span>
+            <span className="text-gradient">事業成果に直結する、3つのコアソリューション</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Experience the future of technology with our comprehensive suite of advanced features
+          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+            SNSを起点とした成長戦略から、コンバージョンを最大化するWebサイト制作、業務効率化まで、<br/>
+            ワンストップで貴社の事業価値を最大化します
           </p>
         </motion.div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <FeatureCard key={index} feature={feature} index={index} />
           ))}

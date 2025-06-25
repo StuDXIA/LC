@@ -6,18 +6,18 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://lc-platform.vercel.app'),
-  title: 'LC - Future Technology Platform',
-  description: 'Experience the future of technology with cutting-edge innovations',
-  keywords: 'technology, innovation, AI, future, platform',
-  authors: [{ name: 'LC Team' }],
+  title: 'Luminous Core - あなたの事業に、次の"成長曲線"を描く',
+  description: 'AI技術とプロの実行力を組み合わせ、SNSを起点とした事業成長をワンストップで支援するグローステック・チーム',
+  keywords: 'SNS運用, LP制作, Webサイト制作, AI開発, 業務効率化, DX, グロースハック',
+  authors: [{ name: 'Kousai Yamamoto' }],
   icons: {
     icon: '/Luminous Core.png',
     shortcut: '/Luminous Core.png',
     apple: '/Luminous Core.png',
   },
   openGraph: {
-    title: 'LC - Future Technology Platform',
-    description: 'Experience the future of technology',
+    title: 'Luminous Core - あなたの事業に、次の"成長曲線"を描く',
+    description: 'AI技術とプロの実行力を組み合わせ、SNSを起点とした事業成長をワンストップで支援',
     type: 'website',
     images: ['/Luminous Core.png'],
   },
