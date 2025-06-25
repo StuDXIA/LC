@@ -53,8 +53,7 @@ export default function HeroSection() {
           
           <h1 
             ref={titleRef}
-            className="text-4xl md:text-6xl font-bold mb-8 glitch transform-gpu transition-transform duration-100 leading-tight"
-            data-text="あなたの事業に、次の成長曲線を描く。"
+            className="text-4xl md:text-6xl font-bold mb-8 transform-gpu transition-transform duration-100 leading-tight"
             style={{ transformStyle: 'preserve-3d' }}
           >
             <span className="text-gradient">
