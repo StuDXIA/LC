@@ -65,8 +65,7 @@ function FeatureCard({ feature, index }: { feature: typeof features[0], index: n
             alt={feature.title}
             width={80}
             height={80}
-            className={`w-20 h-20 ${feature.iconImage === '/LC1.png' ? 'object-cover' : 'rounded-lg'}`}
-            style={feature.iconImage === '/LC1.png' ? { clipPath: 'inset(8% 8% 8% 8%)' } : {}}
+            className="w-20 h-20 rounded-lg"
           />
         </div>
         
