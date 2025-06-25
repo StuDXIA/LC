@@ -88,11 +88,11 @@ export default function NeuralNetworkBackground() {
       return newNodes
     }
 
-    // Create data particles
+    // Create data particles (fewer for subtlety)
     const createParticles = (nodeList: Node[]) => {
       const newParticles: DataParticle[] = []
       
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 15; i++) {
         const sourceNode = nodeList[Math.floor(Math.random() * nodeList.length)]
         if (sourceNode.connections.length > 0) {
           const targetIndex = sourceNode.connections[Math.floor(Math.random() * sourceNode.connections.length)]
@@ -106,10 +106,10 @@ export default function NeuralNetworkBackground() {
               targetX: targetNode.x,
               targetY: targetNode.y,
               targetZ: targetNode.z,
-              speed: 0.02 + Math.random() * 0.03,
+              speed: 0.005 + Math.random() * 0.01,
               progress: Math.random(),
               connectionIndex: i,
-              brightness: 0.5 + Math.random() * 0.5
+              brightness: 0.2 + Math.random() * 0.3
             })
           }
         }
@@ -132,44 +132,45 @@ export default function NeuralNetworkBackground() {
 
     // Animation loop
     const animate = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.03)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       const time = Date.now() * 0.001
       const mouse = mouseRef.current
-      const perspective = 800
+      const perspective = 1200
 
       // Update and draw nodes
       nodes.forEach((node, index) => {
-        // Update pulse
-        node.pulse += 0.05
-        node.energy = 0.3 + 0.7 * Math.sin(node.pulse)
+        // Update pulse (slower and subtler)
+        node.pulse += 0.02
+        node.energy = 0.1 + 0.3 * Math.sin(node.pulse)
 
-        // Mouse interaction
+        // Mouse interaction (reduced radius and influence)
         const dx = mouse.x - node.x
         const dy = mouse.y - node.y
         const distance = Math.sqrt(dx * dx + dy * dy)
-        const mouseInfluence = Math.max(0, 1 - distance / 200)
+        const mouseInfluence = Math.max(0, 1 - distance / 120) * 0.3
 
         // 3D perspective calculation
         const scale = perspective / (perspective + node.z)
         const screenX = node.x * scale + (1 - scale) * canvas.width / 2
         const screenY = node.y * scale + (1 - scale) * canvas.height / 2
 
-        // Draw node
-        const nodeSize = (3 + node.energy * 5 + mouseInfluence * 8) * scale
-        const alpha = 0.6 + node.energy * 0.4 + mouseInfluence * 0.4
+        // Draw node (smaller and more subtle)
+        const nodeSize = (1 + node.energy * 2 + mouseInfluence * 3) * scale
+        const alpha = 0.15 + node.energy * 0.2 + mouseInfluence * 0.25
 
         ctx.beginPath()
         ctx.arc(screenX, screenY, nodeSize, 0, Math.PI * 2)
         
-        // Gradient based on energy and mouse proximity
-        const gradient = ctx.createRadialGradient(screenX, screenY, 0, screenX, screenY, nodeSize * 2)
-        if (mouseInfluence > 0.1) {
-          gradient.addColorStop(0, `rgba(0, 217, 255, ${alpha})`)
-          gradient.addColorStop(1, `rgba(147, 51, 234, ${alpha * 0.3})`)
+        // Subtle gradient with luxury colors
+        const gradient = ctx.createRadialGradient(screenX, screenY, 0, screenX, screenY, nodeSize * 3)
+        if (mouseInfluence > 0.05) {
+          gradient.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.8})`)
+          gradient.addColorStop(0.5, `rgba(0, 217, 255, ${alpha * 0.4})`)
+          gradient.addColorStop(1, `rgba(0, 217, 255, 0)`)
         } else {
-          gradient.addColorStop(0, `rgba(0, 217, 255, ${alpha})`)
+          gradient.addColorStop(0, `rgba(0, 217, 255, ${alpha * 0.6})`)
           gradient.addColorStop(1, `rgba(0, 217, 255, 0)`)
         }
         
@@ -185,21 +186,21 @@ export default function NeuralNetworkBackground() {
           const targetScreenX = targetNode.x * targetScale + (1 - targetScale) * canvas.width / 2
           const targetScreenY = targetNode.y * targetScale + (1 - targetScale) * canvas.height / 2
 
-          // Calculate connection strength based on mouse proximity
+          // Subtle connection effects
           const connectionMidX = (screenX + targetScreenX) / 2
           const connectionMidY = (screenY + targetScreenY) / 2
           const connectionDx = mouse.x - connectionMidX
           const connectionDy = mouse.y - connectionMidY
           const connectionDistance = Math.sqrt(connectionDx * connectionDx + connectionDy * connectionDy)
-          const connectionInfluence = Math.max(0, 1 - connectionDistance / 150)
+          const connectionInfluence = Math.max(0, 1 - connectionDistance / 100) * 0.2
 
           ctx.beginPath()
           ctx.moveTo(screenX, screenY)
           ctx.lineTo(targetScreenX, targetScreenY)
           
-          const lineAlpha = 0.2 + node.energy * 0.3 + connectionInfluence * 0.5
+          const lineAlpha = 0.05 + node.energy * 0.1 + connectionInfluence * 0.15
           ctx.strokeStyle = `rgba(0, 217, 255, ${lineAlpha})`
-          ctx.lineWidth = (1 + connectionInfluence * 3) * Math.min(scale, targetScale)
+          ctx.lineWidth = (0.5 + connectionInfluence * 1) * Math.min(scale, targetScale)
           ctx.stroke()
         })
       })
@@ -240,14 +241,14 @@ export default function NeuralNetworkBackground() {
           const particleScreenX = currentX * particleScale + (1 - particleScale) * canvas.width / 2
           const particleScreenY = currentY * particleScale + (1 - particleScale) * canvas.height / 2
 
-          // Mouse interaction for speed boost
+          // Subtle mouse interaction
           const dx = mouse.x - particleScreenX
           const dy = mouse.y - particleScreenY
           const distance = Math.sqrt(dx * dx + dy * dy)
-          const speedBoost = distance < 100 ? 2 : 1
+          const speedBoost = distance < 80 ? 1.3 : 1
 
-          // Draw particle
-          const particleSize = (2 + particle.brightness * 3) * particleScale
+          // Draw subtle particle
+          const particleSize = (0.8 + particle.brightness * 1.5) * particleScale
           ctx.beginPath()
           ctx.arc(particleScreenX, particleScreenY, particleSize, 0, Math.PI * 2)
           
@@ -255,7 +256,8 @@ export default function NeuralNetworkBackground() {
             particleScreenX, particleScreenY, 0,
             particleScreenX, particleScreenY, particleSize * 2
           )
-          particleGradient.addColorStop(0, `rgba(255, 255, 255, ${particle.brightness})`)
+          particleGradient.addColorStop(0, `rgba(255, 255, 255, ${particle.brightness * 0.4})`)
+          particleGradient.addColorStop(0.7, `rgba(0, 217, 255, ${particle.brightness * 0.2})`)
           particleGradient.addColorStop(1, `rgba(0, 217, 255, 0)`)
           
           ctx.fillStyle = particleGradient
@@ -263,7 +265,7 @@ export default function NeuralNetworkBackground() {
 
           return {
             ...particle,
-            speed: (particle.speed * 0.98 + (0.02 + Math.random() * 0.03) * speedBoost * 0.02)
+            speed: (particle.speed * 0.99 + (0.005 + Math.random() * 0.01) * speedBoost * 0.01)
           }
         })
       )
@@ -287,7 +289,7 @@ export default function NeuralNetworkBackground() {
       ref={canvasRef}
       className="absolute inset-0 w-full h-full"
       style={{ 
-        background: 'radial-gradient(ellipse at center, rgba(0, 217, 255, 0.03) 0%, rgba(0, 0, 0, 0.1) 70%)',
+        background: 'radial-gradient(ellipse at center, rgba(0, 217, 255, 0.01) 0%, rgba(0, 0, 0, 0.05) 70%)',
         zIndex: 1
       }}
     />

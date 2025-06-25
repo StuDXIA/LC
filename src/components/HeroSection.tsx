@@ -29,8 +29,11 @@ export default function HeroSection() {
       {/* Neural Network Background */}
       <NeuralNetworkBackground />
       
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-radial from-neon-blue/10 via-transparent to-black/30 z-10" />
+      {/* Gradient Overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-radial from-black/20 via-transparent to-black/40 z-10" />
+      
+      {/* Center text protection overlay */}
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4/5 h-3/5 bg-gradient-radial from-black/30 via-black/10 to-transparent rounded-full blur-3xl z-15" />
       
       <div className="container mx-auto px-6 relative z-20">
         <motion.div
