@@ -56,7 +56,7 @@ export default function Footer() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-12 py-4 bg-gradient-to-r from-primary-blue to-primary-dark rounded-lg font-bold text-xl hover-lift glass-effect clean-border transition-all duration-300 text-white"
+              className="px-12 py-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg font-bold text-xl hover-lift shadow-lg clean-border transition-all duration-300 text-white hover:shadow-xl"
             >
               30分間の無料相談に申し込む
             </motion.button>

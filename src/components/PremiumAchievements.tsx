@@ -267,13 +267,13 @@ export default function PremiumAchievements() {
         </motion.h3>
         
         <motion.p 
-          className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed"
+          className="text-gray-800 font-medium text-lg max-w-3xl mx-auto leading-relaxed"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           我々は、全てのプロジェクトにおいて、計測可能な
-          <span className="text-primary-blue font-semibold">「数字」</span>
+          <span className="text-blue-700 font-bold">「数字」</span>
           の改善にコミットします。
         </motion.p>
       </motion.div>

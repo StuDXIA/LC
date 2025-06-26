@@ -235,7 +235,7 @@ export default function TechShowcase() {
               />
               
               <motion.p 
-                className="text-lg leading-relaxed text-gray-300 mb-6 relative z-10"
+                className="text-lg leading-relaxed text-gray-800 font-medium mb-6 relative z-10"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4 }}
@@ -244,7 +244,7 @@ export default function TechShowcase() {
               </motion.p>
               
               <motion.p 
-                className="text-lg leading-relaxed text-gray-300 mb-6 relative z-10"
+                className="text-lg leading-relaxed text-gray-800 font-medium mb-6 relative z-10"
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6 }}
@@ -270,7 +270,7 @@ export default function TechShowcase() {
               </motion.p>
               
               <motion.p 
-                className="text-lg leading-relaxed text-gray-300 relative z-10"
+                className="text-lg leading-relaxed text-gray-800 font-medium relative z-10"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
@@ -354,7 +354,7 @@ export default function TechShowcase() {
                       {partner.description}
                     </motion.p>
                     <motion.p 
-                      className="text-sm text-gray-400 leading-relaxed"
+                      className="text-sm text-gray-700 font-medium leading-relaxed"
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 + index * 0.1 }}
@@ -476,7 +476,7 @@ export default function TechShowcase() {
                   Luminous Core 主宰
                 </motion.p>
                 
-                <div className="text-gray-300 leading-relaxed space-y-4">
+                <div className="text-gray-800 font-medium leading-relaxed space-y-4">
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}

@@ -150,7 +150,7 @@ export default function HeroSection() {
             transition={{ delay: 1, duration: 1 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           >
-            <button className="px-8 py-4 bg-gradient-to-r from-primary-blue to-primary-dark rounded-lg font-semibold hover-lift glass-effect clean-border transition-all duration-300 hover:scale-105 text-white">
+            <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg font-bold hover-lift shadow-lg clean-border transition-all duration-300 hover:scale-105 text-white hover:shadow-xl">
               まずは無料で相談する
             </button>
             <button className="px-8 py-4 glass-effect rounded-lg font-bold hover-lift transition-all duration-300 hover:border-primary-blue text-gray-900">
