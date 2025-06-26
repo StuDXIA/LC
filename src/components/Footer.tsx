@@ -48,7 +48,7 @@ export default function Footer() {
               <span className="text-gradient">さあ、あなたのビジネスを、次世代へ。</span>
             </h2>
             
-            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed">
               まずは30分、貴社の現状と課題をお聞かせください。<br/>
               我々が、その未来をどう変えられるかをお見せします。
             </p>
@@ -56,7 +56,7 @@ export default function Footer() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-12 py-4 bg-gradient-to-r from-primary-blue to-primary-dark rounded-lg font-bold text-xl hover-lift glass-effect clean-border transition-all duration-300"
+              className="px-12 py-4 bg-gradient-to-r from-primary-blue to-primary-dark rounded-lg font-bold text-xl hover-lift glass-effect clean-border transition-all duration-300 text-white"
             >
               30分間の無料相談に申し込む
             </motion.button>
@@ -86,14 +86,14 @@ export default function Footer() {
                   href={social.href}
                   whileHover={{ scale: 1.2, rotate: 360 }}
                   transition={{ duration: 0.3 }}
-                  className="w-8 h-8 glass-effect rounded-lg flex items-center justify-center hover:border-primary-blue text-sm"
+                  className="w-8 h-8 glass-effect rounded-lg flex items-center justify-center hover:border-primary-blue text-sm text-slate-600"
                 >
                   <social.icon />
                 </motion.a>
               ))}
             </div>
             
-            <p className="text-gray-400 text-sm">
+            <p className="text-slate-500 text-sm">
               © 2024 Luminous Core. All rights reserved.
             </p>
           </div>

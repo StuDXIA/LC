@@ -55,12 +55,12 @@ export default function HeroSection() {
                 priority
               />
             </div>
-            <span className="text-primary-blue text-lg font-mono">Luminous Core</span>
+            <span className="text-slate-700 text-lg font-mono font-semibold">Luminous Core</span>
           </motion.div>
           
           <h1 
             ref={titleRef}
-            className="text-4xl md:text-6xl font-bold mb-8 transform-gpu transition-transform duration-100 leading-tight relative"
+            className="text-4xl md:text-6xl font-bold mb-8 transform-gpu transition-transform duration-100 leading-tight relative text-slate-800"
             style={{ transformStyle: 'preserve-3d' }}
           >
             <motion.span 
@@ -111,11 +111,11 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <p className="text-dark-gray">
+            <p className="text-slate-700 font-medium">
               私たちは、
               <motion.span 
-                className="text-primary-blue font-semibold inline-block"
-                whileHover={{ scale: 1.05, color: "#00ffff" }}
+                className="text-blue-600 font-bold inline-block"
+                whileHover={{ scale: 1.05, color: "#1d4ed8" }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 AI技術とプロの実行力
@@ -123,7 +123,7 @@ export default function HeroSection() {
               を組み合わせ、
               <br />
               <motion.span 
-                className="text-primary-blue font-semibold inline-block"
+                className="text-blue-600 font-bold inline-block"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2, duration: 0.6 }}
@@ -138,7 +138,7 @@ export default function HeroSection() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1.5, duration: 0.6 }}
               >
-                <span className="bg-gradient-to-r from-primary-blue to-accent-blue bg-clip-text text-transparent font-semibold text-2xl">グローステック・チーム</span>
+                <span className="bg-gradient-to-r from-slate-800 to-blue-700 bg-clip-text text-transparent font-bold text-2xl">グローステック・チーム</span>
               </motion.span>
               です。
             </p>
@@ -150,10 +150,10 @@ export default function HeroSection() {
             transition={{ delay: 1, duration: 1 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           >
-            <button className="px-8 py-4 bg-gradient-to-r from-primary-blue to-primary-dark rounded-lg font-semibold hover-lift glass-effect clean-border transition-all duration-300 hover:scale-105">
+            <button className="px-8 py-4 bg-gradient-to-r from-primary-blue to-primary-dark rounded-lg font-semibold hover-lift glass-effect clean-border transition-all duration-300 hover:scale-105 text-white">
               まずは無料で相談する
             </button>
-            <button className="px-8 py-4 glass-effect rounded-lg font-semibold hover-lift transition-all duration-300 hover:border-primary-blue">
+            <button className="px-8 py-4 glass-effect rounded-lg font-semibold hover-lift transition-all duration-300 hover:border-primary-blue text-slate-700">
               提供サービスを見る →
             </button>
           </motion.div>
