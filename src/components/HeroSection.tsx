@@ -79,18 +79,18 @@ export default function HeroSection() {
             >
               次の
               <motion.span
-                className="inline-block mx-2 text-white font-bold"
+                className="inline-block mx-2 text-blue-800 font-black"
                 style={{
-                  textShadow: "0 0 10px rgba(14, 165, 233, 0.5), 0 2px 4px rgba(0, 0, 0, 0.1)",
-                  WebkitTextStroke: "1px rgba(14, 165, 233, 0.3)"
+                  textShadow: "0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(59, 130, 246, 0.4)",
+                  WebkitTextStroke: "1px rgba(30, 64, 175, 0.4)"
                 }}
                 animate={{ 
                   scale: [1, 1.1, 1],
                   rotate: [0, 3, -3, 0],
                   textShadow: [
-                    "0 0 10px rgba(14, 165, 233, 0.5), 0 2px 4px rgba(0, 0, 0, 0.1)",
-                    "0 0 15px rgba(14, 165, 233, 0.7), 0 2px 4px rgba(0, 0, 0, 0.1)",
-                    "0 0 10px rgba(14, 165, 233, 0.5), 0 2px 4px rgba(0, 0, 0, 0.1)"
+                    "0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(59, 130, 246, 0.4)",
+                    "0 2px 4px rgba(0, 0, 0, 0.3), 0 0 12px rgba(59, 130, 246, 0.6)",
+                    "0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(59, 130, 246, 0.4)"
                   ]
                 }}
                 transition={{ 
