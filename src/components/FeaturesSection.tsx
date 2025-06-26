@@ -107,13 +107,62 @@ export default function FeaturesSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-5xl font-bold mb-4">
-            <span className="text-gradient">事業成果に直結する、3つのコアソリューション</span>
-          </h2>
-          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-            SNSを起点とした成長戦略から、コンバージョンを最大化するWebサイト制作、業務効率化まで、<br/>
-            ワンストップで貴社の事業価値を最大化します
-          </p>
+          <motion.h2 
+            className="text-5xl font-bold mb-4"
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+          >
+            <motion.span className="text-gradient inline-block">
+              事業成果に直結する、
+            </motion.span>
+            <br />
+            <motion.span 
+              className="text-gradient inline-block"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
+              3つの
+              <motion.span
+                className="inline-block mx-2 text-6xl"
+                animate={{ 
+                  color: ["#00d9ff", "#9333ea", "#ff006e", "#00d9ff"],
+                  rotateY: [0, 360],
+                }}
+                transition={{ 
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              >
+                コア
+              </motion.span>
+              ソリューション
+            </motion.span>
+          </motion.h2>
+          <motion.p 
+            className="text-gray-400 text-lg max-w-3xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+          >
+            <motion.span
+              className="inline-block"
+              whileHover={{ scale: 1.02, color: "#ffffff" }}
+            >
+              SNSを起点とした成長戦略から、コンバージョンを最大化するWebサイト制作、業務効率化まで、
+            </motion.span>
+            <br/>
+            <motion.span
+              className="inline-block font-semibold text-xl text-white"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+            >
+              ワンストップで貴社の事業価値を最大化します
+            </motion.span>
+          </motion.p>
         </motion.div>
         
         <div className="grid lg:grid-cols-3 gap-8">

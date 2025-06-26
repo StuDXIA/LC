@@ -60,25 +60,80 @@ export default function HeroSection() {
           
           <h1 
             ref={titleRef}
-            className="text-4xl md:text-6xl font-bold mb-8 transform-gpu transition-transform duration-100 leading-tight"
+            className="text-4xl md:text-6xl font-bold mb-8 transform-gpu transition-transform duration-100 leading-tight relative"
             style={{ transformStyle: 'preserve-3d' }}
           >
-            <span className="text-gradient">
+            <motion.span 
+              className="text-gradient block"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
               あなたの事業に、
-              <br />
-              次の&quot;成長曲線&quot;を描く。
-            </span>
+            </motion.span>
+            <motion.span 
+              className="text-gradient block relative"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
+              次の
+              <motion.span
+                className="inline-block mx-2"
+                animate={{ 
+                  scale: [1, 1.1, 1],
+                  rotate: [0, 3, -3, 0],
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              >
+                &quot;成長曲線&quot;
+              </motion.span>
+              を描く。
+            </motion.span>
           </h1>
           
-          <div className="text-lg md:text-xl mb-12 max-w-4xl mx-auto leading-relaxed">
+          <motion.div 
+            className="text-lg md:text-xl mb-12 max-w-4xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
             <p className="text-gray-300">
-              私たちは、<span className="text-neon-blue font-semibold">AI技術とプロの実行力</span>を組み合わせ、
+              私たちは、
+              <motion.span 
+                className="text-neon-blue font-semibold inline-block"
+                whileHover={{ scale: 1.05, color: "#00ffff" }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                AI技術とプロの実行力
+              </motion.span>
+              を組み合わせ、
               <br />
-              <span className="text-neon-purple font-semibold">SNSを起点とした事業成長</span>をワンストップで支援する、
+              <motion.span 
+                className="text-neon-purple font-semibold inline-block"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2, duration: 0.6 }}
+              >
+                SNSを起点とした事業成長
+              </motion.span>
+              をワンストップで支援する、
               <br />
-              <span className="text-gradient font-semibold">グローステック・チーム</span>です。
+              <motion.span 
+                className="inline-block"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.5, duration: 0.6 }}
+              >
+                <span className="text-gradient font-semibold text-2xl">グローステック・チーム</span>
+              </motion.span>
+              です。
             </p>
-          </div>
+          </motion.div>
           
           <motion.div
             initial={{ opacity: 0 }}
