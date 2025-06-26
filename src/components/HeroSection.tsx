@@ -4,9 +4,6 @@ import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { FaArrowDown } from 'react-icons/fa'
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
-
-const GrowthCurveBackground = dynamic(() => import('./GrowthCurveBackground'), { ssr: false })
 
 export default function HeroSection() {
   const titleRef = useRef<HTMLHeadingElement>(null)
@@ -26,13 +23,10 @@ export default function HeroSection() {
   
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Growth Curve Background */}
-      <GrowthCurveBackground />
+      {/* Simple gradient background */}
+      <div className="absolute inset-0 bg-gradient-radial from-neon-blue/20 via-transparent to-transparent" />
       
-      {/* Text readability overlay */}
-      <div className="absolute inset-0 bg-gradient-radial from-black/10 via-transparent to-black/20 z-10" />
-      
-      <div className="container mx-auto px-6 relative z-20">
+      <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -104,7 +98,7 @@ export default function HeroSection() {
         </motion.div>
       </div>
       
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-blue to-transparent z-20" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-blue to-transparent" />
     </section>
   )
 }
