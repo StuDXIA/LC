@@ -142,20 +142,20 @@ export default function FeaturesSection() {
             </motion.span>
           </motion.h2>
           <motion.p 
-            className="text-gray-400 text-lg max-w-3xl mx-auto"
+            className="text-gray-800 font-medium text-lg max-w-3xl mx-auto"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
             <motion.span
               className="inline-block"
-              whileHover={{ scale: 1.02, color: "#ffffff" }}
+              whileHover={{ scale: 1.02, color: "#1e40af" }}
             >
               SNSを起点とした成長戦略から、コンバージョンを最大化するWebサイト制作、業務効率化まで、
             </motion.span>
             <br/>
             <motion.span
-              className="inline-block font-semibold text-xl text-white"
+              className="inline-block font-bold text-xl text-gray-900"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
