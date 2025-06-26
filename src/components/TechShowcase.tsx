@@ -194,10 +194,10 @@ export default function TechShowcase() {
               transition={{ delay: 0.5, duration: 0.6 }}
             >
               <motion.span
-                className="inline-block"
+                className="inline-block text-gray-800 font-medium"
                 whileHover={{ scale: 1.05 }}
                 animate={{ 
-                  color: ["#00d9ff", "#ffffff", "#00d9ff"],
+                  color: ["#1f2937", "#374151", "#1f2937"],
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
