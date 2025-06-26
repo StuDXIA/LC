@@ -9,11 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'neon-blue': '#00D9FF',
-        'neon-purple': '#BF00FF',
-        'neon-pink': '#FF006E',
-        'cyber-black': '#0A0A0A',
-        'cyber-gray': '#1A1A1A',
+        'primary-blue': '#0EA5E9',
+        'primary-dark': '#0284C7',
+        'accent-blue': '#38BDF8',
+        'light-gray': '#F8FAFC',
+        'medium-gray': '#E2E8F0',
+        'dark-gray': '#475569',
       },
       animation: {
         'text-slide': 'text-slide 12s cubic-bezier(0.83, 0, 0.17, 1) infinite',
@@ -57,10 +58,10 @@ const config: Config = {
         },
         'glow': {
           'from': {
-            textShadow: '0 0 10px #00D9FF, 0 0 20px #00D9FF, 0 0 30px #00D9FF',
+            textShadow: '0 0 5px rgba(14, 165, 233, 0.5)',
           },
           'to': {
-            textShadow: '0 0 20px #00D9FF, 0 0 30px #00D9FF, 0 0 40px #00D9FF',
+            textShadow: '0 0 10px rgba(14, 165, 233, 0.5)',
           },
         },
       },

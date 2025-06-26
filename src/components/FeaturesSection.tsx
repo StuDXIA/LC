@@ -76,7 +76,7 @@ function FeatureCard({ feature, index }: { feature: typeof features[0], index: n
           initial={{ width: 0 }}
           whileHover={{ width: '100%' }}
           transition={{ duration: 0.3 }}
-          className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-neon-blue to-neon-purple"
+          className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary-blue to-primary-dark"
         />
       </div>
     </motion.div>
@@ -98,7 +98,7 @@ export default function FeaturesSection() {
   
   return (
     <section ref={ref} className="py-20 px-6 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neon-blue/5 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-blue/5 to-transparent" />
       
       <div className="container mx-auto relative z-10">
         <motion.div
@@ -183,7 +183,7 @@ export default function FeaturesSection() {
                 <div
                   key={index}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === activeIndex ? 'bg-neon-blue w-8' : 'bg-gray-600'
+                    index === activeIndex ? 'bg-primary-blue w-8' : 'bg-gray-600'
                   }`}
                 />
               ))}

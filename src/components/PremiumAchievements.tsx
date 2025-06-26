@@ -273,7 +273,7 @@ export default function PremiumAchievements() {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           我々は、全てのプロジェクトにおいて、計測可能な
-          <span className="text-neon-blue font-semibold">「数字」</span>
+          <span className="text-primary-blue font-semibold">「数字」</span>
           の改善にコミットします。
         </motion.p>
       </motion.div>

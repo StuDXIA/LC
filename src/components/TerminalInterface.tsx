@@ -161,7 +161,7 @@ export default function TerminalInterface() {
               {history.map((cmd, index) => (
                 <div key={index} className="mb-4">
                   {cmd.input && (
-                    <div className="flex items-center text-neon-blue">
+                    <div className="flex items-center text-primary-blue">
                       <span className="mr-2">❯</span>
                       <span>{cmd.input}</span>
                     </div>
@@ -180,7 +180,7 @@ export default function TerminalInterface() {
                 </div>
               ))}
               
-              <form onSubmit={handleSubmit} className="flex items-center text-neon-blue">
+              <form onSubmit={handleSubmit} className="flex items-center text-primary-blue">
                 <span className="mr-2">❯</span>
                 <input
                   ref={inputRef}
@@ -203,7 +203,7 @@ export default function TerminalInterface() {
                     setCurrentInput(cmd)
                     inputRef.current?.focus()
                   }}
-                  className="px-3 py-1 text-xs glass-effect rounded hover:border-neon-blue transition-all"
+                  className="px-3 py-1 text-xs glass-effect rounded hover:border-primary-blue transition-all"
                 >
                   {cmd}
                 </button>

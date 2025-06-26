@@ -34,8 +34,8 @@ export default function Footer() {
   return (
     <>
       {/* CTA Section */}
-      <section className="relative py-20 px-6 bg-gradient-to-b from-cyber-gray to-cyber-black">
-        <div className="absolute inset-0 bg-gradient-radial from-neon-blue/10 via-transparent to-transparent" />
+      <section className="relative py-20 px-6 bg-gradient-to-b from-slate-100 to-white">
+        <div className="absolute inset-0 bg-gradient-radial from-primary-blue/5 via-transparent to-transparent" />
         
         <div className="container mx-auto relative z-10 text-center">
           <motion.div
@@ -56,7 +56,7 @@ export default function Footer() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-12 py-4 bg-gradient-to-r from-neon-blue to-neon-purple rounded-lg font-bold text-xl hover-lift glass-effect neon-border transition-all duration-300"
+              className="px-12 py-4 bg-gradient-to-r from-primary-blue to-primary-dark rounded-lg font-bold text-xl hover-lift glass-effect clean-border transition-all duration-300"
             >
               30分間の無料相談に申し込む
             </motion.button>
@@ -86,7 +86,7 @@ export default function Footer() {
                   href={social.href}
                   whileHover={{ scale: 1.2, rotate: 360 }}
                   transition={{ duration: 0.3 }}
-                  className="w-8 h-8 glass-effect rounded-lg flex items-center justify-center hover:border-neon-blue text-sm"
+                  className="w-8 h-8 glass-effect rounded-lg flex items-center justify-center hover:border-primary-blue text-sm"
                 >
                   <social.icon />
                 </motion.a>

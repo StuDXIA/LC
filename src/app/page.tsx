@@ -13,7 +13,7 @@ const ParticleBackground = dynamic(() => import('@/components/ParticleBackground
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-cyber-black to-cyber-gray">
+    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <ParticleBackground />
       <HeroSection />
       <AboutSection />

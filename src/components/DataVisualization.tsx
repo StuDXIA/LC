@@ -237,7 +237,7 @@ export default function DataVisualization() {
               transition={{ delay: 0.2 }}
               className="glass-effect p-6 rounded-lg"
             >
-              <h3 className="text-xl font-semibold mb-4 text-neon-blue">Performance Trends</h3>
+              <h3 className="text-xl font-semibold mb-4 text-primary-blue">Performance Trends</h3>
               <div className="h-64">
                 <Line data={lineData} options={chartOptions} />
               </div>
@@ -249,7 +249,7 @@ export default function DataVisualization() {
               transition={{ delay: 0.4 }}
               className="glass-effect p-6 rounded-lg"
             >
-              <h3 className="text-xl font-semibold mb-4 text-neon-purple">Resource Usage</h3>
+              <h3 className="text-xl font-semibold mb-4 text-primary-dark">Resource Usage</h3>
               <div className="h-64">
                 <Bar data={barData} options={chartOptions} />
               </div>
@@ -261,7 +261,7 @@ export default function DataVisualization() {
               transition={{ delay: 0.6 }}
               className="glass-effect p-6 rounded-lg"
             >
-              <h3 className="text-xl font-semibold mb-4 text-neon-pink">System Status</h3>
+              <h3 className="text-xl font-semibold mb-4 text-accent-blue">System Status</h3>
               <div className="h-64 flex items-center justify-center">
                 <div className="w-48 h-48">
                   <Doughnut data={doughnutData} options={{ ...chartOptions, cutout: '70%' }} />

@@ -55,7 +55,7 @@ export default function HeroSection() {
                 priority
               />
             </div>
-            <span className="text-neon-blue text-lg font-mono">Luminous Core</span>
+            <span className="text-primary-blue text-lg font-mono">Luminous Core</span>
           </motion.div>
           
           <h1 
@@ -114,7 +114,7 @@ export default function HeroSection() {
             <p className="text-gray-300">
               私たちは、
               <motion.span 
-                className="text-neon-blue font-semibold inline-block"
+                className="text-primary-blue font-semibold inline-block"
                 whileHover={{ scale: 1.05, color: "#00ffff" }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
@@ -123,7 +123,7 @@ export default function HeroSection() {
               を組み合わせ、
               <br />
               <motion.span 
-                className="text-neon-purple font-semibold inline-block"
+                className="text-primary-dark font-semibold inline-block"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2, duration: 0.6 }}
@@ -150,10 +150,10 @@ export default function HeroSection() {
             transition={{ delay: 1, duration: 1 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           >
-            <button className="px-8 py-4 bg-gradient-to-r from-neon-blue to-neon-purple rounded-lg font-semibold hover-lift glass-effect neon-border transition-all duration-300 hover:scale-105">
+            <button className="px-8 py-4 bg-gradient-to-r from-primary-blue to-primary-dark rounded-lg font-semibold hover-lift glass-effect clean-border transition-all duration-300 hover:scale-105">
               まずは無料で相談する
             </button>
-            <button className="px-8 py-4 glass-effect rounded-lg font-semibold hover-lift transition-all duration-300 hover:border-neon-blue">
+            <button className="px-8 py-4 glass-effect rounded-lg font-semibold hover-lift transition-all duration-300 hover:border-primary-blue">
               提供サービスを見る →
             </button>
           </motion.div>
@@ -161,14 +161,14 @@ export default function HeroSection() {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
-            className="text-neon-blue"
+            className="text-primary-blue"
           >
             <FaArrowDown size={30} className="mx-auto animate-pulse-neon" />
           </motion.div>
         </motion.div>
       </div>
       
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-blue to-transparent z-20" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-blue to-transparent z-20" />
     </section>
   )
 }

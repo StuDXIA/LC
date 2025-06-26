@@ -145,8 +145,8 @@ export default function TechShowcase() {
         className="absolute inset-0 opacity-20"
         style={{ y }}
       >
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-neon-purple rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-neon-blue rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary-dark rounded-full blur-3xl opacity-30" />
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-primary-blue rounded-full blur-3xl opacity-30" />
       </motion.div>
       
       <div className="container mx-auto relative z-10">
@@ -204,7 +204,7 @@ export default function TechShowcase() {
                 次世代をリードするコミュニティからの、
               </motion.span>
               <motion.span
-                className="inline-block text-neon-purple font-bold"
+                className="inline-block text-primary-dark font-bold"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.7, duration: 0.6 }}
@@ -251,7 +251,7 @@ export default function TechShowcase() {
               >
                 代表が創設した
                 <motion.span 
-                  className="text-neon-blue font-bold inline-block mx-1"
+                  className="text-primary-blue font-bold inline-block mx-1"
                   whileHover={{ scale: 1.1, textShadow: "0 0 20px rgba(0, 217, 255, 0.8)" }}
                 >
                   『StuDXIA』
@@ -277,7 +277,7 @@ export default function TechShowcase() {
               >
                 また、東京大学のキャリア支援団体
                 <motion.span 
-                  className="text-neon-purple font-bold inline-block mx-1"
+                  className="text-primary-dark font-bold inline-block mx-1"
                   whileHover={{ scale: 1.1, textShadow: "0 0 20px rgba(147, 51, 234, 0.8)" }}
                 >
                   『羅針盤』
@@ -346,7 +346,7 @@ export default function TechShowcase() {
                       </span>
                     </motion.h4>
                     <motion.p 
-                      className="text-lg font-semibold mb-3 text-neon-blue"
+                      className="text-lg font-semibold mb-3 text-primary-blue"
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       transition={{ delay: 0.3 + index * 0.1 }}
@@ -436,7 +436,7 @@ export default function TechShowcase() {
                   <AlternatingImages
                     images={['me1', 'me2']}
                     alt="山本公才 / Kousai Yamamoto"
-                    className="rounded-full border-4 border-neon-blue/30 drop-shadow-[0_0_30px_rgba(0,217,255,0.5)]"
+                    className="rounded-full border-4 border-primary-blue/30 drop-shadow-[0_0_15px_rgba(14,165,233,0.3)]"
                     interval={3000}
                   />
                   {/* Rotating glow ring */}
@@ -462,12 +462,12 @@ export default function TechShowcase() {
                   className="text-2xl font-bold mb-2"
                   whileHover={{ scale: 1.02 }}
                 >
-                  <span className="text-neon-blue" style={{ textShadow: "0 0 20px rgba(0, 217, 255, 0.5)" }}>
+                  <span className="text-primary-blue" style={{ textShadow: "0 0 10px rgba(14, 165, 233, 0.3)" }}>
                     山本 公才 / Kousai Yamamoto
                   </span>
                 </motion.h4>
                 <motion.p 
-                  className="text-lg font-semibold mb-4 text-neon-purple"
+                  className="text-lg font-semibold mb-4 text-primary-dark"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
@@ -498,8 +498,8 @@ export default function TechShowcase() {
                   >
                     現在は、論理的なビジネス・AIの知見と、モデルとしても活動する表現力を掛け合わせ、独自の視点で企業の課題解決に挑む。
                     <motion.span 
-                      className="text-neon-blue font-semibold inline-block"
-                      whileHover={{ scale: 1.05, textShadow: "0 0 20px rgba(0, 217, 255, 0.8)" }}
+                      className="text-primary-blue font-semibold inline-block"
+                      whileHover={{ scale: 1.05, textShadow: "0 0 10px rgba(14, 165, 233, 0.5)" }}
                     >
                       IT資格や簿記資格
                     </motion.span>

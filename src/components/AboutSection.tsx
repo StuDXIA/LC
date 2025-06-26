@@ -22,8 +22,8 @@ export default function AboutSection() {
         className="absolute inset-0 opacity-10"
         style={{ y }}
       >
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-neon-blue rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-neon-purple rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-blue rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary-dark rounded-full blur-3xl" />
       </motion.div>
       
       <div className="container mx-auto relative z-10">
@@ -70,8 +70,8 @@ export default function AboutSection() {
             >
               Luminous Coreは、
               <motion.span 
-                className="text-neon-blue font-semibold inline-block mx-1"
-                whileHover={{ scale: 1.05, textShadow: "0 0 30px rgba(0, 217, 255, 0.8)" }}
+                className="text-primary-blue font-semibold inline-block mx-1"
+                whileHover={{ scale: 1.05, textShadow: "0 0 15px rgba(14, 165, 233, 0.5)" }}
               >
                 SNSを起点として、クライアントの事業成果を最大化する
               </motion.span>
@@ -88,7 +88,7 @@ export default function AboutSection() {
             >
               独自の
               <motion.span 
-                className="text-neon-purple font-semibold inline-block mx-1"
+                className="text-primary-dark font-semibold inline-block mx-1"
                 animate={{ 
                   textShadow: [
                     "0 0 10px rgba(147, 51, 234, 0.5)",
@@ -102,7 +102,7 @@ export default function AboutSection() {
               </motion.span>
               を軸に、成果に必要な
               <motion.span 
-                className="text-neon-pink font-semibold inline-block mx-1"
+                className="text-accent-blue font-semibold inline-block mx-1"
                 whileInView={{ rotate: [0, 2, -2, 0] }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
@@ -122,7 +122,7 @@ export default function AboutSection() {
                 whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0, 217, 255, 0.5)" }}
               >
                 <motion.div 
-                  className="w-2 h-2 rounded-full bg-neon-blue"
+                  className="w-2 h-2 rounded-full bg-primary-blue"
                   animate={{ scale: [1, 1.5, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
