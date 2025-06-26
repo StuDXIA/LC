@@ -30,7 +30,7 @@ export default function HeroSection() {
       <Neural3DBackground />
       
       {/* Subtle overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-radial from-black/30 via-transparent to-black/50 z-10" />
+      <div className="absolute inset-0 bg-gradient-radial from-clean-white/30 via-transparent to-light-blue/20 z-10" />
       
       <div className="container mx-auto px-6 relative z-20">
         <motion.div
@@ -51,7 +51,7 @@ export default function HeroSection() {
                 alt="Luminous Core Logo"
                 width={120}
                 height={120}
-                className="animate-float drop-shadow-[0_0_20px_rgba(0,217,255,0.6)]"
+                className="animate-float drop-shadow-[0_4px_20px_rgba(14,165,233,0.3)]"
                 priority
               />
             </div>
@@ -81,16 +81,16 @@ export default function HeroSection() {
               <motion.span
                 className="inline-block mx-2 text-white font-bold"
                 style={{
-                  textShadow: "0 0 20px rgba(0, 217, 255, 1), 0 0 40px rgba(0, 217, 255, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.8)",
-                  WebkitTextStroke: "1px rgba(0, 217, 255, 0.5)"
+                  textShadow: "0 0 10px rgba(14, 165, 233, 0.5), 0 2px 4px rgba(0, 0, 0, 0.1)",
+                  WebkitTextStroke: "1px rgba(14, 165, 233, 0.3)"
                 }}
                 animate={{ 
                   scale: [1, 1.1, 1],
                   rotate: [0, 3, -3, 0],
                   textShadow: [
-                    "0 0 20px rgba(0, 217, 255, 1), 0 0 40px rgba(0, 217, 255, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.8)",
-                    "0 0 30px rgba(0, 217, 255, 1), 0 0 60px rgba(0, 217, 255, 1), 2px 2px 4px rgba(0, 0, 0, 0.8)",
-                    "0 0 20px rgba(0, 217, 255, 1), 0 0 40px rgba(0, 217, 255, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.8)"
+                    "0 0 10px rgba(14, 165, 233, 0.5), 0 2px 4px rgba(0, 0, 0, 0.1)",
+                    "0 0 15px rgba(14, 165, 233, 0.7), 0 2px 4px rgba(0, 0, 0, 0.1)",
+                    "0 0 10px rgba(14, 165, 233, 0.5), 0 2px 4px rgba(0, 0, 0, 0.1)"
                   ]
                 }}
                 transition={{ 
@@ -111,7 +111,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <p className="text-gray-300">
+            <p className="text-dark-gray">
               私たちは、
               <motion.span 
                 className="text-primary-blue font-semibold inline-block"
@@ -123,7 +123,7 @@ export default function HeroSection() {
               を組み合わせ、
               <br />
               <motion.span 
-                className="text-primary-dark font-semibold inline-block"
+                className="text-primary-blue font-semibold inline-block"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2, duration: 0.6 }}
@@ -138,7 +138,7 @@ export default function HeroSection() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1.5, duration: 0.6 }}
               >
-                <span className="text-gradient font-semibold text-2xl">グローステック・チーム</span>
+                <span className="bg-gradient-to-r from-primary-blue to-accent-blue bg-clip-text text-transparent font-semibold text-2xl">グローステック・チーム</span>
               </motion.span>
               です。
             </p>

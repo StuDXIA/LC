@@ -9,12 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'primary-blue': '#0EA5E9',
-        'primary-dark': '#0284C7',
-        'accent-blue': '#38BDF8',
+        'primary-blue': '#3B82F6',
+        'primary-dark': '#1E40AF',
+        'accent-blue': '#60A5FA',
+        'light-blue': '#DBEAFE',
         'light-gray': '#F8FAFC',
-        'medium-gray': '#E2E8F0',
-        'dark-gray': '#475569',
+        'medium-gray': '#E5E7EB',
+        'dark-gray': '#4B5563',
+        'clean-white': '#FFFFFF',
+        'soft-gray': '#F3F4F6',
       },
       animation: {
         'text-slide': 'text-slide 12s cubic-bezier(0.83, 0, 0.17, 1) infinite',
