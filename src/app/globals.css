@@ -14,7 +14,7 @@
   }
 
   body {
-    @apply bg-clean-white text-dark-gray overflow-x-hidden;
+    @apply bg-white text-gray-900 overflow-x-hidden;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
@@ -51,7 +51,7 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-blue to-primary-dark;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-800 to-blue-900;
   }
 
   .glass-effect {

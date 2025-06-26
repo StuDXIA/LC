@@ -63,14 +63,14 @@ export default function AboutSection() {
             />
             
             <motion.p 
-              className="text-xl leading-relaxed text-slate-700 relative z-10"
+              className="text-xl leading-relaxed text-gray-800 font-medium relative z-10"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
               Luminous Coreは、
               <motion.span 
-                className="text-blue-600 font-bold inline-block mx-1"
+                className="text-blue-800 font-black inline-block mx-1"
                 whileHover={{ scale: 1.05, textShadow: "0 0 15px rgba(14, 165, 233, 0.5)" }}
               >
                 SNSを起点として、クライアントの事業成果を最大化する
@@ -81,14 +81,14 @@ export default function AboutSection() {
             <br/>
             
             <motion.p 
-              className="text-xl leading-relaxed text-slate-700 relative z-10"
+              className="text-xl leading-relaxed text-gray-800 font-medium relative z-10"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
             >
               独自の
               <motion.span 
-                className="text-blue-700 font-bold inline-block mx-1"
+                className="text-blue-900 font-black inline-block mx-1"
                 animate={{ 
                   textShadow: [
                     "0 0 10px rgba(147, 51, 234, 0.5)",
