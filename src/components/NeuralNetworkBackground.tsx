@@ -107,7 +107,7 @@ export default function NeuralNetworkBackground() {
 
     // Animation loop
     const animate = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.02)'
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.01)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       const time = Date.now() * 0.001
@@ -116,31 +116,31 @@ export default function NeuralNetworkBackground() {
 
       // Update and draw nodes
       nodes.forEach((node, index) => {
-        // Very slow, gentle pulse like floating lights
-        node.pulse += 0.008
-        node.energy = 0.4 + 0.2 * Math.sin(node.pulse)
+        // Extremely slow, almost static pulse
+        node.pulse += 0.002
+        node.energy = 0.5 + 0.1 * Math.sin(node.pulse)
 
-        // Gentle mouse interaction like lights responding to presence
+        // Very subtle mouse interaction
         const dx = mouse.x - node.x
         const dy = mouse.y - node.y
         const distance = Math.sqrt(dx * dx + dy * dy)
-        const mouseInfluence = Math.max(0, 1 - distance / 150) * 0.5
+        const mouseInfluence = Math.max(0, 1 - distance / 200) * 0.2
 
         // 3D perspective calculation
         const scale = perspective / (perspective + node.z)
         const screenX = node.x * scale + (1 - scale) * canvas.width / 2
         const screenY = node.y * scale + (1 - scale) * canvas.height / 2
 
-        // Draw glowing neon node
-        const nodeSize = (2 + node.energy * 3 + mouseInfluence * 4) * scale
-        const alpha = 0.3 + node.energy * 0.4 + mouseInfluence * 0.3
+        // Draw very subtle glowing node
+        const nodeSize = (1.5 + node.energy * 1 + mouseInfluence * 2) * scale
+        const alpha = 0.2 + node.energy * 0.15 + mouseInfluence * 0.2
 
-        // Draw outer glow
+        // Draw very subtle outer glow
         ctx.beginPath()
-        ctx.arc(screenX, screenY, nodeSize * 2.5, 0, Math.PI * 2)
-        const outerGradient = ctx.createRadialGradient(screenX, screenY, 0, screenX, screenY, nodeSize * 2.5)
-        outerGradient.addColorStop(0, `rgba(0, 217, 255, ${alpha * 0.1})`)
-        outerGradient.addColorStop(0.4, `rgba(0, 217, 255, ${alpha * 0.05})`)
+        ctx.arc(screenX, screenY, nodeSize * 2, 0, Math.PI * 2)
+        const outerGradient = ctx.createRadialGradient(screenX, screenY, 0, screenX, screenY, nodeSize * 2)
+        outerGradient.addColorStop(0, `rgba(0, 217, 255, ${alpha * 0.05})`)
+        outerGradient.addColorStop(0.5, `rgba(0, 217, 255, ${alpha * 0.02})`)
         outerGradient.addColorStop(1, `rgba(0, 217, 255, 0)`)
         ctx.fillStyle = outerGradient
         ctx.fill()
@@ -150,14 +150,13 @@ export default function NeuralNetworkBackground() {
         ctx.arc(screenX, screenY, nodeSize, 0, Math.PI * 2)
         const gradient = ctx.createRadialGradient(screenX, screenY, 0, screenX, screenY, nodeSize * 1.5)
         
-        if (mouseInfluence > 0.1) {
-          gradient.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.9})`)
-          gradient.addColorStop(0.3, `rgba(0, 217, 255, ${alpha * 0.8})`)
-          gradient.addColorStop(0.7, `rgba(0, 150, 200, ${alpha * 0.4})`)
+        if (mouseInfluence > 0.05) {
+          gradient.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.4})`)
+          gradient.addColorStop(0.4, `rgba(0, 217, 255, ${alpha * 0.3})`)
           gradient.addColorStop(1, `rgba(0, 217, 255, 0)`)
         } else {
-          gradient.addColorStop(0, `rgba(0, 217, 255, ${alpha * 0.8})`)
-          gradient.addColorStop(0.5, `rgba(0, 180, 220, ${alpha * 0.6})`)
+          gradient.addColorStop(0, `rgba(0, 217, 255, ${alpha * 0.3})`)
+          gradient.addColorStop(0.6, `rgba(0, 180, 220, ${alpha * 0.2})`)
           gradient.addColorStop(1, `rgba(0, 217, 255, 0)`)
         }
         
@@ -173,30 +172,22 @@ export default function NeuralNetworkBackground() {
           const targetScreenX = targetNode.x * targetScale + (1 - targetScale) * canvas.width / 2
           const targetScreenY = targetNode.y * targetScale + (1 - targetScale) * canvas.height / 2
 
-          // Beautiful glowing connections
+          // Very subtle connection lines
           const connectionMidX = (screenX + targetScreenX) / 2
           const connectionMidY = (screenY + targetScreenY) / 2
           const connectionDx = mouse.x - connectionMidX
           const connectionDy = mouse.y - connectionMidY
           const connectionDistance = Math.sqrt(connectionDx * connectionDx + connectionDy * connectionDy)
-          const connectionInfluence = Math.max(0, 1 - connectionDistance / 120) * 0.4
+          const connectionInfluence = Math.max(0, 1 - connectionDistance / 150) * 0.15
 
-          // Draw connection glow
+          // Draw very subtle connection
           ctx.beginPath()
           ctx.moveTo(screenX, screenY)
           ctx.lineTo(targetScreenX, targetScreenY)
           
-          const lineAlpha = 0.15 + node.energy * 0.2 + connectionInfluence * 0.25
+          const lineAlpha = 0.03 + node.energy * 0.05 + connectionInfluence * 0.1
           ctx.strokeStyle = `rgba(0, 217, 255, ${lineAlpha})`
-          ctx.lineWidth = (1 + connectionInfluence * 2) * Math.min(scale, targetScale)
-          ctx.stroke()
-
-          // Draw connection core (brighter line)
-          ctx.beginPath()
-          ctx.moveTo(screenX, screenY)
-          ctx.lineTo(targetScreenX, targetScreenY)
-          ctx.strokeStyle = `rgba(0, 250, 255, ${lineAlpha * 0.7})`
-          ctx.lineWidth = (0.3 + connectionInfluence * 0.5) * Math.min(scale, targetScale)
+          ctx.lineWidth = (0.5 + connectionInfluence * 0.5) * Math.min(scale, targetScale)
           ctx.stroke()
         })
       })
