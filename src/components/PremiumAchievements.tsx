@@ -289,19 +289,6 @@ export default function PremiumAchievements() {
         ))}
       </div>
 
-      {/* Bottom decorative element */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={inView ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 1, delay: 1.5 }}
-        className="mt-12 text-center"
-      >
-        <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-black/40 to-black/20 backdrop-blur-sm border border-white/10 rounded-full">
-          <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-blue-500 rounded-full animate-pulse" />
-          <span className="text-sm text-gray-400 font-mono">Real-time Performance Metrics</span>
-          <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-        </div>
-      </motion.div>
     </div>
   )
 }

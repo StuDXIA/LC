@@ -170,26 +170,6 @@ export default function FeaturesSection() {
           ))}
         </div>
         
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8 }}
-          className="mt-16 text-center"
-        >
-          <div className="inline-flex items-center gap-2 glass-effect px-6 py-3 rounded-full">
-            <div className="flex gap-2">
-              {features.map((_, index) => (
-                <div
-                  key={index}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === activeIndex ? 'bg-primary-blue w-8' : 'bg-gray-600'
-                  }`}
-                />
-              ))}
-            </div>
-            <span className="text-sm text-gray-400 ml-2">Auto-scrolling features</span>
-          </div>
-        </motion.div>
       </div>
     </section>
   )
