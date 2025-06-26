@@ -421,22 +421,22 @@ export default function TechShowcase() {
               </motion.span>
             </motion.h3>
             
-            <div className="flex flex-col lg:flex-row items-center gap-8 relative z-10">
+            <div className="flex flex-col lg:flex-row items-center gap-8 relative z-10 px-4 sm:px-6 lg:px-0">
               <motion.div 
-                className="lg:w-1/3 flex justify-center"
+                className="w-full lg:w-1/3 flex justify-center"
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
               >
                 <motion.div 
-                  className="w-48 h-48 lg:w-80 lg:h-80 relative"
+                  className="w-40 h-40 sm:w-48 sm:h-48 lg:w-80 lg:h-80 relative flex-shrink-0"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <AlternatingImages
                     images={['me1', 'me2']}
                     alt="山本公才 / Kousai Yamamoto"
-                    className="rounded-full border-4 border-primary-blue/30 drop-shadow-[0_0_15px_rgba(14,165,233,0.3)]"
+                    className="rounded-full border-4 border-primary-blue/30 drop-shadow-[0_0_15px_rgba(14,165,233,0.3)] w-full h-full object-cover"
                     interval={3000}
                   />
                   {/* Rotating glow ring */}
@@ -453,7 +453,7 @@ export default function TechShowcase() {
               </motion.div>
               
               <motion.div 
-                className="lg:w-2/3 text-center lg:text-left"
+                className="w-full lg:w-2/3 text-center lg:text-left px-4 sm:px-0"
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
