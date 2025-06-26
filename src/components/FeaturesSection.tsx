@@ -128,7 +128,6 @@ export default function FeaturesSection() {
                 className="inline-block mx-2 text-6xl"
                 animate={{ 
                   color: ["#00d9ff", "#9333ea", "#ff006e", "#00d9ff"],
-                  rotateY: [0, 360],
                 }}
                 transition={{ 
                   duration: 4,
