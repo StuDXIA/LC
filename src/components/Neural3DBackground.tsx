@@ -41,14 +41,14 @@ export default function Neural3DBackground() {
     scene.fog = new THREE.Fog(0x000000, 50, 300)
     sceneRef.current = scene
 
-    // Camera setup
+    // Camera setup - wider view
     const camera = new THREE.PerspectiveCamera(
-      60,
+      75,
       window.innerWidth / window.innerHeight,
       0.1,
       1000
     )
-    camera.position.set(0, 0, 100)
+    camera.position.set(0, 0, 150)
     camera.lookAt(0, 0, 0)
     cameraRef.current = camera
 
@@ -67,46 +67,48 @@ export default function Neural3DBackground() {
     const ambientLight = new THREE.AmbientLight(0x0080ff, 0.2)
     scene.add(ambientLight)
 
-    // Create network nodes
+    // Create network nodes - spread across full screen
     const createNodes = () => {
       const nodes: NetworkNode[] = []
-      const nodeGeometry = new THREE.SphereGeometry(0.8, 16, 16)
-      const glowGeometry = new THREE.SphereGeometry(2, 16, 16)
+      const nodeGeometry = new THREE.SphereGeometry(1.2, 32, 32)
+      const glowGeometry = new THREE.SphereGeometry(4, 32, 32)
       
-      // Create nodes in 3D space
-      const layers = 4
-      const nodesPerLayer = [5, 8, 8, 5]
+      // Create nodes in 3D space - wider distribution
+      const layers = 5
+      const nodesPerLayer = [6, 10, 12, 10, 6]
       let nodeIndex = 0
 
       for (let layer = 0; layer < layers; layer++) {
-        const z = (layer - (layers - 1) / 2) * 40
+        const z = (layer - (layers - 1) / 2) * 60
         const nodeCount = nodesPerLayer[layer]
         
         for (let i = 0; i < nodeCount; i++) {
           const angle = (i / nodeCount) * Math.PI * 2
-          const radius = 30 + (layer % 2) * 10
-          const x = Math.cos(angle) * radius
-          const y = Math.sin(angle) * radius
+          const radius = 60 + (layer % 2) * 20
+          const x = Math.cos(angle) * radius + (Math.random() - 0.5) * 20
+          const y = Math.sin(angle) * radius + (Math.random() - 0.5) * 20
 
           // Node group
           const group = new THREE.Group()
           
-          // Core node
+          // Core node - more luxurious
           const coreMaterial = new THREE.MeshPhongMaterial({
             color: 0x00d9ff,
             emissive: 0x00d9ff,
-            emissiveIntensity: 0.5,
+            emissiveIntensity: 0.8,
             transparent: true,
-            opacity: 0.8
+            opacity: 0.9,
+            shininess: 100
           })
           const coreMesh = new THREE.Mesh(nodeGeometry, coreMaterial)
           group.add(coreMesh)
 
-          // Glow effect
+          // Glow effect - more prominent
           const glowMaterial = new THREE.MeshBasicMaterial({
             color: 0x00d9ff,
             transparent: true,
-            opacity: 0.15
+            opacity: 0.25,
+            side: THREE.BackSide
           })
           const glowMesh = new THREE.Mesh(glowGeometry, glowMaterial)
           group.add(glowMesh)
@@ -137,8 +139,8 @@ export default function Neural3DBackground() {
 
         for (let i = 0; i < currentLayerSize; i++) {
           const nodeIdx = currentIndex + i
-          // Connect to 2-4 nodes in next layer
-          const connectionCount = 2 + Math.floor(Math.random() * 3)
+          // Connect to 3-5 nodes in next layer for denser network
+          const connectionCount = 3 + Math.floor(Math.random() * 3)
           
           for (let j = 0; j < connectionCount; j++) {
             const targetIdx = nextLayerStart + Math.floor(Math.random() * nextLayerSize)
@@ -169,28 +171,41 @@ export default function Neural3DBackground() {
           ])
           geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
 
-          const material = new THREE.LineBasicMaterial({
+          // Create thicker, glowing line using cylinder
+          const direction = new THREE.Vector3().subVectors(targetNode.position, node.position)
+          const distance = direction.length()
+          direction.normalize()
+          
+          const cylinderGeometry = new THREE.CylinderGeometry(0.3, 0.3, distance, 8)
+          const cylinderMaterial = new THREE.MeshPhongMaterial({
             color: 0x00d9ff,
+            emissive: 0x00d9ff,
+            emissiveIntensity: 0.4,
             transparent: true,
-            opacity: 0.15,
-            linewidth: 1
+            opacity: 0.3,
+            shininess: 100
           })
-
-          const line = new THREE.Line(geometry, material)
-          scene.add(line)
-          connections.push(line)
+          
+          const cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial)
+          const midpoint = new THREE.Vector3().addVectors(node.position, targetNode.position).multiplyScalar(0.5)
+          cylinder.position.copy(midpoint)
+          cylinder.lookAt(targetNode.position)
+          cylinder.rotateX(Math.PI / 2)
+          
+          scene.add(cylinder)
+          connections.push(cylinder as any)
         })
       })
 
       connectionsRef.current = connections
     }
 
-    // Create data particles
+    // Create data particles - more and larger
     const createParticles = () => {
       const particles: DataParticle[] = []
-      const particleGeometry = new THREE.SphereGeometry(0.3, 8, 8)
+      const particleGeometry = new THREE.SphereGeometry(0.8, 16, 16)
       
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 50; i++) {
         // Find a random connection
         const validNodes = nodesRef.current.filter(n => n.connections.length > 0)
         if (validNodes.length === 0) continue
@@ -199,10 +214,13 @@ export default function Neural3DBackground() {
         const sourceIndex = nodesRef.current.indexOf(sourceNode)
         const targetIndex = sourceNode.connections[Math.floor(Math.random() * sourceNode.connections.length)]
 
-        const material = new THREE.MeshBasicMaterial({
+        const material = new THREE.MeshPhongMaterial({
           color: 0xffffff,
+          emissive: 0x00d9ff,
+          emissiveIntensity: 1.5,
           transparent: true,
-          opacity: 0.8
+          opacity: 0.9,
+          shininess: 100
         })
 
         const mesh = new THREE.Mesh(particleGeometry, material)
@@ -229,7 +247,7 @@ export default function Neural3DBackground() {
           sourceIndex,
           targetIndex,
           progress: Math.random(),
-          speed: 0.005 + Math.random() * 0.01,
+          speed: 0.002 + Math.random() * 0.003,
           trail
         })
       }
@@ -268,16 +286,16 @@ export default function Neural3DBackground() {
       const time = Date.now() * 0.001
       const mouse = mouseRef.current
 
-      // Camera parallax effect based on mouse
-      cameraRef.current.position.x = mouse.x * 10
-      cameraRef.current.position.y = mouse.y * 10
+      // Camera parallax effect based on mouse - more subtle
+      cameraRef.current.position.x = mouse.x * 5
+      cameraRef.current.position.y = mouse.y * 5
       cameraRef.current.lookAt(0, 0, 0)
 
       // Update nodes
       nodesRef.current.forEach((node, index) => {
-        // Gentle pulse
-        node.pulsePhase += 0.02
-        node.energy = 0.4 + Math.sin(node.pulsePhase) * 0.2
+        // Very slow, luxurious pulse
+        node.pulsePhase += 0.008
+        node.energy = 0.5 + Math.sin(node.pulsePhase) * 0.15
 
         // Calculate distance to mouse in 3D space
         const raycaster = new THREE.Raycaster()
@@ -304,24 +322,23 @@ export default function Neural3DBackground() {
 
       // Update connections opacity based on connected nodes
       connectionsRef.current.forEach((connection, index) => {
-        const positions = connection.geometry.attributes.position.array
-        const start = new THREE.Vector3(positions[0], positions[1], positions[2])
-        const end = new THREE.Vector3(positions[3], positions[4], positions[5])
-        
         // Find connected nodes
         let mouseInfluence = 0
         nodesRef.current.forEach(node => {
-          if (node.position.distanceTo(start) < 1 || node.position.distanceTo(end) < 1) {
+          const nodeWorldPos = new THREE.Vector3()
+          node.group.getWorldPosition(nodeWorldPos)
+          
+          if (connection.position.distanceTo(nodeWorldPos) < 50) {
             const raycaster = new THREE.Raycaster()
             raycaster.setFromCamera(new THREE.Vector2(mouse.x, mouse.y), cameraRef.current!)
-            const nodeWorldPos = new THREE.Vector3()
-            node.group.getWorldPosition(nodeWorldPos)
             const distanceToRay = raycaster.ray.distanceToPoint(nodeWorldPos)
-            mouseInfluence = Math.max(mouseInfluence, Math.max(0, 1 - distanceToRay / 30))
+            mouseInfluence = Math.max(mouseInfluence, Math.max(0, 1 - distanceToRay / 40))
           }
         })
 
-        ;(connection.material as THREE.LineBasicMaterial).opacity = 0.1 + mouseInfluence * 0.3
+        const material = connection.material as THREE.MeshPhongMaterial
+        material.opacity = 0.2 + mouseInfluence * 0.4
+        material.emissiveIntensity = 0.3 + mouseInfluence * 0.5
       })
 
       // Update particles
@@ -374,8 +391,10 @@ export default function Neural3DBackground() {
           const distanceToRay = raycaster.ray.distanceToPoint(currentPos)
           const mouseInfluence = Math.max(0, 1 - distanceToRay / 20)
           
-          particle.speed = 0.005 + mouseInfluence * 0.015
-          ;(particle.mesh.material as THREE.MeshBasicMaterial).opacity = 0.5 + mouseInfluence * 0.5
+          particle.speed = 0.002 + mouseInfluence * 0.005
+          const particleMaterial = particle.mesh.material as THREE.MeshPhongMaterial
+          particleMaterial.opacity = 0.7 + mouseInfluence * 0.3
+          particleMaterial.emissiveIntensity = 1.0 + mouseInfluence * 1.0
         }
       })
 
@@ -406,7 +425,7 @@ export default function Neural3DBackground() {
       ref={mountRef} 
       className="absolute inset-0 w-full h-full"
       style={{ 
-        background: 'radial-gradient(ellipse at center, rgba(0, 30, 60, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%)',
+        background: 'radial-gradient(ellipse at center, rgba(0, 50, 100, 0.2) 0%, rgba(0, 20, 50, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%)',
         zIndex: 1 
       }}
     />
