@@ -30,7 +30,7 @@ export default function HeroSection() {
       <Neural3DBackground />
       
       {/* Subtle overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-radial from-clean-white/30 via-transparent to-light-blue/20 z-10" />
+      <div className="absolute inset-0 bg-gradient-radial from-white/50 via-white/20 to-slate-100/30 z-10" />
       
       <div className="container mx-auto px-6 relative z-20">
         <motion.div

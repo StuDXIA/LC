@@ -4,9 +4,9 @@
 
 @layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 248, 250, 252;
-    --background-end-rgb: 241, 245, 249;
+    --foreground-rgb: 75, 85, 99;
+    --background-start-rgb: 255, 255, 255;
+    --background-end-rgb: 248, 250, 252;
   }
 
   * {

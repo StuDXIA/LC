@@ -38,7 +38,7 @@ export default function Neural3DBackground() {
 
     // Scene setup
     const scene = new THREE.Scene()
-    scene.fog = new THREE.Fog(0x000000, 50, 300)
+    scene.fog = new THREE.Fog(0xffffff, 200, 500)
     sceneRef.current = scene
 
     // Camera setup - wider view
@@ -59,13 +59,17 @@ export default function Neural3DBackground() {
     })
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    renderer.setClearColor(0x000000, 0)
+    renderer.setClearColor(0xffffff, 0.1)
     mountRef.current.appendChild(renderer.domElement)
     rendererRef.current = renderer
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0x0080ff, 0.2)
+    // Lighting - brighter and whiter
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
     scene.add(ambientLight)
+    
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
+    directionalLight.position.set(10, 10, 5)
+    scene.add(directionalLight)
 
     // Create network nodes - spread across full screen
     const createNodes = () => {
@@ -91,23 +95,23 @@ export default function Neural3DBackground() {
           // Node group
           const group = new THREE.Group()
           
-          // Core node - more luxurious
+          // Core node - clean and bright
           const coreMaterial = new THREE.MeshPhongMaterial({
-            color: 0x00d9ff,
-            emissive: 0x00d9ff,
-            emissiveIntensity: 0.8,
+            color: 0x3B82F6,
+            emissive: 0x60A5FA,
+            emissiveIntensity: 0.2,
             transparent: true,
-            opacity: 0.9,
+            opacity: 0.6,
             shininess: 100
           })
           const coreMesh = new THREE.Mesh(nodeGeometry, coreMaterial)
           group.add(coreMesh)
 
-          // Glow effect - more prominent
+          // Glow effect - subtle and clean
           const glowMaterial = new THREE.MeshBasicMaterial({
-            color: 0x00d9ff,
+            color: 0x60A5FA,
             transparent: true,
-            opacity: 0.25,
+            opacity: 0.08,
             side: THREE.BackSide
           })
           const glowMesh = new THREE.Mesh(glowGeometry, glowMaterial)
@@ -178,11 +182,11 @@ export default function Neural3DBackground() {
           
           const cylinderGeometry = new THREE.CylinderGeometry(0.3, 0.3, distance, 8)
           const cylinderMaterial = new THREE.MeshPhongMaterial({
-            color: 0x00d9ff,
-            emissive: 0x00d9ff,
-            emissiveIntensity: 0.4,
+            color: 0x3B82F6,
+            emissive: 0x60A5FA,
+            emissiveIntensity: 0.1,
             transparent: true,
-            opacity: 0.3,
+            opacity: 0.15,
             shininess: 100
           })
           
@@ -216,10 +220,10 @@ export default function Neural3DBackground() {
 
         const material = new THREE.MeshPhongMaterial({
           color: 0xffffff,
-          emissive: 0x00d9ff,
-          emissiveIntensity: 1.5,
+          emissive: 0x3B82F6,
+          emissiveIntensity: 0.8,
           transparent: true,
-          opacity: 0.9,
+          opacity: 0.7,
           shininess: 100
         })
 
@@ -232,10 +236,10 @@ export default function Neural3DBackground() {
         trailGeometry.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3))
         
         const trailMaterial = new THREE.PointsMaterial({
-          color: 0x00d9ff,
+          color: 0x3B82F6,
           size: 1,
           transparent: true,
-          opacity: 0.3,
+          opacity: 0.2,
           sizeAttenuation: true
         })
 
@@ -425,7 +429,7 @@ export default function Neural3DBackground() {
       ref={mountRef} 
       className="absolute inset-0 w-full h-full"
       style={{ 
-        background: 'radial-gradient(ellipse at center, rgba(0, 50, 100, 0.2) 0%, rgba(0, 20, 50, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%)',
+        background: 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.8) 50%, rgba(243, 244, 246, 0.6) 100%)',
         zIndex: 1 
       }}
     />
