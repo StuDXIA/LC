@@ -10,28 +10,30 @@ interface NetworkNode {
   pulsePhase: number
   group: THREE.Group
   coreMesh: THREE.Mesh
-  glowMesh: THREE.Mesh
-  ringMesh: THREE.Mesh
+  innerGlowMesh: THREE.Mesh
+  outerGlowMesh: THREE.Mesh
   layer: number
-  angle: number
+  neuronType: 'input' | 'hidden' | 'output'
 }
 
 interface Connection {
   line: THREE.Line
-  glow: THREE.Line
+  glowLine: THREE.Line
+  pulseLine: THREE.Line
   sourceIndex: number
   targetIndex: number
+  strength: number
   flowPhase: number
 }
 
-interface LightParticle {
+interface ElectricPulse {
   mesh: THREE.Mesh
+  trail: THREE.Points
   sourceIndex: number
   targetIndex: number
   progress: number
   speed: number
-  trail: THREE.Points
-  birthTime: number
+  energy: number
 }
 
 export default function Neural3DBackground() {
@@ -41,28 +43,27 @@ export default function Neural3DBackground() {
   const cameraRef = useRef<THREE.PerspectiveCamera>()
   const nodesRef = useRef<NetworkNode[]>([])
   const connectionsRef = useRef<Connection[]>([])
-  const particlesRef = useRef<LightParticle[]>([])
+  const pulsesRef = useRef<ElectricPulse[]>([])
   const mouseRef = useRef({ x: 0, y: 0 })
   const animationIdRef = useRef<number>()
   const timeRef = useRef(0)
-  const buildPhaseRef = useRef(0)
 
   useEffect(() => {
     if (!mountRef.current) return
 
-    // Scene setup with dark gradient background
+    // Scene setup with dark tech background
     const scene = new THREE.Scene()
-    scene.fog = new THREE.Fog(0x0a0a0f, 100, 400)
+    scene.fog = new THREE.Fog(0x050512, 150, 500)
     sceneRef.current = scene
 
     // Camera setup
     const camera = new THREE.PerspectiveCamera(
-      65,
+      75,
       window.innerWidth / window.innerHeight,
       0.1,
       1000
     )
-    camera.position.set(0, 0, 120)
+    camera.position.set(0, 0, 100)
     camera.lookAt(0, 0, 0)
     cameraRef.current = camera
 
@@ -76,118 +77,136 @@ export default function Neural3DBackground() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.setClearColor(0x000000, 0)
     renderer.toneMapping = THREE.ACESFilmicToneMapping
-    renderer.toneMappingExposure = 1.2
+    renderer.toneMappingExposure = 1.5
     mountRef.current.appendChild(renderer.domElement)
     rendererRef.current = renderer
 
-    // Ambient lighting for neon effect
-    const ambientLight = new THREE.AmbientLight(0x0a0a0f, 0.4)
+    // Ambient lighting for neural glow
+    const ambientLight = new THREE.AmbientLight(0x0a0a1f, 0.2)
     scene.add(ambientLight)
 
-    // Create network nodes with staged animation
+    // Create neural network nodes
     const createNodes = () => {
       const nodes: NetworkNode[] = []
       
-      // Neon materials
-      const createNodeMaterials = (color: number, emissiveColor: number) => ({
-        core: new THREE.MeshPhongMaterial({
-          color: color,
-          emissive: emissiveColor,
-          emissiveIntensity: 0.8,
-          transparent: true,
-          opacity: 0.9,
-        }),
-        glow: new THREE.MeshBasicMaterial({
-          color: emissiveColor,
-          transparent: true,
-          opacity: 0.15,
-          side: THREE.BackSide
-        }),
-        ring: new THREE.MeshBasicMaterial({
-          color: emissiveColor,
-          transparent: true,
-          opacity: 0.3,
-          side: THREE.DoubleSide
-        })
-      })
+      // Neon materials for neurons
+      const createNeuronMaterials = (type: 'input' | 'hidden' | 'output') => {
+        const baseColor = type === 'input' ? 0x00D9FF : 
+                         type === 'output' ? 0x00FFFF : 
+                         0x00B8E6
+        const emissiveColor = type === 'input' ? 0x00D9FF : 
+                             type === 'output' ? 0x00FFFF : 
+                             0x00B8E6
 
-      // Create nodes in elegant formation
-      const centerNode = {
-        position: new THREE.Vector3(0, 0, 0),
-        materials: createNodeMaterials(0x00D9FF, 0x00D9FF),
-        scale: 1.5,
-        layer: 0,
-        angle: 0
+        return {
+          core: new THREE.MeshPhongMaterial({
+            color: baseColor,
+            emissive: emissiveColor,
+            emissiveIntensity: 1.2,
+            transparent: true,
+            opacity: 0.95,
+          }),
+          innerGlow: new THREE.MeshBasicMaterial({
+            color: emissiveColor,
+            transparent: true,
+            opacity: 0.4,
+            side: THREE.BackSide
+          }),
+          outerGlow: new THREE.MeshBasicMaterial({
+            color: emissiveColor,
+            transparent: true,
+            opacity: 0.15,
+            side: THREE.BackSide
+          })
+        }
       }
 
-      // Layer configuration for elegant network
+      // Neural network architecture
       const layers = [
-        { count: 1, radius: 0, z: 0, scale: 1.5 },      // Center
-        { count: 6, radius: 25, z: 0, scale: 1.0 },     // Inner ring
-        { count: 12, radius: 50, z: -20, scale: 0.8 },  // Middle layer
-        { count: 18, radius: 80, z: 20, scale: 0.7 },   // Outer layer
-        { count: 12, radius: 110, z: -10, scale: 0.6 }  // Far layer
+        { count: 5, radius: 0, z: -30, type: 'input' as const },      // Input layer
+        { count: 8, radius: 30, z: -15, type: 'hidden' as const },    // Hidden layer 1
+        { count: 12, radius: 50, z: 0, type: 'hidden' as const },     // Hidden layer 2
+        { count: 8, radius: 70, z: 15, type: 'hidden' as const },     // Hidden layer 3
+        { count: 5, radius: 90, z: 30, type: 'output' as const }      // Output layer
       ]
 
       let nodeIndex = 0
       layers.forEach((layer, layerIndex) => {
         for (let i = 0; i < layer.count; i++) {
           const angle = (i / layer.count) * Math.PI * 2
-          const x = Math.cos(angle) * layer.radius
-          const y = Math.sin(angle) * layer.radius
-          const z = layer.z + (Math.random() - 0.5) * 10
+          const angleOffset = layerIndex % 2 === 0 ? 0 : Math.PI / layer.count
+          const finalAngle = angle + angleOffset
+          
+          const x = Math.cos(finalAngle) * layer.radius + (Math.random() - 0.5) * 10
+          const y = Math.sin(finalAngle) * layer.radius + (Math.random() - 0.5) * 10
+          const z = layer.z + (Math.random() - 0.5) * 5
 
-          // Color variation based on position
-          const hue = layerIndex === 0 ? 0x00D9FF : 
-                     (i % 3 === 0) ? 0x00D9FF : 
-                     (i % 3 === 1) ? 0x00FFFF : 
-                     0x9D00FF
-
-          const materials = createNodeMaterials(hue, hue)
+          const materials = createNeuronMaterials(layer.type)
 
           // Node group
           const group = new THREE.Group()
           group.position.set(x, y, z)
           
-          // Core sphere - smaller and more refined
-          const coreGeometry = new THREE.SphereGeometry(0.4 * layer.scale, 16, 16)
+          // Core neuron body
+          const coreGeometry = new THREE.SphereGeometry(0.6, 24, 24)
           const coreMesh = new THREE.Mesh(coreGeometry, materials.core)
           group.add(coreMesh)
 
-          // Glow sphere
-          const glowGeometry = new THREE.SphereGeometry(1.5 * layer.scale, 16, 16)
-          const glowMesh = new THREE.Mesh(glowGeometry, materials.glow)
-          group.add(glowMesh)
+          // Inner glow
+          const innerGlowGeometry = new THREE.SphereGeometry(1.2, 16, 16)
+          const innerGlowMesh = new THREE.Mesh(innerGlowGeometry, materials.innerGlow)
+          group.add(innerGlowMesh)
 
-          // Decorative ring
-          const ringGeometry = new THREE.RingGeometry(0.8 * layer.scale, 1.2 * layer.scale, 32)
-          const ringMesh = new THREE.Mesh(ringGeometry, materials.ring)
-          ringMesh.rotation.x = Math.PI / 2
-          group.add(ringMesh)
+          // Outer glow
+          const outerGlowGeometry = new THREE.SphereGeometry(2.5, 12, 12)
+          const outerGlowMesh = new THREE.Mesh(outerGlowGeometry, materials.outerGlow)
+          group.add(outerGlowMesh)
 
-          // Initially hidden for build animation
-          group.scale.set(0, 0, 0)
-          group.visible = false
+          // Add axon branches (decorative lines)
+          const axonCount = 3 + Math.floor(Math.random() * 3)
+          for (let j = 0; j < axonCount; j++) {
+            const axonAngle = (j / axonCount) * Math.PI * 2
+            const axonLength = 2 + Math.random() * 2
+            const axonGeometry = new THREE.BufferGeometry()
+            const axonPoints = [
+              new THREE.Vector3(0, 0, 0),
+              new THREE.Vector3(
+                Math.cos(axonAngle) * axonLength,
+                Math.sin(axonAngle) * axonLength,
+                (Math.random() - 0.5) * 2
+              )
+            ]
+            axonGeometry.setFromPoints(axonPoints)
+            const axonMaterial = new THREE.LineBasicMaterial({
+              color: materials.core.emissive,
+              transparent: true,
+              opacity: 0.3,
+              linewidth: 1
+            })
+            const axonLine = new THREE.Line(axonGeometry, axonMaterial)
+            group.add(axonLine)
+          }
+
           scene.add(group)
 
           nodes.push({
             position: new THREE.Vector3(x, y, z),
             connections: [],
-            energy: 0.5,
+            energy: 0.5 + Math.random() * 0.5,
             pulsePhase: Math.random() * Math.PI * 2,
             group,
             coreMesh,
-            glowMesh,
-            ringMesh,
+            innerGlowMesh,
+            outerGlowMesh,
             layer: layerIndex,
-            angle
+            neuronType: layer.type
           })
 
           nodeIndex++
         }
       })
 
-      // Define connections - elegant and purposeful
+      // Create synaptic connections
       let currentIndex = 0
       for (let layerIndex = 0; layerIndex < layers.length - 1; layerIndex++) {
         const currentLayer = layers[layerIndex]
@@ -197,15 +216,13 @@ export default function Neural3DBackground() {
         for (let i = 0; i < currentLayer.count; i++) {
           const nodeIdx = currentIndex + i
           
-          // Connect to 2-3 nodes in next layer
-          const connectionCount = layerIndex === 0 ? 6 : 2 + Math.floor(Math.random() * 2)
+          // Connect to multiple neurons in next layer (neural network style)
+          const connectionCount = 2 + Math.floor(Math.random() * 4)
           const connections = new Set<number>()
           
-          // Prioritize nearby nodes
+          // Create connections with some randomness
           for (let j = 0; j < connectionCount; j++) {
-            const baseTarget = Math.floor(i * nextLayer.count / currentLayer.count)
-            const offset = Math.floor(Math.random() * 3) - 1
-            const targetIdx = nextLayerStart + (baseTarget + offset + nextLayer.count) % nextLayer.count
+            const targetIdx = nextLayerStart + Math.floor(Math.random() * nextLayer.count)
             connections.add(targetIdx)
           }
           
@@ -217,7 +234,7 @@ export default function Neural3DBackground() {
       nodesRef.current = nodes
     }
 
-    // Create elegant neon connections
+    // Create synaptic connections with glow
     const createConnections = () => {
       const connections: Connection[] = []
       
@@ -226,38 +243,51 @@ export default function Neural3DBackground() {
           const targetNode = nodesRef.current[targetIndex]
           if (!targetNode) return
 
-          // Main connection line - ultra thin
+          // Connection strength based on distance
+          const distance = node.position.distanceTo(targetNode.position)
+          const strength = 1 / (1 + distance * 0.02)
+
+          // Main synaptic connection
           const points = [node.position, targetNode.position]
           const geometry = new THREE.BufferGeometry().setFromPoints(points)
           
+          // Base connection line
           const lineMaterial = new THREE.LineBasicMaterial({
-            color: 0x00D9FF,
+            color: 0x00B8E6,
             transparent: true,
-            opacity: 0.6,
+            opacity: 0.3 * strength,
             linewidth: 1
           })
-          
           const line = new THREE.Line(geometry, lineMaterial)
-          line.visible = false // Initially hidden
           scene.add(line)
 
-          // Glow line for neon effect
+          // Glow line
           const glowMaterial = new THREE.LineBasicMaterial({
             color: 0x00D9FF,
             transparent: true,
-            opacity: 0.2,
+            opacity: 0.15 * strength,
+            linewidth: 2
+          })
+          const glowLine = new THREE.Line(geometry.clone(), glowMaterial)
+          scene.add(glowLine)
+
+          // Pulse line for activity
+          const pulseMaterial = new THREE.LineBasicMaterial({
+            color: 0x00FFFF,
+            transparent: true,
+            opacity: 0,
             linewidth: 3
           })
-          
-          const glowLine = new THREE.Line(geometry.clone(), glowMaterial)
-          glowLine.visible = false
-          scene.add(glowLine)
+          const pulseLine = new THREE.Line(geometry.clone(), pulseMaterial)
+          scene.add(pulseLine)
 
           connections.push({
             line,
-            glow: glowLine,
+            glowLine,
+            pulseLine,
             sourceIndex: nodeIndex,
             targetIndex,
+            strength,
             flowPhase: Math.random() * Math.PI * 2
           })
         })
@@ -266,13 +296,13 @@ export default function Neural3DBackground() {
       connectionsRef.current = connections
     }
 
-    // Create light particles for data flow
-    const createParticles = () => {
-      const particles: LightParticle[] = []
-      const particleGeometry = new THREE.SphereGeometry(0.2, 8, 8)
+    // Create electric pulses
+    const createPulses = () => {
+      const pulses: ElectricPulse[] = []
+      const pulseGeometry = new THREE.SphereGeometry(0.3, 12, 12)
       
-      // Create fewer, more impactful particles
-      for (let i = 0; i < 20; i++) {
+      // Create more pulses for active neural network
+      for (let i = 0; i < 40; i++) {
         const validNodes = nodesRef.current.filter(n => n.connections.length > 0)
         if (validNodes.length === 0) continue
 
@@ -280,52 +310,51 @@ export default function Neural3DBackground() {
         const sourceIndex = nodesRef.current.indexOf(sourceNode)
         const targetIndex = sourceNode.connections[Math.floor(Math.random() * sourceNode.connections.length)]
 
-        const particleMaterial = new THREE.MeshBasicMaterial({
+        const pulseMaterial = new THREE.MeshBasicMaterial({
           color: 0x00FFFF,
           transparent: true,
-          opacity: 0,
+          opacity: 0.8,
         })
 
-        const mesh = new THREE.Mesh(particleGeometry, particleMaterial)
-        mesh.visible = false
+        const mesh = new THREE.Mesh(pulseGeometry, pulseMaterial)
+        mesh.scale.set(0, 0, 0)
         scene.add(mesh)
 
-        // Create elegant trail
+        // Create electric trail
         const trailGeometry = new THREE.BufferGeometry()
-        const trailPositions = new Float32Array(15 * 3) // 5 trail points
+        const trailPositions = new Float32Array(21 * 3) // 7 trail points
         trailGeometry.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3))
         
         const trailMaterial = new THREE.PointsMaterial({
           color: 0x00D9FF,
-          size: 1.5,
+          size: 2,
           transparent: true,
-          opacity: 0,
+          opacity: 0.6,
           sizeAttenuation: true,
           blending: THREE.AdditiveBlending
         })
 
         const trail = new THREE.Points(trailGeometry, trailMaterial)
-        trail.visible = false
         scene.add(trail)
 
-        particles.push({
+        pulses.push({
           mesh,
+          trail,
           sourceIndex,
           targetIndex,
           progress: Math.random(),
-          speed: 0.003 + Math.random() * 0.002,
-          trail,
-          birthTime: 0
+          speed: 0.005 + Math.random() * 0.005,
+          energy: 0.5 + Math.random() * 0.5
         })
       }
 
-      particlesRef.current = particles
+      pulsesRef.current = pulses
     }
 
     // Initialize
     createNodes()
     createConnections()
-    createParticles()
+    createPulses()
 
     // Mouse tracking
     const handleMouseMove = (event: MouseEvent) => {
@@ -355,161 +384,124 @@ export default function Neural3DBackground() {
       timeRef.current = time
       const mouse = mouseRef.current
 
-      // Build animation phases
-      const animTime = time - 0.5 // Start after 0.5s delay
-      if (animTime > 0) {
-        // Phase 1: Center node appears (0-1s)
-        if (animTime < 1 && nodesRef.current[0]) {
-          const progress = animTime
-          nodesRef.current[0].group.visible = true
-          nodesRef.current[0].group.scale.setScalar(progress * 1.5)
-        }
-
-        // Phase 2: First ring expands (1-2s)
-        if (animTime > 0.8 && animTime < 2) {
-          const progress = (animTime - 0.8) / 1.2
-          nodesRef.current.slice(1, 7).forEach((node, i) => {
-            node.group.visible = true
-            node.group.scale.setScalar(progress)
-          })
-        }
-
-        // Phase 3: Connections and outer nodes (2-3s)
-        if (animTime > 1.8 && animTime < 3) {
-          const progress = (animTime - 1.8) / 1.2
-          
-          // Show remaining nodes
-          nodesRef.current.slice(7).forEach((node, i) => {
-            node.group.visible = true
-            node.group.scale.setScalar(progress * (0.6 + i * 0.01))
-          })
-
-          // Show connections
-          connectionsRef.current.forEach((conn, i) => {
-            const connProgress = Math.min(1, progress + i * 0.01)
-            conn.line.visible = true
-            conn.glow.visible = true
-            ;(conn.line.material as THREE.LineBasicMaterial).opacity = connProgress * 0.4
-            ;(conn.glow.material as THREE.LineBasicMaterial).opacity = connProgress * 0.1
-          })
-        }
-
-        // Phase 4: Activate particles (3s+)
-        if (animTime > 3) {
-          particlesRef.current.forEach(p => {
-            if (!p.mesh.visible) {
-              p.mesh.visible = true
-              p.trail.visible = true
-              p.birthTime = time
-            }
-          })
-        }
-      }
-
-      // Camera subtle movement
-      cameraRef.current.position.x = mouse.x * 3
-      cameraRef.current.position.y = mouse.y * 3
+      // Camera movement based on mouse
+      cameraRef.current.position.x = mouse.x * 10
+      cameraRef.current.position.y = mouse.y * 10
       cameraRef.current.lookAt(0, 0, 0)
 
-      // Update nodes with elegant animations
+      // Rotate entire scene slowly
+      sceneRef.current.rotation.z = Math.sin(time * 0.1) * 0.05
+
+      // Update neurons with activity
       nodesRef.current.forEach((node, index) => {
-        if (!node.group.visible) return
-
-        // Breathing effect
-        node.pulsePhase += 0.02
-        const breathing = 0.5 + Math.sin(node.pulsePhase) * 0.1
-
-        // Mouse interaction
+        // Neural activity simulation
+        node.pulsePhase += 0.03 + Math.sin(time + index) * 0.01
+        const activity = 0.5 + Math.sin(node.pulsePhase) * 0.3
+        
+        // Mouse influence on neural activity
         const raycaster = new THREE.Raycaster()
         raycaster.setFromCamera(new THREE.Vector2(mouse.x, mouse.y), cameraRef.current!)
         const distanceToRay = raycaster.ray.distanceToPoint(node.position)
-        const mouseInfluence = Math.max(0, 1 - distanceToRay / 40) * 0.5
-
-        // Update node visuals
-        const scale = node.group.scale.x
-        node.coreMesh.scale.setScalar(1 + breathing * 0.2 + mouseInfluence)
-        node.glowMesh.scale.setScalar(1 + breathing * 0.4 + mouseInfluence * 2)
+        const mouseInfluence = Math.max(0, 1 - distanceToRay / 30)
         
-        // Neon glow intensity
+        // Update neuron visuals
+        const totalActivity = activity + mouseInfluence * 0.5
+        node.energy = node.energy * 0.95 + totalActivity * 0.05
+        
+        // Core pulsing
+        node.coreMesh.scale.setScalar(0.8 + node.energy * 0.4)
         const coreMat = node.coreMesh.material as THREE.MeshPhongMaterial
-        coreMat.emissiveIntensity = 0.8 + breathing * 0.2 + mouseInfluence
+        coreMat.emissiveIntensity = 0.8 + node.energy * 0.8
         
-        const glowMat = node.glowMesh.material as THREE.MeshBasicMaterial
-        glowMat.opacity = 0.15 + breathing * 0.05 + mouseInfluence * 0.15
+        // Inner glow
+        node.innerGlowMesh.scale.setScalar(1.2 + node.energy * 0.6)
+        const innerGlowMat = node.innerGlowMesh.material as THREE.MeshBasicMaterial
+        innerGlowMat.opacity = 0.3 + node.energy * 0.3
+        
+        // Outer glow
+        node.outerGlowMesh.scale.setScalar(2.5 + node.energy * 1.0)
+        const outerGlowMat = node.outerGlowMesh.material as THREE.MeshBasicMaterial
+        outerGlowMat.opacity = 0.1 + node.energy * 0.15
 
-        // Ring rotation
-        node.ringMesh.rotation.z = time * 0.5 + index
-        node.ringMesh.scale.setScalar(1 + mouseInfluence * 0.5)
+        // Slight floating motion
+        node.group.position.y += Math.sin(time * 2 + index) * 0.02
+        node.group.rotation.z = Math.sin(time + index) * 0.1
       })
 
-      // Update connections with flowing light effect
+      // Update synaptic connections
       connectionsRef.current.forEach((conn) => {
         const sourceNode = nodesRef.current[conn.sourceIndex]
         const targetNode = nodesRef.current[conn.targetIndex]
         if (!sourceNode || !targetNode) return
 
-        // Calculate mouse influence on connection
-        const midpoint = new THREE.Vector3().addVectors(sourceNode.position, targetNode.position).multiplyScalar(0.5)
-        const raycaster = new THREE.Raycaster()
-        raycaster.setFromCamera(new THREE.Vector2(mouse.x, mouse.y), cameraRef.current!)
-        const distanceToRay = raycaster.ray.distanceToPoint(midpoint)
-        const mouseInfluence = Math.max(0, 1 - distanceToRay / 50)
+        // Calculate activity flow
+        const activity = (sourceNode.energy + targetNode.energy) * 0.5
+        conn.flowPhase += 0.05 * activity
 
-        // Update connection opacity
+        // Update connection visuals
         const lineMat = conn.line.material as THREE.LineBasicMaterial
-        const glowMat = conn.glow.material as THREE.LineBasicMaterial
+        const glowMat = conn.glowLine.material as THREE.LineBasicMaterial
+        const pulseMat = conn.pulseLine.material as THREE.LineBasicMaterial
         
-        const baseOpacity = 0.3
-        const flowPulse = Math.sin(time * 2 + conn.flowPhase) * 0.1
+        const pulse = Math.sin(conn.flowPhase) * 0.5 + 0.5
+        lineMat.opacity = 0.2 + activity * 0.3
+        glowMat.opacity = 0.1 + activity * 0.2
         
-        lineMat.opacity = baseOpacity + flowPulse + mouseInfluence * 0.3
-        glowMat.opacity = (baseOpacity * 0.3) + (flowPulse * 0.5) + mouseInfluence * 0.2
+        // Pulse effect on strong connections
+        if (activity > 0.7) {
+          pulseMat.opacity = pulse * 0.5 * activity
+        } else {
+          pulseMat.opacity = 0
+        }
       })
 
-      // Update particles with elegant trails
-      particlesRef.current.forEach(particle => {
-        if (!particle.mesh.visible) return
+      // Update electric pulses
+      pulsesRef.current.forEach(pulse => {
+        pulse.progress += pulse.speed * (1 + pulse.energy * 0.5)
 
-        particle.progress += particle.speed
-
-        if (particle.progress >= 1) {
-          // Reset particle
+        if (pulse.progress >= 1) {
+          // Reset pulse
           const validNodes = nodesRef.current.filter(n => n.connections.length > 0)
           if (validNodes.length > 0) {
             const sourceNode = validNodes[Math.floor(Math.random() * validNodes.length)]
-            particle.sourceIndex = nodesRef.current.indexOf(sourceNode)
-            particle.targetIndex = sourceNode.connections[Math.floor(Math.random() * sourceNode.connections.length)]
-            particle.progress = 0
-            particle.birthTime = time
+            pulse.sourceIndex = nodesRef.current.indexOf(sourceNode)
+            pulse.targetIndex = sourceNode.connections[Math.floor(Math.random() * sourceNode.connections.length)]
+            pulse.progress = 0
+            pulse.energy = 0.5 + Math.random() * 0.5
           }
         }
 
-        // Smooth position along path
-        const sourceNode = nodesRef.current[particle.sourceIndex]
-        const targetNode = nodesRef.current[particle.targetIndex]
+        // Move pulse along synapse
+        const sourceNode = nodesRef.current[pulse.sourceIndex]
+        const targetNode = nodesRef.current[pulse.targetIndex]
         
         if (sourceNode && targetNode) {
-          // Cubic bezier for smooth path
-          const t = particle.progress
-          const controlOffset = 15
-          const control1 = sourceNode.position.clone()
-          control1.y += controlOffset
-          const control2 = targetNode.position.clone()
-          control2.y += controlOffset
-
-          const currentPos = new THREE.Vector3()
-          const bezier = new THREE.CubicBezierCurve3(
+          const t = pulse.progress
+          const currentPos = new THREE.Vector3().lerpVectors(
             sourceNode.position,
-            control1,
-            control2,
-            targetNode.position
+            targetNode.position,
+            t
           )
-          bezier.getPoint(t, currentPos)
           
-          particle.mesh.position.copy(currentPos)
+          // Add slight curve to path
+          const perpendicular = new THREE.Vector3()
+            .subVectors(targetNode.position, sourceNode.position)
+            .cross(new THREE.Vector3(0, 0, 1))
+            .normalize()
+            .multiplyScalar(Math.sin(t * Math.PI) * 2)
+          
+          currentPos.add(perpendicular)
+          pulse.mesh.position.copy(currentPos)
+          
+          // Pulse size and glow
+          const scale = Math.sin(t * Math.PI) * 0.3 + 0.2
+          pulse.mesh.scale.setScalar(scale * pulse.energy)
+          
+          const pulseMat = pulse.mesh.material as THREE.MeshBasicMaterial
+          pulseMat.opacity = (1 - Math.abs(t - 0.5) * 2) * 0.8 * pulse.energy
           
           // Update trail
-          const trailPositions = particle.trail.geometry.attributes.position.array as Float32Array
+          const trailPositions = pulse.trail.geometry.attributes.position.array as Float32Array
           for (let i = trailPositions.length - 3; i >= 3; i -= 3) {
             trailPositions[i] = trailPositions[i - 3]
             trailPositions[i + 1] = trailPositions[i - 2]
@@ -518,24 +510,14 @@ export default function Neural3DBackground() {
           trailPositions[0] = currentPos.x
           trailPositions[1] = currentPos.y
           trailPositions[2] = currentPos.z
-          particle.trail.geometry.attributes.position.needsUpdate = true
+          pulse.trail.geometry.attributes.position.needsUpdate = true
           
-          // Particle and trail visibility
-          const age = time - particle.birthTime
-          const fadeIn = Math.min(1, age * 2)
-          const particleMat = particle.mesh.material as THREE.MeshBasicMaterial
-          const trailMat = particle.trail.material as THREE.PointsMaterial
-          
-          particleMat.opacity = fadeIn * 0.9
-          trailMat.opacity = fadeIn * 0.3
-          
-          // Speed variation
-          const speedBoost = Math.sin(t * Math.PI) * 0.5 + 0.5
-          particle.speed = 0.004 + speedBoost * 0.002
+          const trailMat = pulse.trail.material as THREE.PointsMaterial
+          trailMat.opacity = 0.6 * pulse.energy * (1 - t)
         }
       })
 
-      // Render with post-processing feel
+      // Render
       rendererRef.current.render(sceneRef.current, cameraRef.current)
     }
 
@@ -564,10 +546,14 @@ export default function Neural3DBackground() {
       style={{ 
         background: `
           radial-gradient(ellipse at center, 
-            rgba(255, 255, 255, 0.95) 0%, 
-            rgba(248, 250, 252, 0.92) 40%, 
-            rgba(241, 245, 249, 0.88) 70%, 
-            rgba(226, 232, 240, 0.85) 100%)
+            rgba(5, 5, 18, 0.7) 0%, 
+            rgba(10, 10, 31, 0.85) 40%, 
+            rgba(15, 15, 41, 0.9) 70%, 
+            rgba(20, 20, 51, 0.95) 100%),
+          linear-gradient(180deg,
+            rgba(0, 216, 255, 0.05) 0%,
+            rgba(0, 184, 230, 0.03) 50%,
+            rgba(0, 255, 255, 0.02) 100%)
         `,
         zIndex: 1 
       }}

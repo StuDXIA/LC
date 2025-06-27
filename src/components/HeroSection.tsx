@@ -30,7 +30,7 @@ export default function HeroSection() {
       <Neural3DBackground />
       
       {/* Subtle overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-radial from-white/50 via-white/20 to-slate-100/30 z-10" />
+      <div className="absolute inset-0 bg-gradient-radial from-black/20 via-transparent to-transparent z-10" />
       
       <div className="container mx-auto px-6 relative z-20">
         <motion.div
@@ -55,12 +55,12 @@ export default function HeroSection() {
                 priority
               />
             </div>
-            <span className="text-gray-900 text-lg font-mono font-bold">Luminous Core</span>
+            <span className="text-white text-lg font-mono font-bold drop-shadow-[0_2px_10px_rgba(0,216,255,0.5)]">Luminous Core</span>
           </motion.div>
           
           <h1 
             ref={titleRef}
-            className="text-4xl md:text-6xl font-bold mb-8 transform-gpu transition-transform duration-100 leading-tight relative text-gray-900"
+            className="text-4xl md:text-6xl font-bold mb-8 transform-gpu transition-transform duration-100 leading-tight relative text-white"
             style={{ transformStyle: 'preserve-3d' }}
           >
             <motion.span 
@@ -79,7 +79,7 @@ export default function HeroSection() {
             >
               次の
               <motion.span
-                className="inline-block mx-2 text-blue-800 font-black"
+                className="inline-block mx-2 text-cyan-400 font-black"
                 style={{
                   textShadow: "0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(59, 130, 246, 0.4)",
                   WebkitTextStroke: "1px rgba(30, 64, 175, 0.4)"
@@ -111,10 +111,10 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <p className="text-gray-800 font-semibold">
+            <p className="text-white/90 font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
               Luminous Coreは、
               <motion.span 
-                className="text-blue-700 font-black inline-block"
+                className="text-cyan-300 font-black inline-block"
                 whileHover={{ scale: 1.05, color: "#1d4ed8" }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
@@ -123,7 +123,7 @@ export default function HeroSection() {
               として、クライアントの事業成果を最大化する
               <br />
               <motion.span 
-                className="text-blue-700 font-black inline-block"
+                className="text-cyan-300 font-black inline-block"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2, duration: 0.6 }}
@@ -140,7 +140,7 @@ export default function HeroSection() {
               >
                 我々は、独自のAI技術と専門チームを駆使し、戦略的なSNSグロース、
                 成果に繋がるウェブサイト制作、業務を効率化するカスタムツール開発を、
-                <span className="bg-gradient-to-r from-gray-900 to-blue-800 bg-clip-text text-transparent font-black text-xl">ワンストップで提供</span>
+                <span className="bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent font-black text-xl drop-shadow-[0_2px_10px_rgba(0,216,255,0.5)]">ワンストップで提供</span>
                 します。
               </motion.span>
             </p>
@@ -155,7 +155,7 @@ export default function HeroSection() {
             <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg font-bold hover-lift shadow-lg clean-border transition-all duration-300 hover:scale-105 text-white hover:shadow-xl">
               まずは無料で相談する
             </button>
-            <button className="px-8 py-4 glass-effect rounded-lg font-bold hover-lift transition-all duration-300 hover:border-primary-blue text-gray-900">
+            <button className="px-8 py-4 glass-effect rounded-lg font-bold hover-lift transition-all duration-300 hover:border-primary-blue text-white backdrop-blur-sm bg-white/10 border border-white/20">
               提供サービスを見る →
             </button>
           </motion.div>
