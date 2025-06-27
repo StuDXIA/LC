@@ -9,7 +9,7 @@ const features = [
   {
     iconImage: '/LC1.png',
     title: '戦略的SNSグロース',
-    description: 'データ分析とトレンド洞察に基づき、単なる「運用」ではなく、事業成果に繋がる「成長戦略」を設計・実行します。',
+    description: 'データ分析とトレンド洞察に基づき、「運用」だけではなく、事業成果に繋がる「成長戦略」を設計・実行します。',
     gradient: 'from-blue-500 to-cyan-500',
     accentColor: '#3B82F6',
     bgMesh: 'polygon(0 0, 100% 0, 100% 75%, 0 100%)',
