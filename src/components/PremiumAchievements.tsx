@@ -133,7 +133,7 @@ function AchievementCard({ achievement, index }: { achievement: typeof achieveme
       </div>
 
       {/* Main card */}
-      <div className="relative bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 h-full overflow-hidden group-hover:border-white/20 transition-all duration-500">
+      <div className="relative bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-8 h-full overflow-hidden group-hover:border-gray-300 group-hover:shadow-2xl transition-all duration-500">
         {/* Gradient border effect */}
         <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
           <div className={`absolute inset-px bg-gradient-to-br ${achievement.gradient} rounded-2xl opacity-20`} />
@@ -171,7 +171,7 @@ function AchievementCard({ achievement, index }: { achievement: typeof achieveme
           </motion.div>
 
           {/* Category name */}
-          <h4 className="text-xl font-bold mb-4 text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-gray-300 transition-all duration-500">
+          <h4 className="text-xl font-bold mb-4 text-gray-900 transition-all duration-500">
             {achievement.name}
           </h4>
 
@@ -192,7 +192,7 @@ function AchievementCard({ achievement, index }: { achievement: typeof achieveme
           </div>
 
           {/* Description with elegant typography */}
-          <p className="text-gray-300 leading-relaxed whitespace-pre-line group-hover:text-gray-200 transition-colors duration-500">
+          <p className="text-gray-700 leading-relaxed whitespace-pre-line group-hover:text-gray-800 transition-colors duration-500">
             {achievement.description}
           </p>
 
@@ -239,7 +239,7 @@ export default function PremiumAchievements() {
   const inView = useInView(sectionRef)
 
   return (
-    <div ref={sectionRef} className="mb-16">
+    <section ref={sectionRef} className="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50">
       {/* Section header with elegant animations */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -248,13 +248,17 @@ export default function PremiumAchievements() {
         className="text-center mb-12"
       >
         <motion.h3 
-          className="text-4xl font-bold mb-6 relative"
+          className="text-5xl font-bold mb-6 relative"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          <span className="text-gradient bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
-            私たちが提供する"成果"の一例。
+          <span className="text-gray-900">
+            私たちが実現した
+          </span>
+          <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600">
+            具体的な成果
           </span>
           
           {/* Subtle underline effect */}
@@ -267,28 +271,35 @@ export default function PremiumAchievements() {
         </motion.h3>
         
         <motion.p 
-          className="text-gray-800 font-medium text-lg max-w-3xl mx-auto leading-relaxed"
+          className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          我々は、全てのプロジェクトにおいて、計測可能な
-          <span className="text-blue-700 font-bold">「数字」</span>
-          の改善にコミットします。
+          実際のクライアント様と共に達成した、
+          <span className="text-green-600 font-bold">計測可能な成果</span>
+          の一例をご紹介します。
         </motion.p>
       </motion.div>
 
       {/* Achievement cards grid */}
-      <div className="grid lg:grid-cols-3 gap-8">
-        {achievements.map((achievement, index) => (
-          <AchievementCard 
-            key={achievement.name} 
-            achievement={achievement} 
-            index={index} 
-          />
-        ))}
+      <div className="container mx-auto relative z-10 max-w-7xl">
+        <div className="grid lg:grid-cols-3 gap-8">
+          {achievements.map((achievement, index) => (
+            <AchievementCard 
+              key={achievement.name} 
+              achievement={achievement} 
+              index={index} 
+            />
+          ))}
+        </div>
       </div>
 
-    </div>
+      {/* Background decoration */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/3 -left-40 w-96 h-96 bg-green-100 rounded-full blur-3xl opacity-20" />
+        <div className="absolute bottom-1/3 -right-40 w-96 h-96 bg-yellow-100 rounded-full blur-3xl opacity-20" />
+      </div>
+    </section>
   )
 }

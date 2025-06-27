@@ -4,6 +4,7 @@ import HeroSection from '@/components/HeroSection'
 import AboutSection from '@/components/AboutSection'
 import TechShowcase from '@/components/TechShowcase'
 import CoreServices from '@/components/CoreServices'
+import PremiumAchievements from '@/components/PremiumAchievements'
 import Footer from '@/components/Footer'
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <CoreServices />
+      <PremiumAchievements />
       <TechShowcase />
       <Footer />
     </main>
