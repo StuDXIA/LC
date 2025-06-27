@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   metadataBase: new URL('https://lc-platform.vercel.app'),
   title: 'Luminous Core - あなたの事業に、次の"成長曲線"を描く',
-  description: 'AI技術とプロの実行力を組み合わせ、SNSを起点とした事業成長をワンストップで支援するグローステック・チーム',
+  description: 'デジタル戦略を起点として、独自AI技術と専門チームでクライアントの事業成果を最大化するグローステック・カンパニー',
   keywords: 'SNS運用, LP制作, Webサイト制作, AI開発, 業務効率化, DX, グロースハック',
   authors: [{ name: 'Kousai Yamamoto' }],
   icons: {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Luminous Core - あなたの事業に、次の"成長曲線"を描く',
-    description: 'AI技術とプロの実行力を組み合わせ、SNSを起点とした事業成長をワンストップで支援',
+    description: 'デジタル戦略を起点として、独自AI技術と専門チームでクライアントの事業成果を最大化',
     type: 'website',
     images: ['/Luminous Core.png'],
   },

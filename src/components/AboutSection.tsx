@@ -73,7 +73,7 @@ export default function AboutSection() {
                 className="text-blue-800 font-black inline-block mx-1"
                 whileHover={{ scale: 1.05, textShadow: "0 0 15px rgba(14, 165, 233, 0.5)" }}
               >
-                SNSを起点として、クライアントの事業成果を最大化する
+                デジタル戦略を起点として、クライアントの事業成果を最大化する
               </motion.span>
               グローステック・カンパニーです。
             </motion.p>
@@ -98,7 +98,7 @@ export default function AboutSection() {
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                AI技術と専門チームによる戦略的なSNS運用
+                独自AI技術と専門チームによる戦略的なデジタルグロース
               </motion.span>
               を軸に、成果に必要な
               <motion.span 

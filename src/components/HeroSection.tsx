@@ -112,15 +112,15 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <p className="text-gray-800 font-semibold">
-              私たちは、
+              Luminous Coreは、
               <motion.span 
                 className="text-blue-700 font-black inline-block"
                 whileHover={{ scale: 1.05, color: "#1d4ed8" }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                AI技術とプロの実行力
+                デジタル戦略を起点
               </motion.span>
-              を組み合わせ、
+              として、クライアントの事業成果を最大化する
               <br />
               <motion.span 
                 className="text-blue-700 font-black inline-block"
@@ -128,9 +128,9 @@ export default function HeroSection() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2, duration: 0.6 }}
               >
-                SNSを起点とした事業成長
+                グローステック・カンパニー
               </motion.span>
-              をワンストップで支援する、
+              です。
               <br />
               <motion.span 
                 className="inline-block"
@@ -138,9 +138,11 @@ export default function HeroSection() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1.5, duration: 0.6 }}
               >
-                <span className="bg-gradient-to-r from-gray-900 to-blue-800 bg-clip-text text-transparent font-black text-2xl">グローステック・チーム</span>
+                我々は、独自のAI技術と専門チームを駆使し、戦略的なSNSグロース、
+                成果に繋がるウェブサイト制作、業務を効率化するカスタムツール開発を、
+                <span className="bg-gradient-to-r from-gray-900 to-blue-800 bg-clip-text text-transparent font-black text-xl">ワンストップで提供</span>
+                します。
               </motion.span>
-              です。
             </p>
           </motion.div>
           
