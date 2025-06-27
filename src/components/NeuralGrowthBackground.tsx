@@ -246,9 +246,9 @@ export default function NeuralGrowthBackground() {
     // Create particles
     const createParticles = () => {
       const particles: Particle[] = []
-      const particleGeometry = new THREE.SphereGeometry(0.15, 8, 8)
+      const particleGeometry = new THREE.SphereGeometry(0.25, 12, 12)
       
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 30; i++) {
         const validNodes = nodesRef.current.filter(n => n.connections.length > 0)
         if (validNodes.length === 0) continue
 
@@ -260,6 +260,8 @@ export default function NeuralGrowthBackground() {
           color: 0x60A5FA,
           transparent: true,
           opacity: 0,
+          emissive: 0x60A5FA,
+          emissiveIntensity: 0.5
         })
 
         const mesh = new THREE.Mesh(particleGeometry, particleMaterial)
@@ -273,11 +275,12 @@ export default function NeuralGrowthBackground() {
         
         const trailMaterial = new THREE.PointsMaterial({
           color: 0x60A5FA,
-          size: 1,
+          size: 2,
           transparent: true,
           opacity: 0,
           sizeAttenuation: true,
-          blending: THREE.AdditiveBlending
+          blending: THREE.AdditiveBlending,
+          vertexColors: false
         })
 
         const trail = new THREE.Points(trailGeometry, trailMaterial)
@@ -455,8 +458,11 @@ export default function NeuralGrowthBackground() {
           const particleMat = particle.mesh.material as THREE.MeshBasicMaterial
           const trailMat = particle.trail.material as THREE.PointsMaterial
           const fade = Math.sin(particle.progress * Math.PI)
-          particleMat.opacity = fade * 0.8
-          trailMat.opacity = fade * 0.3
+          particleMat.opacity = fade * 0.9
+          trailMat.opacity = fade * 0.4
+          
+          // Add glow effect
+          particleMat.emissiveIntensity = fade * 0.8
         }
       })
 

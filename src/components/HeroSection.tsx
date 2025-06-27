@@ -1,21 +1,28 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { FaArrowDown } from 'react-icons/fa'
+import { useEffect, useRef, useState } from 'react'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 
 const NeuralGrowthBackground = dynamic(() => import('./NeuralGrowthBackground'), { ssr: false })
 
 export default function HeroSection() {
-  const titleRef = useRef<HTMLHeadingElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const titleRef = useRef<HTMLDivElement>(null)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const { scrollY } = useScroll()
+  
+  const y = useTransform(scrollY, [0, 300], [0, 50])
+  const opacity = useTransform(scrollY, [0, 300], [1, 0])
   
   useEffect(() => {
+    setIsLoaded(true)
+    
     const handleMouseMove = (e: MouseEvent) => {
       if (titleRef.current) {
-        const x = (e.clientX / window.innerWidth - 0.5) * 20
-        const y = (e.clientY / window.innerHeight - 0.5) * 20
+        const x = (e.clientX / window.innerWidth - 0.5) * 10
+        const y = (e.clientY / window.innerHeight - 0.5) * 10
         titleRef.current.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg)`
       }
     }
@@ -25,152 +32,186 @@ export default function HeroSection() {
   }, [])
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Neural Network × Growth Curve Background */}
+    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-gray-50">
+      {/* Enhanced Neural Network × Growth Curve Background */}
       <NeuralGrowthBackground />
       
-      {/* Subtle overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-radial from-black/20 via-transparent to-transparent z-10" />
+      {/* Refined gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-white/10 z-10" />
       
-      <div className="container mx-auto px-6 relative z-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
+      <motion.div 
+        className="container mx-auto px-6 relative z-20"
+        style={{ y, opacity }}
+      >
+        <div className="max-w-5xl mx-auto">
+          {/* Refined Logo Section */}
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="mb-6 flex flex-col items-center"
+            transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
+            className="flex flex-col items-center mb-12"
           >
-            <div className="mb-4 relative">
+            <div className="relative group">
+              <div className="absolute inset-0 bg-blue-400/20 blur-3xl group-hover:bg-blue-400/30 transition-all duration-500" />
               <Image
                 src="/Luminous Core.png"
-                alt="Luminous Core Logo"
-                width={120}
-                height={120}
-                className="animate-float drop-shadow-[0_4px_20px_rgba(14,165,233,0.3)]"
+                alt="Luminous Core"
+                width={100}
+                height={100}
+                className="relative z-10 drop-shadow-2xl"
                 priority
               />
             </div>
-            <span className="text-white text-lg font-mono font-bold drop-shadow-[0_2px_10px_rgba(0,216,255,0.5)]">Luminous Core</span>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="mt-4"
+            >
+              <span className="text-gray-700 text-sm font-medium tracking-[0.3em] uppercase">Luminous Core</span>
+            </motion.div>
           </motion.div>
           
-          <h1 
+          {/* Minimalist Title with Enhanced Typography */}
+          <div 
             ref={titleRef}
-            className="text-4xl md:text-6xl font-bold mb-8 transform-gpu transition-transform duration-100 leading-tight relative text-white"
+            className="text-center transform-gpu transition-transform duration-100"
             style={{ transformStyle: 'preserve-3d' }}
           >
-            <motion.span 
-              className="text-gradient block"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              あなたの事業に、
-            </motion.span>
-            <motion.span 
-              className="text-gradient block relative"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              次の
-              <motion.span
-                className="inline-block mx-2 text-cyan-400 font-black"
-                style={{
-                  textShadow: "0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(59, 130, 246, 0.4)",
-                  WebkitTextStroke: "1px rgba(30, 64, 175, 0.4)"
-                }}
-                animate={{ 
-                  scale: [1, 1.1, 1],
-                  rotate: [0, 3, -3, 0],
-                  textShadow: [
-                    "0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(59, 130, 246, 0.4)",
-                    "0 2px 4px rgba(0, 0, 0, 0.3), 0 0 12px rgba(59, 130, 246, 0.6)",
-                    "0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(59, 130, 246, 0.4)"
-                  ]
-                }}
-                transition={{ 
-                  duration: 3,
-                  repeat: Infinity,
-                  repeatType: "reverse"
-                }}
-              >
-                &quot;成長曲線&quot;
-              </motion.span>
-              を描く。
-            </motion.span>
-          </h1>
+            <AnimatePresence>
+              {isLoaded && (
+                <motion.h1 
+                  className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1 }}
+                >
+                  <motion.span 
+                    className="block text-gray-900 mb-2"
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2, duration: 0.8 }}
+                  >
+                    あなたの事業に、
+                  </motion.span>
+                  <motion.span 
+                    className="block relative"
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4, duration: 0.8 }}
+                  >
+                    <span className="text-gray-900">次の</span>
+                    <motion.span
+                      className="inline-block mx-3 relative"
+                      animate={{ 
+                        scale: [1, 1.05, 1],
+                      }}
+                      transition={{ 
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400 font-black">
+                        "成長曲線"
+                      </span>
+                      <motion.div
+                        className="absolute inset-0 blur-xl bg-gradient-to-r from-blue-400/30 to-blue-600/30"
+                        animate={{
+                          opacity: [0.5, 0.8, 0.5]
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      />
+                    </motion.span>
+                    <span className="text-gray-900">を描く</span>
+                  </motion.span>
+                </motion.h1>
+              )}
+            </AnimatePresence>
+          </div>
           
+          {/* Simplified Subtitle */}
           <motion.div 
-            className="text-lg md:text-xl mb-12 max-w-4xl mx-auto leading-relaxed"
+            className="mt-8 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
           >
-            <p className="text-white/90 font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-              Luminous Coreは、
-              <motion.span 
-                className="text-cyan-300 font-black inline-block"
-                whileHover={{ scale: 1.05, color: "#1d4ed8" }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                デジタル戦略を起点
-              </motion.span>
-              として、クライアントの事業成果を最大化する
-              <br />
-              <motion.span 
-                className="text-cyan-300 font-black inline-block"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.2, duration: 0.6 }}
-              >
-                グローステック・カンパニー
-              </motion.span>
-              です。
-              <br />
-              <motion.span 
-                className="inline-block"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.5, duration: 0.6 }}
-              >
-                我々は、独自のAI技術と専門チームを駆使し、戦略的なSNSグロース、
-                成果に繋がるウェブサイト制作、業務を効率化するカスタムツール開発を、
-                <span className="bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent font-black text-xl drop-shadow-[0_2px_10px_rgba(0,216,255,0.5)]">ワンストップで提供</span>
-                します。
-              </motion.span>
+            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              デジタル戦略で事業成果を最大化する
+              <span className="font-semibold text-blue-600"> グローステック・カンパニー</span>
             </p>
+            <motion.p
+              className="mt-4 text-base text-gray-600 max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2 }}
+            >
+              AI技術と専門チームで、SNSグロース・Web制作・業務効率化を
+              <span className="font-medium">ワンストップ</span>で実現
+            </motion.p>
           </motion.div>
           
+          {/* Enhanced CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.4, duration: 0.8 }}
+            className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group relative px-8 py-4 overflow-hidden rounded-xl font-semibold text-white transition-all duration-300"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 bg-white/20 blur-xl" />
+              </div>
+              <span className="relative z-10">無料相談を開始する</span>
+            </motion.button>
+            
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group relative px-8 py-4 rounded-xl font-semibold border-2 border-gray-300 text-gray-700 bg-white/80 backdrop-blur-sm transition-all duration-300 hover:border-blue-400 hover:text-blue-600"
+            >
+              <span className="relative z-10">サービス詳細 →</span>
+            </motion.button>
+          </motion.div>
+
+          {/* Refined Scroll Indicator */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
+            transition={{ delay: 2 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2"
           >
-            <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg font-bold hover-lift shadow-lg clean-border transition-all duration-300 hover:scale-105 text-white hover:shadow-xl">
-              まずは無料で相談する
-            </button>
-            <button className="px-8 py-4 glass-effect rounded-lg font-bold hover-lift transition-all duration-300 hover:border-primary-blue text-white backdrop-blur-sm bg-white/10 border border-white/20">
-              提供サービスを見る →
-            </button>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              className="flex flex-col items-center gap-2 text-gray-400"
+            >
+              <span className="text-xs tracking-wider uppercase">Scroll</span>
+              <div className="w-5 h-8 border-2 border-gray-300 rounded-full relative">
+                <motion.div
+                  className="absolute left-1/2 top-1 -translate-x-1/2 w-1.5 h-1.5 bg-gray-400 rounded-full"
+                  animate={{ y: [0, 16, 0] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                />
+              </div>
+            </motion.div>
           </motion.div>
-
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="text-primary-blue"
-          >
-            <FaArrowDown size={30} className="mx-auto animate-pulse-neon" />
-          </motion.div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
       
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-blue to-transparent z-20" />
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-20" />
     </section>
   )
 }
