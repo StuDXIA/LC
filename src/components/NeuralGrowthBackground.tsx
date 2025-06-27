@@ -256,7 +256,7 @@ export default function NeuralGrowthBackground() {
         const sourceIndex = nodesRef.current.indexOf(sourceNode)
         const targetIndex = sourceNode.connections[Math.floor(Math.random() * sourceNode.connections.length)]
 
-        const particleMaterial = new THREE.MeshBasicMaterial({
+        const particleMaterial = new THREE.MeshStandardMaterial({
           color: 0x60A5FA,
           transparent: true,
           opacity: 0,
@@ -455,7 +455,7 @@ export default function NeuralGrowthBackground() {
           particle.trail.geometry.attributes.position.needsUpdate = true
           
           // Fade based on progress
-          const particleMat = particle.mesh.material as THREE.MeshBasicMaterial
+          const particleMat = particle.mesh.material as THREE.MeshStandardMaterial
           const trailMat = particle.trail.material as THREE.PointsMaterial
           const fade = Math.sin(particle.progress * Math.PI)
           particleMat.opacity = fade * 0.9
