@@ -6,7 +6,7 @@ import { FaArrowDown } from 'react-icons/fa'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 
-const Neural3DBackground = dynamic(() => import('./Neural3DBackground'), { ssr: false })
+const NeuralGrowthBackground = dynamic(() => import('./NeuralGrowthBackground'), { ssr: false })
 
 export default function HeroSection() {
   const titleRef = useRef<HTMLHeadingElement>(null)
@@ -26,8 +26,8 @@ export default function HeroSection() {
   
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* 3D Neural Network Background */}
-      <Neural3DBackground />
+      {/* Neural Network × Growth Curve Background */}
+      <NeuralGrowthBackground />
       
       {/* Subtle overlay for text readability */}
       <div className="absolute inset-0 bg-gradient-radial from-black/20 via-transparent to-transparent z-10" />

@@ -30,11 +30,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-cyber-black antialiased`}>
-        <div className="fixed inset-0 cyber-grid opacity-20 pointer-events-none" />
-        <div className="relative z-10">
-          {children}
-        </div>
+      <body className={`${inter.className} bg-white antialiased`}>
+        {children}
       </body>
     </html>
   )
