@@ -175,14 +175,14 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{ y: -10, transition: { duration: 0.3 } }}
-      className="relative group block"
+      className="relative group block w-full"
     >
-      <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-gray-200 bg-white transform transition-all duration-300 hover:shadow-3xl">
+      <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl border border-gray-200 bg-white transform transition-all duration-300 hover:shadow-3xl">
         {/* Background gradient */}
         <div className={`absolute inset-0 bg-gradient-to-br ${service.visual.gradient} opacity-5`} />
         
         {/* Content container */}
-        <div className="relative h-full p-8 flex flex-col justify-between">
+        <div className="relative h-full p-8 lg:p-12 flex flex-row justify-between items-center">
           {/* Glow effect */}
           <motion.div
             className={`absolute -inset-10 bg-gradient-to-br ${service.visual.gradient} opacity-0 blur-2xl`}
@@ -190,23 +190,16 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
             transition={{ duration: 0.5 }}
           />
           
-          {/* Header section */}
-          <div className="relative z-10">
-            <div className="flex justify-between items-start mb-8">
-              <span className={`text-7xl font-black bg-gradient-to-br ${service.visual.gradient} bg-clip-text text-transparent`}>
-                {service.number}
-              </span>
-              <span className="text-xs font-medium tracking-[0.3em] uppercase text-gray-500">
-                {service.tagline}
-              </span>
-            </div>
-            
-            {/* Visual icon */}
+          {/* Left side - Number and Icon */}
+          <div className="relative z-10 flex-shrink-0">
+            <span className={`text-8xl lg:text-9xl font-black bg-gradient-to-br ${service.visual.gradient} bg-clip-text text-transparent block`}>
+              {service.number}
+            </span>
             <motion.div
-              className="absolute top-0 right-8 w-32 h-32 opacity-20"
+              className="w-24 h-24 mt-4 opacity-30"
               animate={{ 
                 scale: isHovered ? 1.2 : 1,
-                opacity: isHovered ? 0.4 : 0.2
+                opacity: isHovered ? 0.5 : 0.3
               }}
               transition={{ duration: 0.5 }}
             >
@@ -214,8 +207,8 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
             </motion.div>
           </div>
           
-          {/* Problem section */}
-          <div className="relative z-10 flex-grow">
+          {/* Right side - Content */}
+          <div className="relative z-10 flex-grow ml-8 lg:ml-16">
             <motion.div
               initial={{ opacity: 1 }}
               animate={{ opacity: isHovered ? 0.5 : 1 }}
@@ -275,17 +268,18 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
             </motion.div>
           </div>
           
-          {/* CTA Button */}
-          <motion.div
-            className="relative z-10 mt-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
-            transition={{ duration: 0.3 }}
-          >
-            <button className={`w-full py-4 rounded-2xl bg-gradient-to-r ${service.visual.gradient} text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300`}>
-              このソリューションについて相談する
-            </button>
-          </motion.div>
+            {/* CTA Button */}
+            <motion.div
+              className="mt-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <button className={`px-8 py-3 rounded-xl bg-gradient-to-r ${service.visual.gradient} text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300`}>
+                詳しく見る →
+              </button>
+            </motion.div>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -339,7 +333,7 @@ export default function CoreServices() {
         </motion.div>
 
         {/* Service cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+        <div className="flex flex-col gap-12 mt-16 max-w-6xl mx-auto">
           {serviceTransformations.map((service, index) => (
             <ServiceCard key={service.id} service={service} index={index} />
           ))}
