@@ -163,99 +163,62 @@ const serviceTransformations: ServiceTransformation[] = [
 ]
 
 function ServiceCard({ service, index }: { service: ServiceTransformation, index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null)
   const [isHovered, setIsHovered] = useState(false)
-  const [ref, inView] = useInView({ threshold: 0.5, triggerOnce: true })
-  
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-  
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [15, -15]))
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-15, 15]))
-  
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width - 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5
-    mouseX.set(x)
-    mouseY.set(y)
-  }
-
-  const handleMouseLeave = () => {
-    mouseX.set(0)
-    mouseY.set(0)
-    setIsHovered(false)
-  }
+  const [ref, inView] = useInView({ threshold: 0.01, triggerOnce: true })
 
   return (
     <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 100 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: index * 0.2 }}
-      onMouseMove={handleMouseMove}
+      ref={ref}
+      initial={{ opacity: 0, y: 50, scale: 0.95 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.95 }}
+      transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX: rotateX,
-        rotateY: rotateY,
-        transformStyle: 'preserve-3d'
-      }}
-      className="relative group"
+      onMouseLeave={() => setIsHovered(false)}
+      whileHover={{ y: -10, transition: { duration: 0.3 } }}
+      className="relative group block"
     >
-      <div className="relative h-[500px] rounded-3xl overflow-hidden">
+      <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-gray-200 bg-white transform transition-all duration-300 hover:shadow-3xl">
         {/* Background gradient */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${service.visual.gradient} opacity-10`} />
+        <div className={`absolute inset-0 bg-gradient-to-br ${service.visual.gradient} opacity-5`} />
         
-        {/* Glass effect container */}
-        <div className="absolute inset-0 bg-white/80 backdrop-blur-xl border border-gray-200/50">
+        {/* Content container */}
+        <div className="relative h-full p-8 flex flex-col justify-between">
           {/* Glow effect */}
           <motion.div
-            className={`absolute -inset-20 bg-gradient-to-br ${service.visual.gradient} opacity-0 blur-3xl`}
-            animate={{ opacity: isHovered ? 0.3 : 0 }}
+            className={`absolute -inset-10 bg-gradient-to-br ${service.visual.gradient} opacity-0 blur-2xl`}
+            animate={{ opacity: isHovered ? 0.2 : 0 }}
             transition={{ duration: 0.5 }}
           />
           
-          {/* Number indicator */}
-          <motion.div
-            className="absolute top-8 left-8"
-            style={{ transform: 'translateZ(50px)' }}
-          >
-            <span className={`text-7xl font-black bg-gradient-to-br ${service.visual.gradient} bg-clip-text text-transparent`}>
-              {service.number}
-            </span>
-          </motion.div>
-          
-          {/* Tagline */}
-          <motion.div
-            className="absolute top-10 right-8"
-            style={{ transform: 'translateZ(30px)' }}
-          >
-            <span className="text-xs font-medium tracking-[0.3em] uppercase text-gray-500">
-              {service.tagline}
-            </span>
-          </motion.div>
-          
-          {/* Visual icon */}
-          <motion.div
-            className="absolute top-32 right-8 w-32 h-32 opacity-20"
-            animate={{ 
-              scale: isHovered ? 1.2 : 1,
-              opacity: isHovered ? 0.4 : 0.2
-            }}
-            transition={{ duration: 0.5 }}
-            style={{ transform: 'translateZ(40px)' }}
-          >
-            {service.visual.icon}
-          </motion.div>
-          
-          {/* Content container */}
-          <div className="absolute inset-0 p-8 pt-32 flex flex-col justify-between">
-            {/* Problem section */}
+          {/* Header section */}
+          <div className="relative z-10">
+            <div className="flex justify-between items-start mb-8">
+              <span className={`text-7xl font-black bg-gradient-to-br ${service.visual.gradient} bg-clip-text text-transparent`}>
+                {service.number}
+              </span>
+              <span className="text-xs font-medium tracking-[0.3em] uppercase text-gray-500">
+                {service.tagline}
+              </span>
+            </div>
+            
+            {/* Visual icon */}
             <motion.div
-              initial={{ opacity: 0.6 }}
-              animate={{ opacity: isHovered ? 0.3 : 0.6 }}
+              className="absolute top-0 right-8 w-32 h-32 opacity-20"
+              animate={{ 
+                scale: isHovered ? 1.2 : 1,
+                opacity: isHovered ? 0.4 : 0.2
+              }}
+              transition={{ duration: 0.5 }}
+            >
+              {service.visual.icon}
+            </motion.div>
+          </div>
+          
+          {/* Problem section */}
+          <div className="relative z-10 flex-grow">
+            <motion.div
+              initial={{ opacity: 1 }}
+              animate={{ opacity: isHovered ? 0.5 : 1 }}
               transition={{ duration: 0.3 }}
               className="mb-8"
             >
@@ -273,13 +236,11 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
             
             {/* Solution section */}
             <motion.div
-              initial={{ opacity: 0.6, y: 20 }}
+              initial={{ opacity: 0.8 }}
               animate={{ 
-                opacity: isHovered ? 1 : 0.6,
-                y: isHovered ? 0 : 20
+                opacity: isHovered ? 1 : 0.8
               }}
               transition={{ duration: 0.5 }}
-              style={{ transform: 'translateZ(20px)' }}
             >
               <h4 className="text-sm font-medium text-gray-500 mb-3">SOLUTION</h4>
               <h3 className={`text-3xl font-bold bg-gradient-to-r ${service.visual.gradient} bg-clip-text text-transparent mb-2`}>
@@ -291,13 +252,12 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
               
               {/* Approach list */}
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
+                initial={{ opacity: 0 }}
                 animate={{ 
-                  opacity: isHovered ? 1 : 0,
-                  height: isHovered ? 'auto' : 0
+                  opacity: isHovered ? 1 : 0
                 }}
                 transition={{ duration: 0.3 }}
-                className="space-y-2 overflow-hidden"
+                className="space-y-2"
               >
                 {service.solution.approach.map((item, i) => (
                   <motion.div
@@ -313,20 +273,19 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
                 ))}
               </motion.div>
             </motion.div>
-            
-            {/* CTA */}
-            <motion.div
-              className="absolute bottom-8 left-8 right-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isHovered ? 1 : 0 }}
-              transition={{ duration: 0.3 }}
-              style={{ transform: 'translateZ(30px)' }}
-            >
-              <button className={`w-full py-4 rounded-2xl bg-gradient-to-r ${service.visual.gradient} text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300`}>
-                このソリューションについて相談する
-              </button>
-            </motion.div>
           </div>
+          
+          {/* CTA Button */}
+          <motion.div
+            className="relative z-10 mt-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <button className={`w-full py-4 rounded-2xl bg-gradient-to-r ${service.visual.gradient} text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300`}>
+              このソリューションについて相談する
+            </button>
+          </motion.div>
         </div>
       </div>
     </motion.div>
@@ -336,6 +295,7 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
 export default function CoreServices() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true })
+
 
   return (
     <section ref={sectionRef} className="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white">
@@ -379,11 +339,12 @@ export default function CoreServices() {
         </motion.div>
 
         {/* Service cards */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {serviceTransformations.map((service, index) => (
             <ServiceCard key={service.id} service={service} index={index} />
           ))}
         </div>
+        
 
         {/* Bottom CTA */}
         <motion.div

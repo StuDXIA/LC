@@ -106,7 +106,7 @@ export default function AboutSection() {
                 whileInView={{ rotate: [0, 2, -2, 0] }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                ウェブサイト制作やカスタムツールの開発
+                SNSグロース、ウェブサイト制作やカスタムツールの開発
               </motion.span>
               まで、ワンストップで手掛けます。
             </motion.p>

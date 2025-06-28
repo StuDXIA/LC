@@ -8,7 +8,6 @@ import { FaReact, FaRocket, FaChartLine } from 'react-icons/fa'
 import { SiTypescript, SiGraphql, SiKubernetes, SiTensorflow } from 'react-icons/si'
 import AlternatingImages from './AlternatingImages'
 import ImageWithFallback from './ImageWithFallback'
-import PremiumAchievements from './PremiumAchievements'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
@@ -377,8 +376,6 @@ export default function TechShowcase() {
             ))}
           </div>
           
-          {/* Premium Achievements Section */}
-          <PremiumAchievements />
           
           <motion.div 
             className="glass-effect rounded-lg p-8 relative overflow-hidden"
