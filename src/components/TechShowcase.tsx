@@ -111,7 +111,7 @@ const partnerships = [
   { 
     name: 'StuDXIA', 
     description: '国内最大級のDXコミュニティ',
-    details: '慶應義塾大学を中心に、東京大学、早稲田大学の学生、上場企業・テック企業が連携',
+    details: '慶應義塾大学を拠点に、東京大学、早稲田大学の有志、上場企業・テック企業が連携',
     imageName: 'StudXIA',
     color: 'from-blue-500 to-cyan-500' 
   },
@@ -255,7 +255,7 @@ export default function TechShowcase() {
                 >
                   『StuDXIA』
                 </motion.span>
-                は、慶應義塾大学を中心に、東京大学や早稲田大学の学生、さらには上場企業やテック企業とも連携する、
+                は、慶應義塾大学を拠点に、東京大学や早稲田大学の有志、さらには上場企業やテック企業とも連携する、
                 <motion.span 
                   className="text-gradient font-semibold inline-block mx-1"
                   animate={{ 
@@ -479,14 +479,14 @@ export default function TechShowcase() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
                   >
-                    慶應義塾大学経済学部出身。在学中より経理代行事業での起業を経験し、ビジネスの現場におけるリアルな課題解決に取り組む。
+                    慶應義塾大学経済学部にて、AIとビジネスの融合に関する研究を深めながら、実践的な事業開発に従事。経理代行事業での起業経験を通じて、ビジネスの現場におけるリアルな課題解決に取り組む。
                   </motion.p>
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 }}
                   >
-                    その経験からデジタル分野の可能性を確信し、多様な才能を集めて学生団体「StuDXIA」を創設。
+                    その経験からデジタル分野の可能性を確信し、多様な才能を集めてDXコミュニティ「StuDXIA」を創設。
                   </motion.p>
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
