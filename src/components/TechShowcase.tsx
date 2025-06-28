@@ -113,14 +113,14 @@ const partnerships = [
     description: '国内最大級のDXコミュニティ',
     details: '慶應義塾大学を拠点に、東京大学、早稲田大学の有志、上場企業・テック企業が連携',
     imageName: 'StudXIA',
-    color: 'from-blue-500 to-cyan-500' 
+    color: 'from-primary to-primary-dark' 
   },
   { 
     name: '羅針盤', 
     description: '東京大学キャリア支援団体',
     details: '公式ウェブサイト制作を担当し、学生のキャリア形成を技術面でサポート',
     imageName: 'rashinban',
-    color: 'from-purple-500 to-pink-500' 
+    color: 'from-primary-dark to-primary' 
   },
 ]
 
