@@ -266,8 +266,6 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
                 ))}
               </motion.div>
             </motion.div>
-          </div>
-          
             {/* CTA Button */}
             <motion.div
               className="mt-6"
