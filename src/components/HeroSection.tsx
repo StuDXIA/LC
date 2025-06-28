@@ -172,15 +172,18 @@ export default function HeroSection() {
             transition={{ delay: 1.4, duration: 0.8 }}
             className="mt-16 flex justify-center px-4 sm:px-0"
           >
-            <motion.button
+            <motion.a
+              href="https://line.me/R/ti/p/@862uxzup"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="group relative px-8 sm:px-12 py-4 sm:py-5 overflow-hidden rounded-lg font-semibold text-white transition-all duration-300"
+              className="group relative inline-block px-8 sm:px-12 py-4 sm:py-5 overflow-hidden rounded-lg font-semibold text-white transition-all duration-300"
             >
               <div className="absolute inset-0 bg-primary" />
               <div className="absolute inset-0 bg-primary-dark opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="relative z-10 text-base sm:text-lg">30分間の無料相談に申し込む</span>
-            </motion.button>
+            </motion.a>
           </motion.div>
         </div>
       </motion.div>

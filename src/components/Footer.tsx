@@ -53,13 +53,16 @@ export default function Footer() {
               我々が、その未来をどう変えられるかをお見せします。
             </p>
             
-            <motion.button
+            <motion.a
+              href="https://line.me/R/ti/p/@862uxzup"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg font-bold text-base sm:text-lg lg:text-xl hover-lift shadow-lg clean-border transition-all duration-300 text-white hover:shadow-xl w-full sm:w-auto"
+              className="inline-block px-8 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg font-bold text-base sm:text-lg lg:text-xl hover-lift shadow-lg clean-border transition-all duration-300 text-white hover:shadow-xl"
             >
               30分間の無料相談に申し込む
-            </motion.button>
+            </motion.a>
           </motion.div>
         </div>
       </section>

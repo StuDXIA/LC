@@ -284,14 +284,19 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
               animate={inView ? { opacity: 1 } : {}}
               transition={{ delay: index * 0.3 + 1 }}
             >
-              <button className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-primary hover:bg-primary-dark text-white font-bold text-base sm:text-lg rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform-gpu">
-                {service.id === 'awareness' && 'SNSグロースの事例を見る'}
-                {service.id === 'conversion' && 'Webサイト/LP制作の事例を見る'}
-                {service.id === 'automation' && 'カスタム開発の事例を見る'}
+              <a 
+                href="https://line.me/R/ti/p/@862uxzup"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-primary hover:bg-primary-dark text-white font-bold text-base sm:text-lg rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform-gpu"
+              >
+                {service.id === 'awareness' && '無料相談でSNSグロースを始める'}
+                {service.id === 'conversion' && '無料相談でWebサイト/LP制作を始める'}
+                {service.id === 'automation' && '無料相談でカスタム開発を始める'}
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </button>
+              </a>
             </motion.div>
           </motion.div>
         </div>

@@ -138,13 +138,16 @@ export default function Navigation() {
                 </motion.a>
               ))}
               
-              <motion.button
+              <motion.a
+                href="https://line.me/R/ti/p/@862uxzup"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="ml-6 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-full shadow-md hover:shadow-xl transition-all duration-300"
+                className="ml-6 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-full shadow-md hover:shadow-xl transition-all duration-300 inline-block"
               >
                 無料相談
-              </motion.button>
+              </motion.a>
             </div>
 
             {/* Mobile Menu Button */}
@@ -220,13 +223,16 @@ export default function Navigation() {
                   ))}
                 </div>
                 
-                <motion.button
+                <motion.a
+                  href="https://line.me/R/ti/p/@862uxzup"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="mt-8 w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl shadow-lg"
+                  className="mt-8 w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl shadow-lg inline-block text-center"
                 >
                   無料相談を開始する
-                </motion.button>
+                </motion.a>
               </div>
             </motion.div>
           </>
