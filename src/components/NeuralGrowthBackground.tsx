@@ -87,11 +87,11 @@ export default function NeuralGrowthBackground() {
     const createNodes = () => {
       const nodes: NetworkNode[] = []
       
-      // Colors matching existing design
+      // Ultra-professional color palette
       const nodeColors = {
-        primary: 0x3B82F6,    // Primary blue
-        secondary: 0x60A5FA,  // Accent blue
-        tertiary: 0x1E40AF    // Primary dark
+        primary: 0x0066CC,    // IBM Blue - 信頼と安定
+        secondary: 0x004999,  // Darker professional blue
+        tertiary: 0x003D7A    // Deep professional blue
       }
 
       // Layer configuration for professional layout
@@ -130,7 +130,7 @@ export default function NeuralGrowthBackground() {
           const coreMaterial = new THREE.MeshPhongMaterial({
             color: color,
             emissive: color,
-            emissiveIntensity: 0.3,
+            emissiveIntensity: 0.15,
             transparent: true,
             opacity: 0.9,
           })
@@ -205,7 +205,7 @@ export default function NeuralGrowthBackground() {
           const geometry = new THREE.BufferGeometry().setFromPoints(points)
           
           const lineMaterial = new THREE.LineBasicMaterial({
-            color: 0x3B82F6,
+            color: 0x0066CC,
             transparent: true,
             opacity: 0,
             linewidth: 1
@@ -241,7 +241,7 @@ export default function NeuralGrowthBackground() {
 
       const geometry = new THREE.BufferGeometry().setFromPoints(points)
       const material = new THREE.LineBasicMaterial({
-        color: 0x3B82F6,
+        color: 0x0066CC,
         linewidth: 3,
         transparent: true,
         opacity: 0
@@ -268,11 +268,11 @@ export default function NeuralGrowthBackground() {
         const targetIndex = sourceNode.connections[Math.floor(Math.random() * sourceNode.connections.length)]
 
         const particleMaterial = new THREE.MeshStandardMaterial({
-          color: 0x60A5FA,
+          color: 0x0066CC,
           transparent: true,
           opacity: 0,
-          emissive: 0x60A5FA,
-          emissiveIntensity: 0.5
+          emissive: 0x003D7A,
+          emissiveIntensity: 0.2
         })
 
         const mesh = new THREE.Mesh(particleGeometry, particleMaterial)
@@ -285,7 +285,7 @@ export default function NeuralGrowthBackground() {
         trailGeometry.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3))
         
         const trailMaterial = new THREE.PointsMaterial({
-          color: 0x60A5FA,
+          color: 0x0066CC,
           size: 2,
           transparent: true,
           opacity: 0,

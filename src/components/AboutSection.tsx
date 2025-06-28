@@ -53,9 +53,9 @@ export default function AboutSection() {
               className="absolute inset-0 rounded-lg opacity-50"
               animate={{
                 background: [
-                  "linear-gradient(45deg, #00d9ff, transparent, #9333ea)",
-                  "linear-gradient(225deg, #9333ea, transparent, #00d9ff)",
-                  "linear-gradient(45deg, #00d9ff, transparent, #9333ea)",
+                  "linear-gradient(45deg, transparent, #0066CC, transparent)",
+                  "linear-gradient(225deg, transparent, #003D7A, transparent)",
+                  "linear-gradient(45deg, transparent, #0066CC, transparent)",
                 ],
               }}
               transition={{ duration: 8, repeat: Infinity }}
@@ -71,7 +71,7 @@ export default function AboutSection() {
               Luminous Coreは、
               <motion.span 
                 className="text-blue-800 font-black block sm:inline-block mx-0 sm:mx-1 my-2 sm:my-0"
-                whileHover={{ scale: 1.05, textShadow: "0 0 15px rgba(14, 165, 233, 0.5)" }}
+                whileHover={{ scale: 1.02 }}
               >
                 デジタル戦略を起点として、クライアントの事業成果を最大化する
               </motion.span>
@@ -90,11 +90,7 @@ export default function AboutSection() {
               <motion.span 
                 className="text-blue-900 font-black block sm:inline-block mx-0 sm:mx-1 my-2 sm:my-0"
                 animate={{ 
-                  textShadow: [
-                    "0 0 10px rgba(147, 51, 234, 0.5)",
-                    "0 0 20px rgba(147, 51, 234, 0.8)",
-                    "0 0 10px rgba(147, 51, 234, 0.5)",
-                  ]
+                  opacity: [0.9, 1, 0.9]
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
               >

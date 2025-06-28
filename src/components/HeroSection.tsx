@@ -52,7 +52,7 @@ export default function HeroSection() {
             className="flex flex-col items-center mb-12"
           >
             <div className="relative group">
-              <div className="absolute inset-0 bg-blue-400/20 blur-3xl group-hover:bg-blue-400/30 transition-all duration-500" />
+              <div className="absolute inset-0 bg-primary/10 blur-2xl group-hover:bg-primary/15 transition-all duration-500" />
               <Image
                 src="/Luminous Core.png"
                 alt="Luminous Core"
@@ -112,16 +112,16 @@ export default function HeroSection() {
                         ease: "easeInOut"
                       }}
                     >
-                      <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400 font-black">
+                      <span className="relative z-10 text-primary font-black">
                         <span className="hidden sm:inline">"</span>成長曲線<span className="hidden sm:inline">"</span>
                       </span>
                       <motion.div
-                        className="absolute inset-0 blur-xl bg-gradient-to-r from-blue-400/30 to-blue-600/30"
+                        className="absolute inset-0 blur-md bg-primary/10"
                         animate={{
-                          opacity: [0.5, 0.8, 0.5]
+                          opacity: [0.3, 0.5, 0.3]
                         }}
                         transition={{
-                          duration: 3,
+                          duration: 4,
                           repeat: Infinity,
                           ease: "easeInOut"
                         }}
@@ -143,7 +143,7 @@ export default function HeroSection() {
           >
             <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
               デジタル戦略で事業成果を最大化する
-              <span className="font-semibold text-blue-600"> グローステック・パートナー</span>
+              <span className="font-semibold text-primary"> グローステック・パートナー</span>
             </p>
             <motion.p
               className="mt-4 text-base text-gray-600 max-w-2xl mx-auto"
@@ -168,8 +168,8 @@ export default function HeroSection() {
               whileTap={{ scale: 0.95 }}
               className="group relative px-6 sm:px-8 py-3 sm:py-4 overflow-hidden rounded-xl font-semibold text-white transition-all duration-300 w-full sm:w-auto"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500" />
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-primary" />
+              <div className="absolute inset-0 bg-primary-dark opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute inset-0 bg-white/20 blur-xl" />
               </div>
@@ -179,7 +179,7 @@ export default function HeroSection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold border-2 border-gray-300 text-gray-700 bg-white/80 backdrop-blur-sm transition-all duration-300 hover:border-blue-400 hover:text-blue-600 w-full sm:w-auto"
+              className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold border-2 border-neutral-200 text-neutral-900 bg-white transition-all duration-300 hover:border-primary hover:text-primary w-full sm:w-auto"
             >
               <span className="relative z-10">サービス詳細 →</span>
             </motion.button>

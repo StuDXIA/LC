@@ -162,15 +162,10 @@ export default function TechShowcase() {
             transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
           >
             <motion.span 
-              className="text-gradient inline-block"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-              style={{
-                backgroundSize: "200% 200%",
-                backgroundImage: "linear-gradient(90deg, #00d9ff, #9333ea, #ff006e, #00d9ff)"
-              }}
+              className="text-primary-dark font-bold inline-block"
+              initial={{ opacity: 0.8 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
             >
               信頼の
             </motion.span>
@@ -179,7 +174,7 @@ export default function TechShowcase() {
               initial={{ opacity: 0, rotateX: -90 }}
               whileInView={{ opacity: 1, rotateX: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              whileHover={{ scale: 1.1, textShadow: "0 0 40px rgba(147, 51, 234, 0.8)" }}
+              whileHover={{ scale: 1.05 }}
             >
               源泉
             </motion.span>
@@ -195,10 +190,6 @@ export default function TechShowcase() {
               <motion.span
                 className="inline-block text-gray-800 font-medium"
                 whileHover={{ scale: 1.05 }}
-                animate={{ 
-                  color: ["#1f2937", "#374151", "#1f2937"],
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
               >
                 次世代をリードするコミュニティからの、
               </motion.span>
@@ -217,21 +208,10 @@ export default function TechShowcase() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              whileHover={{ boxShadow: "0 0 50px rgba(0, 217, 255, 0.3)" }}
+              whileHover={{ boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)" }}
             >
-              {/* Animated border gradient */}
-              <motion.div 
-                className="absolute inset-0 rounded-lg opacity-30"
-                animate={{
-                  background: [
-                    "linear-gradient(45deg, #00d9ff, transparent, #9333ea)",
-                    "linear-gradient(225deg, #9333ea, transparent, #ff006e)",
-                    "linear-gradient(45deg, #ff006e, transparent, #00d9ff)",
-                  ],
-                }}
-                transition={{ duration: 6, repeat: Infinity }}
-                style={{ padding: "2px", backgroundClip: "content-box" }}
-              />
+              {/* Subtle border */}
+              <div className="absolute inset-0 rounded-lg border border-primary/10" />
               
               <motion.p 
                 className="text-lg leading-relaxed text-gray-800 font-medium mb-6 relative z-10"
@@ -251,7 +231,7 @@ export default function TechShowcase() {
                 代表が創設した
                 <motion.span 
                   className="text-primary-blue font-bold inline-block mx-1"
-                  whileHover={{ scale: 1.1, textShadow: "0 0 20px rgba(0, 217, 255, 0.8)" }}
+                  whileHover={{ scale: 1.05 }}
                 >
                   『StuDXIA』
                 </motion.span>
@@ -277,7 +257,7 @@ export default function TechShowcase() {
                 また、東京大学のキャリア支援団体
                 <motion.span 
                   className="text-primary-dark font-bold inline-block mx-1"
-                  whileHover={{ scale: 1.1, textShadow: "0 0 20px rgba(147, 51, 234, 0.8)" }}
+                  whileHover={{ scale: 1.05 }}
                 >
                   『羅針盤』
                 </motion.span>
@@ -301,7 +281,7 @@ export default function TechShowcase() {
                 }}
                 whileHover={{ 
                   scale: 1.05,
-                  boxShadow: "0 20px 40px rgba(0, 217, 255, 0.3)",
+                  boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
                   transition: { duration: 0.3 }
                 }}
                 className="glass-effect p-8 rounded-lg relative overflow-hidden"
@@ -382,7 +362,7 @@ export default function TechShowcase() {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            whileHover={{ boxShadow: "0 0 60px rgba(147, 51, 234, 0.2)" }}
+            whileHover={{ boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)" }}
           >
             {/* Animated particles background */}
             <motion.div
@@ -406,11 +386,7 @@ export default function TechShowcase() {
               <motion.span 
                 className="text-gradient inline-block"
                 animate={{
-                  textShadow: [
-                    "0 0 20px rgba(147, 51, 234, 0.5)",
-                    "0 0 40px rgba(0, 217, 255, 0.5)",
-                    "0 0 20px rgba(147, 51, 234, 0.5)",
-                  ],
+                  opacity: [0.8, 1, 0.8],
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
@@ -459,7 +435,7 @@ export default function TechShowcase() {
                   className="text-2xl font-bold mb-2"
                   whileHover={{ scale: 1.02 }}
                 >
-                  <span className="text-primary-blue" style={{ textShadow: "0 0 10px rgba(14, 165, 233, 0.3)" }}>
+                  <span className="text-primary font-bold">
                     山本 公才 / Kousai Yamamoto
                   </span>
                 </motion.h4>
@@ -468,7 +444,6 @@ export default function TechShowcase() {
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
-                  style={{ textShadow: "0 0 15px rgba(147, 51, 234, 0.5)" }}
                 >
                   Luminous Core 主宰
                 </motion.p>
@@ -496,7 +471,7 @@ export default function TechShowcase() {
                     現在は、論理的なビジネス・AIの知見と、モデルとしても活動する表現力を掛け合わせ、独自の視点で企業の課題解決に挑む。
                     <motion.span 
                       className="text-primary-blue font-semibold inline-block"
-                      whileHover={{ scale: 1.05, textShadow: "0 0 10px rgba(14, 165, 233, 0.5)" }}
+                      whileHover={{ scale: 1.02 }}
                     >
                       IT資格や簿記資格
                     </motion.span>

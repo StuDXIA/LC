@@ -10,8 +10,8 @@ const achievements = [
     name: 'CVR向上', 
     metric: '+15%',
     description: 'LP改修による\nお問い合わせ転換率\n平均+15%以上',
-    gradient: 'from-emerald-400 via-green-500 to-emerald-600',
-    glowColor: 'emerald-500',
+    gradient: 'from-primary to-primary-dark',
+    glowColor: 'primary',
     delay: 0
   },
   { 
@@ -20,8 +20,8 @@ const achievements = [
     metric: '+30',
     unit: '件/月',
     description: '戦略的SNS運用による\n月間新規リード獲得\n+30件以上',
-    gradient: 'from-amber-400 via-yellow-500 to-orange-500',
-    glowColor: 'yellow-500',
+    gradient: 'from-primary-dark to-primary',
+    glowColor: 'primary-dark',
     delay: 0.2
   },
   { 
@@ -29,8 +29,8 @@ const achievements = [
     name: '業務効率化', 
     metric: '50%',
     description: 'カスタムツール導入による\n特定業務の作業時間\n50%削減',
-    gradient: 'from-purple-400 via-violet-500 to-purple-600',
-    glowColor: 'purple-500',
+    gradient: 'from-primary to-primary-dark',
+    glowColor: 'primary',
     delay: 0.4
   },
 ]

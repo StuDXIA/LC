@@ -9,15 +9,28 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'primary-blue': '#3B82F6',
-        'primary-dark': '#1E40AF',
-        'accent-blue': '#60A5FA',
-        'light-blue': '#DBEAFE',
+        // Ultra-Professional Blue Palette
+        'primary': '#0066CC',        // IBM Blue - 信頼と安定
+        'primary-dark': '#003D7A',   // Deep Professional Blue
+        'primary-light': '#E6F2FF',  // Very Light Blue for backgrounds
+        
+        // Neutral Colors
+        'neutral-50': '#F8FAFC',     // Almost White
+        'neutral-100': '#F1F5F9',    // Light Gray
+        'neutral-200': '#E2E8F0',    // Border Gray
+        'neutral-500': '#64748B',    // Text Secondary
+        'neutral-900': '#0F172A',    // Text Primary
+        
+        // Legacy mappings for compatibility
+        'primary-blue': '#0066CC',
+        'primary-dark': '#003D7A',
+        'accent-blue': '#0066CC',
+        'light-blue': '#E6F2FF',
         'light-gray': '#F8FAFC',
-        'medium-gray': '#E5E7EB',
-        'dark-gray': '#4B5563',
+        'medium-gray': '#E2E8F0',
+        'dark-gray': '#64748B',
         'clean-white': '#FFFFFF',
-        'soft-gray': '#F3F4F6',
+        'soft-gray': '#F1F5F9',
       },
       animation: {
         'text-slide': 'text-slide 12s cubic-bezier(0.83, 0, 0.17, 1) infinite',

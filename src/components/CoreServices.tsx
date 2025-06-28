@@ -80,7 +80,7 @@ const serviceTransformations: ServiceTransformation[] = [
           />
         </svg>
       ),
-      gradient: 'from-blue-600 via-cyan-500 to-blue-400',
+      gradient: 'from-primary to-primary-dark',
       glow: 'blue'
     }
   },
@@ -114,7 +114,7 @@ const serviceTransformations: ServiceTransformation[] = [
           />
         </svg>
       ),
-      gradient: 'from-purple-600 via-pink-500 to-purple-400',
+      gradient: 'from-primary-dark to-primary',
       glow: 'purple'
     }
   },
@@ -156,7 +156,7 @@ const serviceTransformations: ServiceTransformation[] = [
           <circle cx="50" cy="50" r="12" fill="currentColor" />
         </svg>
       ),
-      gradient: 'from-indigo-600 via-blue-500 to-indigo-400',
+      gradient: 'from-primary to-primary-dark',
       glow: 'indigo'
     }
   }
@@ -174,26 +174,26 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
       transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ y: -5, transition: { duration: 0.3 } }}
+      whileHover={{ y: -2, transition: { duration: 0.3 } }}
       className="relative group block w-full will-change-transform"
     >
-      <div className="relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl border border-gray-100 bg-gradient-to-br from-white to-gray-50 transform transition-all duration-500 hover:scale-[1.02]">
+      <div className="relative rounded-2xl overflow-hidden shadow-md hover:shadow-lg border border-neutral-200 bg-white transition-all duration-300">
         {/* Background gradient - stronger presence */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${service.visual.gradient} opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500`} />
+        <div className={`absolute inset-0 bg-gradient-to-br ${service.visual.gradient} opacity-[0.02] group-hover:opacity-[0.04] transition-opacity duration-500`} />
         
         {/* Content container - better proportions */}
         <div className="relative p-6 sm:p-8 lg:p-14 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           {/* Glow effect */}
           <motion.div
-            className={`absolute -inset-10 bg-gradient-to-br ${service.visual.gradient} opacity-0 blur-2xl`}
-            animate={{ opacity: isHovered ? 0.2 : 0 }}
+            className={`absolute -inset-10 bg-primary/5 opacity-0 blur-xl`}
+            animate={{ opacity: isHovered ? 0.1 : 0 }}
             transition={{ duration: 0.5 }}
           />
           
           {/* Left side - Number with better scale */}
           <div className="col-span-1 lg:col-span-2">
             <div className="lg:sticky lg:top-10">
-              <span className={`text-5xl sm:text-6xl lg:text-7xl font-black bg-gradient-to-br ${service.visual.gradient} bg-clip-text text-transparent block leading-none`}>
+              <span className="text-5xl sm:text-6xl lg:text-7xl font-black text-primary block leading-none">
                 {service.number}
               </span>
               <div className="text-xs font-medium tracking-[0.2em] uppercase text-gray-400 mt-2">
@@ -202,9 +202,8 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
               <motion.div
                 className="w-12 h-12 sm:w-16 sm:h-16 mt-4 lg:mt-6"
                 animate={{ 
-                  scale: isHovered ? 1.1 : 1,
-                  opacity: isHovered ? 0.4 : 0.2,
-                  rotate: isHovered ? 180 : 0
+                  scale: isHovered ? 1.05 : 1,
+                  opacity: isHovered ? 0.3 : 0.15
                 }}
                 transition={{ duration: 0.8 }}
               >
@@ -222,14 +221,14 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
               transition={{ duration: 0.3 }}
               className="relative"
             >
-              <div className="absolute -top-2 -left-2 w-20 h-20 bg-red-50 rounded-full opacity-50 blur-xl" />
-              <h4 className="text-sm sm:text-base font-bold text-red-600 mb-3 sm:mb-4 tracking-wider">PROBLEM</h4>
+              <div className="absolute -top-2 -left-2 w-20 h-20 bg-neutral-100 rounded-full opacity-30 blur-xl" />
+              <h4 className="text-sm sm:text-base font-bold text-neutral-500 mb-3 sm:mb-4 tracking-wider">PROBLEM</h4>
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
                 {service.problem.title}
               </h3>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                 {service.problem.description}
-                <span className="block text-lg sm:text-xl lg:text-2xl font-bold text-red-600 mt-2 sm:mt-3">
+                <span className="block text-lg sm:text-xl lg:text-2xl font-bold text-neutral-900 mt-2 sm:mt-3">
                   {service.problem.pain}
                 </span>
               </p>
@@ -245,9 +244,9 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
               transition={{ duration: 0.5 }}
               className="relative"
             >
-              <div className={`absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br ${service.visual.gradient} opacity-10 rounded-full blur-xl`} />
-              <h4 className={`text-sm sm:text-base font-bold bg-gradient-to-r ${service.visual.gradient} bg-clip-text text-transparent mb-3 sm:mb-4 tracking-wider`}>SOLUTION</h4>
-              <h3 className={`text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r ${service.visual.gradient} bg-clip-text text-transparent mb-2 sm:mb-3 leading-tight`}>
+              <div className={`absolute -top-2 -right-2 w-24 h-24 bg-primary-light opacity-20 rounded-full blur-xl`} />
+              <h4 className="text-sm sm:text-base font-bold text-primary mb-3 sm:mb-4 tracking-wider">SOLUTION</h4>
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-primary-dark mb-2 sm:mb-3 leading-tight">
                 {service.solution.title}
               </h3>
               <p className="text-sm sm:text-base text-gray-700 mb-4 leading-relaxed">
@@ -267,7 +266,7 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
                     transition={{ delay: i * 0.1 }}
                     className="flex items-center gap-3"
                   >
-                    <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-gradient-to-r ${service.visual.gradient} group-hover:scale-125 transition-transform flex-shrink-0`} />
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary group-hover:scale-110 transition-transform flex-shrink-0" />
                     <span className="text-xs sm:text-sm font-medium text-gray-700 break-words">{item}</span>
                   </motion.div>
                 ))}
@@ -275,7 +274,7 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
               
               {/* CTA Button - always visible but subtle */}
               <motion.button 
-                className={`mt-4 sm:mt-6 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r ${service.visual.gradient} text-white text-xs sm:text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto`}
+                className="mt-4 sm:mt-6 px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg bg-primary text-white text-xs sm:text-sm font-semibold shadow-sm hover:shadow-md hover:bg-primary-dark transition-all duration-300 w-full sm:w-auto"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -298,8 +297,8 @@ export default function CoreServices() {
     <section id="services" ref={sectionRef} className="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white">
       {/* Background elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -left-40 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-30" />
-        <div className="absolute bottom-1/4 -right-40 w-80 h-80 bg-purple-100 rounded-full blur-3xl opacity-30" />
+        <div className="absolute top-1/4 -left-40 w-80 h-80 bg-primary-light rounded-full blur-2xl opacity-20" />
+        <div className="absolute bottom-1/4 -right-40 w-80 h-80 bg-primary-light rounded-full blur-2xl opacity-20" />
       </div>
 
       <div className="container mx-auto relative z-10 max-w-7xl">
@@ -319,7 +318,7 @@ export default function CoreServices() {
           >
             <span className="text-gray-900">事業成長を加速する</span>
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
+            <span className="text-primary-dark">
               3つの変革
             </span>
           </motion.h2>
