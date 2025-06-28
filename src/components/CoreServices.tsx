@@ -177,12 +177,12 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
       whileHover={{ y: -10, transition: { duration: 0.3 } }}
       className="relative group block w-full"
     >
-      <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl border border-gray-200 bg-white transform transition-all duration-300 hover:shadow-3xl">
-        {/* Background gradient */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${service.visual.gradient} opacity-5`} />
+      <div className="relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl border border-gray-100 bg-gradient-to-br from-white to-gray-50 transform transition-all duration-500 hover:scale-[1.02]">
+        {/* Background gradient - stronger presence */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${service.visual.gradient} opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500`} />
         
-        {/* Content container */}
-        <div className="relative h-full p-8 lg:p-12 flex flex-row justify-between items-center">
+        {/* Content container - better proportions */}
+        <div className="relative p-10 lg:p-14 grid grid-cols-12 gap-8 items-start">
           {/* Glow effect */}
           <motion.div
             className={`absolute -inset-10 bg-gradient-to-br ${service.visual.gradient} opacity-0 blur-2xl`}
@@ -190,92 +190,97 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
             transition={{ duration: 0.5 }}
           />
           
-          {/* Left side - Number and Icon */}
-          <div className="relative z-10 flex-shrink-0">
-            <span className={`text-8xl lg:text-9xl font-black bg-gradient-to-br ${service.visual.gradient} bg-clip-text text-transparent block`}>
-              {service.number}
-            </span>
-            <motion.div
-              className="w-24 h-24 mt-4 opacity-30"
-              animate={{ 
-                scale: isHovered ? 1.2 : 1,
-                opacity: isHovered ? 0.5 : 0.3
-              }}
-              transition={{ duration: 0.5 }}
-            >
-              {service.visual.icon}
-            </motion.div>
+          {/* Left side - Number with better scale */}
+          <div className="col-span-3 lg:col-span-2">
+            <div className="sticky top-10">
+              <span className={`text-6xl lg:text-7xl font-black bg-gradient-to-br ${service.visual.gradient} bg-clip-text text-transparent block leading-none`}>
+                {service.number}
+              </span>
+              <div className="text-xs font-medium tracking-[0.2em] uppercase text-gray-400 mt-2">
+                {service.tagline}
+              </div>
+              <motion.div
+                className="w-16 h-16 mt-6"
+                animate={{ 
+                  scale: isHovered ? 1.1 : 1,
+                  opacity: isHovered ? 0.4 : 0.2,
+                  rotate: isHovered ? 180 : 0
+                }}
+                transition={{ duration: 0.8 }}
+              >
+                {service.visual.icon}
+              </motion.div>
+            </div>
           </div>
           
-          {/* Right side - Content */}
-          <div className="relative z-10 flex-grow ml-8 lg:ml-16">
+          {/* Right side - Content with better hierarchy */}
+          <div className="col-span-9 lg:col-span-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Problem column */}
             <motion.div
-              initial={{ opacity: 1 }}
-              animate={{ opacity: isHovered ? 0.5 : 1 }}
+              initial={{ opacity: 0.7 }}
+              animate={{ opacity: isHovered ? 0.4 : 0.7 }}
               transition={{ duration: 0.3 }}
-              className="mb-8"
+              className="relative"
             >
-              <h4 className="text-sm font-medium text-gray-500 mb-3">PROBLEM</h4>
-              <h3 className="text-3xl font-bold text-gray-900 mb-2">
+              <div className="absolute -top-2 -left-2 w-20 h-20 bg-red-50 rounded-full opacity-50 blur-xl" />
+              <h4 className="text-base font-bold text-red-600 mb-4 tracking-wider">PROBLEM</h4>
+              <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3 leading-tight">
                 {service.problem.title}
               </h3>
-              <p className="text-lg text-gray-700">
+              <p className="text-base text-gray-600 leading-relaxed">
                 {service.problem.description}
-                <span className="block text-2xl font-bold text-red-500 mt-1">
+                <span className="block text-xl lg:text-2xl font-bold text-red-600 mt-3">
                   {service.problem.pain}
                 </span>
               </p>
             </motion.div>
             
-            {/* Solution section */}
+            {/* Solution column */}
             <motion.div
               initial={{ opacity: 0.8 }}
               animate={{ 
-                opacity: isHovered ? 1 : 0.8
+                opacity: isHovered ? 1 : 0.8,
+                x: isHovered ? 0 : 10
               }}
               transition={{ duration: 0.5 }}
+              className="relative"
             >
-              <h4 className="text-sm font-medium text-gray-500 mb-3">SOLUTION</h4>
-              <h3 className={`text-3xl font-bold bg-gradient-to-r ${service.visual.gradient} bg-clip-text text-transparent mb-2`}>
+              <div className={`absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br ${service.visual.gradient} opacity-10 rounded-full blur-xl`} />
+              <h4 className={`text-base font-bold bg-gradient-to-r ${service.visual.gradient} bg-clip-text text-transparent mb-4 tracking-wider`}>SOLUTION</h4>
+              <h3 className={`text-2xl lg:text-3xl font-bold bg-gradient-to-r ${service.visual.gradient} bg-clip-text text-transparent mb-3 leading-tight`}>
                 {service.solution.title}
               </h3>
-              <p className="text-lg text-gray-700 mb-4">
+              <p className="text-base text-gray-700 mb-4 leading-relaxed">
                 {service.solution.description}
               </p>
               
-              {/* Approach list */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ 
-                  opacity: isHovered ? 1 : 0
-                }}
-                transition={{ duration: 0.3 }}
-                className="space-y-2"
-              >
+              {/* Approach list - always visible */}
+              <div className="space-y-2 mt-6">
                 {service.solution.approach.map((item, i) => (
                   <motion.div
                     key={i}
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: isHovered ? 0 : -20, opacity: isHovered ? 1 : 0 }}
+                    initial={{ x: 0, opacity: 0.7 }}
+                    animate={{ 
+                      x: isHovered ? 10 : 0, 
+                      opacity: isHovered ? 1 : 0.7 
+                    }}
                     transition={{ delay: i * 0.1 }}
                     className="flex items-center gap-3"
                   >
-                    <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${service.visual.gradient}`} />
+                    <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.visual.gradient} group-hover:scale-125 transition-transform`} />
                     <span className="text-sm font-medium text-gray-700">{item}</span>
                   </motion.div>
                 ))}
-              </motion.div>
-            </motion.div>
-            {/* CTA Button */}
-            <motion.div
-              className="mt-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
-              transition={{ duration: 0.3 }}
-            >
-              <button className={`px-8 py-3 rounded-xl bg-gradient-to-r ${service.visual.gradient} text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300`}>
+              </div>
+              
+              {/* CTA Button - always visible but subtle */}
+              <motion.button 
+                className={`mt-6 px-6 py-2.5 rounded-xl bg-gradient-to-r ${service.visual.gradient} text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 詳しく見る →
-              </button>
+              </motion.button>
             </motion.div>
           </div>
         </div>
@@ -331,7 +336,7 @@ export default function CoreServices() {
         </motion.div>
 
         {/* Service cards */}
-        <div className="flex flex-col gap-12 mt-16 max-w-6xl mx-auto">
+        <div className="flex flex-col gap-8 mt-16 max-w-7xl mx-auto">
           {serviceTransformations.map((service, index) => (
             <ServiceCard key={service.id} service={service} index={index} />
           ))}
