@@ -34,7 +34,7 @@ export default function Footer() {
   return (
     <>
       {/* CTA Section */}
-      <section className="relative py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-100 to-white">
+      <section id="contact" className="relative py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-100 to-white">
         <div className="absolute inset-0 bg-gradient-radial from-primary-blue/5 via-transparent to-transparent" />
         
         <div className="container mx-auto relative z-10 text-center">

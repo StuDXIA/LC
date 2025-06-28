@@ -42,9 +42,15 @@ export default function NeuralGrowthBackground() {
   const mouseRef = useRef({ x: 0, y: 0 })
   const animationIdRef = useRef<number>()
   const timeRef = useRef(0)
+  const isReducedMotion = useRef(false)
+  const isLowPerformance = useRef(false)
 
   useEffect(() => {
     if (!mountRef.current) return
+
+    // パフォーマンス設定の検出
+    isReducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    isLowPerformance.current = navigator.hardwareConcurrency <= 4 || /Android|iPhone|iPad/i.test(navigator.userAgent)
 
     // Scene setup
     const scene = new THREE.Scene()
@@ -89,7 +95,11 @@ export default function NeuralGrowthBackground() {
       }
 
       // Layer configuration for professional layout
-      const layers = [
+      const layers = isLowPerformance.current ? [
+        { count: 1, radius: 0, y: 10, scale: 1.2 },      // Center
+        { count: 3, radius: 30, y: 5, scale: 1.0 },      // First layer
+        { count: 5, radius: 60, y: 0, scale: 0.9 }       // Second layer
+      ] : [
         { count: 1, radius: 0, y: 10, scale: 1.2 },      // Center
         { count: 5, radius: 20, y: 5, scale: 1.0 },      // First layer
         { count: 8, radius: 40, y: 0, scale: 0.9 },      // Second layer
@@ -248,7 +258,8 @@ export default function NeuralGrowthBackground() {
       const particles: Particle[] = []
       const particleGeometry = new THREE.SphereGeometry(0.25, 12, 12)
       
-      for (let i = 0; i < 30; i++) {
+      const particleCount = isLowPerformance.current ? 10 : 20
+      for (let i = 0; i < particleCount; i++) {
         const validNodes = nodesRef.current.filter(n => n.connections.length > 0)
         if (validNodes.length === 0) continue
 
@@ -323,9 +334,13 @@ export default function NeuralGrowthBackground() {
     }
     window.addEventListener('resize', handleResize)
 
-    // Animation loop
+    // Animation loop with performance optimization
+    let frameCount = 0
     const animate = () => {
       animationIdRef.current = requestAnimationFrame(animate)
+      
+      // Skip frames on low performance devices
+      if (isLowPerformance.current && frameCount++ % 2 !== 0) return
 
       if (!sceneRef.current || !cameraRef.current || !rendererRef.current) return
 
@@ -391,9 +406,9 @@ export default function NeuralGrowthBackground() {
       nodesRef.current.forEach((node) => {
         if (!node.group.visible) return
 
-        // Gentle pulse
-        node.pulsePhase += 0.02
-        const pulse = 0.5 + Math.sin(node.pulsePhase) * 0.05
+        // Gentle pulse (reduced on low performance)
+        node.pulsePhase += isLowPerformance.current ? 0.01 : 0.02
+        const pulse = isReducedMotion.current ? 0.5 : (0.5 + Math.sin(node.pulsePhase) * 0.05)
 
         // Mouse interaction
         const distance = new THREE.Vector2(

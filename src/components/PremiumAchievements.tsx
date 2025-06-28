@@ -239,7 +239,7 @@ export default function PremiumAchievements() {
   const inView = useInView(sectionRef)
 
   return (
-    <section ref={sectionRef} className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 relative overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50">
+    <section id="achievements" ref={sectionRef} className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 relative overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50">
       {/* Section header with elegant animations */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}

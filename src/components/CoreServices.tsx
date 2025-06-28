@@ -174,8 +174,8 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
       transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ y: -10, transition: { duration: 0.3 } }}
-      className="relative group block w-full"
+      whileHover={{ y: -5, transition: { duration: 0.3 } }}
+      className="relative group block w-full will-change-transform"
     >
       <div className="relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl border border-gray-100 bg-gradient-to-br from-white to-gray-50 transform transition-all duration-500 hover:scale-[1.02]">
         {/* Background gradient - stronger presence */}
@@ -295,7 +295,7 @@ export default function CoreServices() {
 
 
   return (
-    <section ref={sectionRef} className="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white">
+    <section id="services" ref={sectionRef} className="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white">
       {/* Background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 -left-40 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-30" />

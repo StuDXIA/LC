@@ -16,7 +16,7 @@ export default function AboutSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
   
   return (
-    <section ref={sectionRef} className="py-16 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
+    <section id="about" ref={sectionRef} className="py-16 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
       {/* Animated background elements */}
       <motion.div 
         className="absolute inset-0 opacity-10"

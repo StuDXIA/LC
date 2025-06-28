@@ -32,7 +32,7 @@ export default function HeroSection() {
   }, [])
   
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-gray-50">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-gray-50 pt-20">
       {/* Enhanced Neural Network × Growth Curve Background */}
       <NeuralGrowthBackground />
       

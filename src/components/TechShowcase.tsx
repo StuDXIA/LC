@@ -138,7 +138,7 @@ export default function TechShowcase() {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
   
   return (
-    <section ref={sectionRef} className="py-20 px-6 relative overflow-hidden">
+    <section id="technology" ref={sectionRef} className="py-20 px-6 relative overflow-hidden">
       {/* Dynamic background gradient */}
       <motion.div 
         className="absolute inset-0 opacity-20"
