@@ -143,7 +143,7 @@ export default function HeroSection() {
           >
             <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
               デジタル戦略で事業成果を最大化する
-              <span className="font-semibold text-blue-600"> グローステック・カンパニー</span>
+              <span className="font-semibold text-blue-600"> グローステック・パートナー</span>
             </p>
             <motion.p
               className="mt-4 text-base text-gray-600 max-w-2xl mx-auto"
