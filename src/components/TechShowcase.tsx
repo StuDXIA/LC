@@ -221,7 +221,7 @@ export default function TechShowcase() {
                   『羅針盤』
                 </span>
                 の公式ウェブサイト制作も担当。これらの実績こそが、我々が信頼できるプロフェッショナルな開発パートナーであることの何よりの証明です。
-              </motion.p>
+              </p>
             </motion.div>
           </div>
           
