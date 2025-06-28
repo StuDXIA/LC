@@ -134,19 +134,16 @@ export default function TechShowcase() {
     offset: ["start end", "end start"]
   })
   
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50])
+  const y = useTransform(scrollYProgress, [0, 1], [30, -30])
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
   
   return (
     <section id="technology" ref={sectionRef} className="py-20 px-6 relative overflow-hidden">
-      {/* Dynamic background gradient */}
-      <motion.div 
-        className="absolute inset-0 opacity-20"
-        style={{ y }}
-      >
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary-dark rounded-full blur-3xl opacity-30" />
-        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-primary-blue rounded-full blur-3xl opacity-30" />
-      </motion.div>
+      {/* Optimized background gradient */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary-dark rounded-full blur-3xl opacity-30 will-change-transform" style={{ transform: 'translateZ(0)' }} />
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-primary-blue rounded-full blur-3xl opacity-30 will-change-transform" style={{ transform: 'translateZ(0)' }} />
+      </div>
       
       <div className="container mx-auto relative z-10">
         <motion.div
@@ -180,6 +177,7 @@ export default function TechShowcase() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
+              style={{ transform: 'translateZ(0)' }}
             >
               <span className="inline-block text-gray-800 font-medium">
                 次世代をリードするコミュニティからの、
@@ -230,40 +228,30 @@ export default function TechShowcase() {
             {partnerships.map((partner, index) => (
               <motion.div
                 key={partner.name}
-                initial={{ opacity: 0, scale: 0.8, rotateY: -30 }}
-                whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ 
                   delay: index * 0.2,
-                  duration: 0.8,
-                  type: "spring",
-                  stiffness: 100
+                  duration: 0.6
                 }}
                 whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
-                  transition: { duration: 0.3 }
+                  scale: 1.02,
+                  transition: { duration: 0.2 }
                 }}
-                className="glass-effect p-8 rounded-lg relative overflow-hidden"
-                style={{ transformStyle: "preserve-3d" }}
+                className="glass-effect p-8 rounded-lg relative overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                style={{ transform: 'translateZ(0)' }}
               >
-                {/* Dynamic background pulse */}
-                <motion.div
-                  className="absolute inset-0 opacity-10"
-                  animate={{
-                    background: [
-                      `radial-gradient(circle at 20% 50%, ${partner.color.split(' ')[1]}, transparent 50%)`,
-                      `radial-gradient(circle at 80% 50%, ${partner.color.split(' ')[3]}, transparent 50%)`,
-                      `radial-gradient(circle at 20% 50%, ${partner.color.split(' ')[1]}, transparent 50%)`,
-                    ],
+                {/* Static gradient background */}
+                <div
+                  className="absolute inset-0 opacity-5"
+                  style={{
+                    background: `linear-gradient(135deg, ${partner.color.split(' ')[1]}, transparent 70%)`,
                   }}
-                  transition={{ duration: 4, repeat: Infinity }}
                 />
                 
                 <div className="flex items-center gap-6 relative z-10">
-                  <motion.div 
+                  <div 
                     className="w-20 h-20 flex-shrink-0"
-                    whileHover={{ rotate: [0, 5, -5, 0] }}
-                    transition={{ duration: 0.5 }}
                   >
                     <ImageWithFallback
                       baseName={partner.imageName}
@@ -272,7 +260,7 @@ export default function TechShowcase() {
                       height={80}
                       className="rounded-lg border border-white/20 shadow-lg"
                     />
-                  </motion.div>
+                  </div>
                   
                   <div className="flex-1">
                     <motion.h4 
@@ -302,15 +290,6 @@ export default function TechShowcase() {
                   </div>
                 </div>
                 
-                {/* Hover glow effect */}
-                <motion.div
-                  className="absolute inset-0 rounded-lg opacity-0"
-                  whileHover={{ opacity: 1 }}
-                  style={{
-                    background: `linear-gradient(45deg, ${partner.color.split(' ')[1]}20, ${partner.color.split(' ')[3]}20)`,
-                    filter: "blur(20px)",
-                  }}
-                />
               </motion.div>
             ))}
           </div>
@@ -323,17 +302,12 @@ export default function TechShowcase() {
             transition={{ duration: 0.8 }}
             whileHover={{ boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)" }}
           >
-            {/* Animated particles background */}
-            <motion.div
+            {/* Static gradient background */}
+            <div
               className="absolute inset-0 opacity-5"
-              animate={{
-                backgroundImage: [
-                  "radial-gradient(circle at 10% 20%, #9333ea 0%, transparent 50%)",
-                  "radial-gradient(circle at 80% 80%, #00d9ff 0%, transparent 50%)",
-                  "radial-gradient(circle at 10% 20%, #9333ea 0%, transparent 50%)",
-                ],
+              style={{
+                background: "radial-gradient(circle at 50% 50%, #0066CC 0%, transparent 60%)",
               }}
-              transition={{ duration: 8, repeat: Infinity }}
             />
             
             <motion.h3 

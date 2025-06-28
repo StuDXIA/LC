@@ -13,22 +13,31 @@ export default function HeroSection() {
   const [isLoaded, setIsLoaded] = useState(false)
   const { scrollY } = useScroll()
   
-  const y = useTransform(scrollY, [0, 300], [0, 50])
+  const y = useTransform(scrollY, [0, 300], [0, 30])
   const opacity = useTransform(scrollY, [0, 300], [1, 0])
   
   useEffect(() => {
     setIsLoaded(true)
     
+    let frameId: number | null = null
     const handleMouseMove = (e: MouseEvent) => {
-      if (titleRef.current) {
-        const x = (e.clientX / window.innerWidth - 0.5) * 10
-        const y = (e.clientY / window.innerHeight - 0.5) * 10
-        titleRef.current.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg)`
-      }
+      if (frameId) return
+      
+      frameId = requestAnimationFrame(() => {
+        if (titleRef.current) {
+          const x = (e.clientX / window.innerWidth - 0.5) * 5
+          const y = (e.clientY / window.innerHeight - 0.5) * 5
+          titleRef.current.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg) translateZ(0)`
+        }
+        frameId = null
+      })
     }
     
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      if (frameId) cancelAnimationFrame(frameId)
+    }
   }, [])
   
   return (
@@ -41,7 +50,7 @@ export default function HeroSection() {
       
       <motion.div 
         className="container mx-auto px-6 relative z-20"
-        style={{ y, opacity }}
+        style={{ y, opacity, transform: 'translateZ(0)' }}
       >
         <div className="max-w-5xl mx-auto">
           {/* Refined Logo Section */}

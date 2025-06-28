@@ -4,20 +4,18 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
 export default function AboutSection() {
-  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true })
+  const [ref, inView] = useInView({ threshold: 0.2, triggerOnce: true })
   
   return (
     <section id="about" className="py-32 sm:py-40 lg:py-48 px-4 sm:px-6 relative bg-gradient-to-b from-white via-neutral-50/50 to-white">
       {/* Sophisticated geometric accent */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div 
-          className="absolute top-20 right-0 w-[600px] h-[600px]"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 0.03 } : {}}
-          transition={{ duration: 1.5 }}
+        <div 
+          className="absolute top-20 right-0 w-[600px] h-[600px] opacity-[0.03]"
+          style={{ transform: 'translateZ(0)' }}
         >
           <div className="w-full h-full border-[40px] border-primary/10 rounded-full" />
-        </motion.div>
+        </div>
       </div>
       
       <div className="container mx-auto relative z-10">
@@ -98,7 +96,7 @@ export default function AboutSection() {
                     >
                       <div className="flex items-center gap-3">
                         <span className="text-sm text-neutral-400 font-light">0{index + 1}</span>
-                        <div className="w-12 h-px bg-neutral-300 group-hover:w-20 group-hover:bg-primary transition-all duration-500" />
+                        <div className="w-12 h-px bg-neutral-300 group-hover:w-20 group-hover:bg-primary transition-all duration-300 transform-gpu" />
                       </div>
                       <span className="text-lg sm:text-xl text-neutral-700 group-hover:text-primary transition-colors duration-300">
                         {item}

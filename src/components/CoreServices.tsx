@@ -164,21 +164,25 @@ const serviceTransformations: ServiceTransformation[] = [
 
 function ServiceCard({ service, index }: { service: ServiceTransformation, index: number }) {
   const [isHovered, setIsHovered] = useState(false)
-  const [ref, inView] = useInView({ threshold: 0.01, triggerOnce: true })
+  const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true })
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 80 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
-      transition={{ duration: 0.8, delay: index * 0.3, ease: "easeOut" }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="relative group block w-full"
+      style={{ transform: 'translateZ(0)' }}
     >
       <div className="relative bg-white overflow-hidden">
-        {/* Ultra-large number background */}
-        <div className="absolute -top-20 -left-10 text-[200px] sm:text-[300px] lg:text-[400px] font-black text-neutral-100 leading-none select-none">
+        {/* Optimized large number background */}
+        <div 
+          className="absolute -top-20 -left-10 text-[150px] sm:text-[200px] lg:text-[250px] font-black text-neutral-100 leading-none select-none"
+          style={{ transform: 'translateZ(0)', willChange: 'transform' }}
+        >
           {service.number}
         </div>
         
@@ -189,7 +193,8 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
             className="mb-16 sm:mb-20"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: index * 0.3 + 0.2 }}
+            transition={{ delay: index * 0.2 + 0.1 }}
+            style={{ transform: 'translateZ(0)' }}
           >
             <h3 className="text-sm sm:text-base text-neutral-500 font-medium tracking-[0.3em] uppercase mb-4">
               {service.tagline}
@@ -200,9 +205,10 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
           {/* Problem Section - Large & Bold */}
           <motion.div 
             className="mb-16 sm:mb-24 lg:mb-32"
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: index * 0.3 + 0.3 }}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: index * 0.2 + 0.2 }}
+            style={{ transform: 'translateZ(0)' }}
           >
             <h4 className="text-base sm:text-lg text-red-600 font-bold tracking-wider mb-6 sm:mb-8">
               ― PROBLEM
@@ -234,9 +240,10 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
           
           {/* Solution Section - Impactful */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: index * 0.3 + 0.6 }}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: index * 0.2 + 0.3 }}
+            style={{ transform: 'translateZ(0)' }}
           >
             <h4 className="text-base sm:text-lg text-primary font-bold tracking-wider mb-6 sm:mb-8">
               ― SOLUTION
@@ -253,10 +260,11 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
               {service.solution.approach.map((item, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: index * 0.3 + 0.7 + i * 0.1 }}
+                  initial={{ opacity: 0 }}
+                  animate={inView ? { opacity: 1 } : {}}
+                  transition={{ delay: index * 0.2 + 0.4 + i * 0.05 }}
                   className="flex items-start gap-6"
+                  style={{ transform: 'translateZ(0)' }}
                 >
                   <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 flex items-center justify-center mt-1">
                     <span className="text-sm sm:text-base font-bold text-primary">
@@ -276,7 +284,7 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
               animate={inView ? { opacity: 1 } : {}}
               transition={{ delay: index * 0.3 + 1 }}
             >
-              <button className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-primary hover:bg-primary-dark text-white font-bold text-base sm:text-lg rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl">
+              <button className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-primary hover:bg-primary-dark text-white font-bold text-base sm:text-lg rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform-gpu">
                 {service.id === 'awareness' && 'SNSグロースの事例を見る'}
                 {service.id === 'conversion' && 'Webサイト/LP制作の事例を見る'}
                 {service.id === 'automation' && 'カスタム開発の事例を見る'}
@@ -294,7 +302,7 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
 
 export default function CoreServices() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true })
+  const [ref, inView] = useInView({ threshold: 0.2, triggerOnce: true })
 
 
   return (

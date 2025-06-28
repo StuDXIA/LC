@@ -19,29 +19,39 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState('')
 
   useEffect(() => {
+    let ticking = false
+    
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-      
-      // セクションの位置を確認してアクティブセクションを更新
-      const sections = navItems.map(item => ({
-        id: item.id,
-        element: document.getElementById(item.id)
-      }))
-      
-      const current = sections.find(section => {
-        if (section.element) {
-          const rect = section.element.getBoundingClientRect()
-          return rect.top <= 100 && rect.bottom >= 100
-        }
-        return false
-      })
-      
-      if (current) {
-        setActiveSection(current.id)
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20)
+          
+          // セクションの位置を確認してアクティブセクションを更新
+          const sections = navItems.map(item => ({
+            id: item.id,
+            element: document.getElementById(item.id)
+          }))
+          
+          const current = sections.find(section => {
+            if (section.element) {
+              const rect = section.element.getBoundingClientRect()
+              return rect.top <= 100 && rect.bottom >= 100
+            }
+            return false
+          })
+          
+          if (current) {
+            setActiveSection(current.id)
+          }
+          
+          ticking = false
+        })
+        
+        ticking = true
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
     
     return () => window.removeEventListener('scroll', handleScroll)

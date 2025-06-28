@@ -76,6 +76,26 @@
   will-change: opacity;
 }
 
+/* Performance optimizations */
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Reduce render blocking for large text */
+.text-render-optimize {
+  text-rendering: optimizeSpeed;
+  font-display: swap;
+}
+
+/* Optimize animations */
+@layer utilities {
+  .animation-optimize {
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
 @layer utilities {
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-dark;
@@ -83,8 +103,10 @@
 
   .glass-effect {
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid #E2E8F0;
+    transform: translateZ(0);
   }
 
   .clean-border {
@@ -114,11 +136,12 @@
   }
 
   .hover-lift {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0);
   }
 
   .hover-lift:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px) translateZ(0);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.03);
   }
 

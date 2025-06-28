@@ -27,7 +27,6 @@ interface Particle {
   targetIndex: number
   progress: number
   speed: number
-  trail: THREE.Points
 }
 
 export default function NeuralGrowthBackground() {
@@ -39,11 +38,12 @@ export default function NeuralGrowthBackground() {
   const connectionsRef = useRef<Connection[]>([])
   const particlesRef = useRef<Particle[]>([])
   const growthCurveRef = useRef<THREE.Line>()
-  const mouseRef = useRef({ x: 0, y: 0 })
   const animationIdRef = useRef<number>()
   const timeRef = useRef(0)
+  const frameCount = useRef(0)
   const isReducedMotion = useRef(false)
   const isLowPerformance = useRef(false)
+  const mouseRef = useRef({ x: 0, y: 0 })
 
   useEffect(() => {
     if (!mountRef.current) return
@@ -256,7 +256,7 @@ export default function NeuralGrowthBackground() {
     // Create particles
     const createParticles = () => {
       const particles: Particle[] = []
-      const particleGeometry = new THREE.SphereGeometry(0.25, 12, 12)
+      const particleGeometry = new THREE.SphereGeometry(0.25, 6, 6)
       
       const particleCount = isLowPerformance.current ? 10 : 20
       for (let i = 0; i < particleCount; i++) {
@@ -279,32 +279,12 @@ export default function NeuralGrowthBackground() {
         mesh.visible = false
         scene.add(mesh)
 
-        // Trail
-        const trailGeometry = new THREE.BufferGeometry()
-        const trailPositions = new Float32Array(9) // 3 trail points
-        trailGeometry.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3))
-        
-        const trailMaterial = new THREE.PointsMaterial({
-          color: 0x0066CC,
-          size: 2,
-          transparent: true,
-          opacity: 0,
-          sizeAttenuation: true,
-          blending: THREE.AdditiveBlending,
-          vertexColors: false
-        })
-
-        const trail = new THREE.Points(trailGeometry, trailMaterial)
-        trail.visible = false
-        scene.add(trail)
-
         particles.push({
           mesh,
           sourceIndex,
           targetIndex,
           progress: Math.random(),
-          speed: 0.005 + Math.random() * 0.003,
-          trail
+          speed: 0.003 + Math.random() * 0.002
         })
       }
 
@@ -334,13 +314,14 @@ export default function NeuralGrowthBackground() {
     }
     window.addEventListener('resize', handleResize)
 
-    // Animation loop with performance optimization
-    let frameCount = 0
+    // Animation loop with enhanced performance optimization
     const animate = () => {
       animationIdRef.current = requestAnimationFrame(animate)
       
-      // Skip frames on low performance devices
-      if (isLowPerformance.current && frameCount++ % 2 !== 0) return
+      // Skip more frames for better performance
+      frameCount.current++
+      if (isLowPerformance.current && frameCount.current % 3 !== 0) return
+      if (!isLowPerformance.current && frameCount.current % 2 !== 0) return
 
       if (!sceneRef.current || !cameraRef.current || !rendererRef.current) return
 
@@ -396,7 +377,6 @@ export default function NeuralGrowthBackground() {
           particlesRef.current.forEach(p => {
             if (!p.mesh.visible) {
               p.mesh.visible = true
-              p.trail.visible = true
             }
           })
         }
@@ -406,8 +386,8 @@ export default function NeuralGrowthBackground() {
       nodesRef.current.forEach((node) => {
         if (!node.group.visible) return
 
-        // Gentle pulse (reduced on low performance)
-        node.pulsePhase += isLowPerformance.current ? 0.01 : 0.02
+        // Gentle pulse (reduced frequency)
+        node.pulsePhase += 0.01
         const pulse = isReducedMotion.current ? 0.5 : (0.5 + Math.sin(node.pulsePhase) * 0.05)
 
         // Mouse interaction
@@ -418,14 +398,15 @@ export default function NeuralGrowthBackground() {
         const mouseInfluence = Math.max(0, 1 - distance / 30) * 0.3
 
         // Update visuals
-        node.coreMesh.scale.setScalar(1 + pulse * 0.2 + mouseInfluence)
-        node.glowMesh.scale.setScalar(1 + pulse * 0.4 + mouseInfluence * 2)
+        // Simplified updates for performance
+        const scale = 1 + pulse * 0.1 + mouseInfluence * 0.5
+        node.coreMesh.scale.setScalar(scale)
         
-        const coreMat = node.coreMesh.material as THREE.MeshPhongMaterial
-        coreMat.emissiveIntensity = 0.3 + pulse * 0.1 + mouseInfluence
-        
-        const glowMat = node.glowMesh.material as THREE.MeshBasicMaterial
-        glowMat.opacity = 0.1 + pulse * 0.05 + mouseInfluence * 0.1
+        if (frameCount.current % 6 === 0) {
+          node.glowMesh.scale.setScalar(scale * 1.5)
+          const coreMat = node.coreMesh.material as THREE.MeshPhongMaterial
+          coreMat.emissiveIntensity = 0.3 + pulse * 0.1
+        }
       })
 
       // Update particles
@@ -457,27 +438,14 @@ export default function NeuralGrowthBackground() {
           )
           particle.mesh.position.copy(position)
           
-          // Update trail
-          const trailPositions = particle.trail.geometry.attributes.position.array as Float32Array
-          for (let i = trailPositions.length - 3; i >= 3; i -= 3) {
-            trailPositions[i] = trailPositions[i - 3]
-            trailPositions[i + 1] = trailPositions[i - 2]
-            trailPositions[i + 2] = trailPositions[i - 1]
-          }
-          trailPositions[0] = position.x
-          trailPositions[1] = position.y
-          trailPositions[2] = position.z
-          particle.trail.geometry.attributes.position.needsUpdate = true
-          
-          // Fade based on progress
+          // Simplified particle updates
           const particleMat = particle.mesh.material as THREE.MeshStandardMaterial
-          const trailMat = particle.trail.material as THREE.PointsMaterial
           const fade = Math.sin(particle.progress * Math.PI)
-          particleMat.opacity = fade * 0.9
-          trailMat.opacity = fade * 0.4
+          particleMat.opacity = fade * 0.8
           
-          // Add glow effect
-          particleMat.emissiveIntensity = fade * 0.8
+          if (frameCount.current % 4 === 0) {
+            particleMat.emissiveIntensity = fade * 0.5
+          }
         }
       })
 

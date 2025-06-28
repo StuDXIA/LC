@@ -2,8 +2,8 @@
   "components/HeroSection.tsx -> ./NeuralGrowthBackground": {
     "id": 8527,
     "files": [
-      "static/chunks/b536a0f1.054732ac48051f55.js",
-      "static/chunks/527.3b857888bd44b195.js"
+      "static/chunks/b536a0f1.4a2993b267f6f7ef.js",
+      "static/chunks/527.3a07932075a84a4b.js"
     ]
   },
   "components/TechShowcase.tsx -> @monaco-editor/react": {
