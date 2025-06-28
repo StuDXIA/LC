@@ -133,7 +133,7 @@ function AchievementCard({ achievement, index }: { achievement: typeof achieveme
       </div>
 
       {/* Main card */}
-      <div className="relative bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-8 h-full overflow-hidden group-hover:border-gray-300 group-hover:shadow-2xl transition-all duration-500">
+      <div className="relative bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-6 sm:p-8 h-full overflow-hidden group-hover:border-gray-300 group-hover:shadow-2xl transition-all duration-500">
         {/* Gradient border effect */}
         <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
           <div className={`absolute inset-px bg-gradient-to-br ${achievement.gradient} rounded-2xl opacity-20`} />
@@ -171,14 +171,14 @@ function AchievementCard({ achievement, index }: { achievement: typeof achieveme
           </motion.div>
 
           {/* Category name */}
-          <h4 className="text-xl font-bold mb-4 text-gray-900 transition-all duration-500">
+          <h4 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-gray-900 transition-all duration-500">
             {achievement.name}
           </h4>
 
           {/* Large metric display */}
-          <div className="mb-6">
+          <div className="mb-4 sm:mb-6">
             <motion.div 
-              className={`text-5xl font-black bg-gradient-to-br ${achievement.gradient} bg-clip-text text-transparent`}
+              className={`text-3xl sm:text-4xl lg:text-5xl font-black bg-gradient-to-br ${achievement.gradient} bg-clip-text text-transparent`}
               whileInView={{ scale: [0.8, 1.1, 1] }}
               transition={{ duration: 1, delay: achievement.delay + 0.5 }}
             >
@@ -192,7 +192,7 @@ function AchievementCard({ achievement, index }: { achievement: typeof achieveme
           </div>
 
           {/* Description with elegant typography */}
-          <p className="text-gray-700 leading-relaxed whitespace-pre-line group-hover:text-gray-800 transition-colors duration-500">
+          <p className="text-sm sm:text-base text-gray-700 leading-relaxed whitespace-pre-line group-hover:text-gray-800 transition-colors duration-500">
             {achievement.description}
           </p>
 
@@ -239,7 +239,7 @@ export default function PremiumAchievements() {
   const inView = useInView(sectionRef)
 
   return (
-    <section ref={sectionRef} className="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50">
+    <section ref={sectionRef} className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 relative overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50">
       {/* Section header with elegant animations */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -248,7 +248,7 @@ export default function PremiumAchievements() {
         className="text-center mb-12"
       >
         <motion.h3 
-          className="text-5xl font-bold mb-6 relative"
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 relative"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 0.2 }}
@@ -271,7 +271,7 @@ export default function PremiumAchievements() {
         </motion.h3>
         
         <motion.p 
-          className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed"
+          className="text-gray-600 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}

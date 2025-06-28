@@ -81,7 +81,7 @@ export default function HeroSection() {
             <AnimatePresence>
               {isLoaded && (
                 <motion.h1 
-                  className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight"
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight px-4 sm:px-0"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1 }}
@@ -102,7 +102,7 @@ export default function HeroSection() {
                   >
                     <span className="text-gray-900">次の</span>
                     <motion.span
-                      className="inline-block mx-3 relative"
+                      className="inline-block mx-1 sm:mx-2 md:mx-3 relative"
                       animate={{ 
                         scale: [1, 1.05, 1],
                       }}
@@ -113,7 +113,7 @@ export default function HeroSection() {
                       }}
                     >
                       <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400 font-black">
-                        "成長曲線"
+                        <span className="hidden sm:inline">"</span>成長曲線<span className="hidden sm:inline">"</span>
                       </span>
                       <motion.div
                         className="absolute inset-0 blur-xl bg-gradient-to-r from-blue-400/30 to-blue-600/30"
@@ -161,12 +161,12 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4, duration: 0.8 }}
-            className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
+            className="mt-12 flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0"
           >
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group relative px-8 py-4 overflow-hidden rounded-xl font-semibold text-white transition-all duration-300"
+              className="group relative px-6 sm:px-8 py-3 sm:py-4 overflow-hidden rounded-xl font-semibold text-white transition-all duration-300 w-full sm:w-auto"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500" />
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -179,7 +179,7 @@ export default function HeroSection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group relative px-8 py-4 rounded-xl font-semibold border-2 border-gray-300 text-gray-700 bg-white/80 backdrop-blur-sm transition-all duration-300 hover:border-blue-400 hover:text-blue-600"
+              className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold border-2 border-gray-300 text-gray-700 bg-white/80 backdrop-blur-sm transition-all duration-300 hover:border-blue-400 hover:text-blue-600 w-full sm:w-auto"
             >
               <span className="relative z-10">サービス詳細 →</span>
             </motion.button>

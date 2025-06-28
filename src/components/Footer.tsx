@@ -34,7 +34,7 @@ export default function Footer() {
   return (
     <>
       {/* CTA Section */}
-      <section className="relative py-20 px-6 bg-gradient-to-b from-slate-100 to-white">
+      <section className="relative py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-100 to-white">
         <div className="absolute inset-0 bg-gradient-radial from-primary-blue/5 via-transparent to-transparent" />
         
         <div className="container mx-auto relative z-10 text-center">
@@ -44,19 +44,19 @@ export default function Footer() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl font-bold mb-6">
-              <span className="text-gradient">さあ、あなたのビジネスを、次世代へ。</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 px-4 sm:px-0">
+              <span className="text-gradient">さあ、あなたのビジネスを、<br className="block sm:hidden"/>次世代へ。</span>
             </h2>
             
-            <p className="text-xl text-gray-800 font-medium mb-8 max-w-3xl mx-auto leading-relaxed">
-              まずは30分、貴社の現状と課題をお聞かせください。<br/>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-800 font-medium mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
+              まずは30分、貴社の現状と課題をお聞かせください。<br className="hidden sm:block"/>
               我々が、その未来をどう変えられるかをお見せします。
             </p>
             
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-12 py-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg font-bold text-xl hover-lift shadow-lg clean-border transition-all duration-300 text-white hover:shadow-xl"
+              className="px-8 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg font-bold text-base sm:text-lg lg:text-xl hover-lift shadow-lg clean-border transition-all duration-300 text-white hover:shadow-xl w-full sm:w-auto"
             >
               30分間の無料相談に申し込む
             </motion.button>
@@ -65,7 +65,7 @@ export default function Footer() {
       </section>
 
       {/* Footer */}
-      <footer className="relative py-12 px-6 border-t border-gray-800">
+      <footer className="relative py-8 sm:py-12 px-4 sm:px-6 border-t border-gray-800">
         <div className="container mx-auto relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3">

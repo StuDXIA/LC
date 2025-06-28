@@ -16,7 +16,7 @@ export default function AboutSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
   
   return (
-    <section ref={sectionRef} className="py-20 px-6 relative overflow-hidden">
+    <section ref={sectionRef} className="py-16 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
       {/* Animated background elements */}
       <motion.div 
         className="absolute inset-0 opacity-10"
@@ -35,7 +35,7 @@ export default function AboutSection() {
           className="max-w-4xl mx-auto"
         >
           <motion.h2 
-            className="text-5xl font-bold text-center mb-12"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-8 sm:mb-12"
             whileInView={{ scale: [0.8, 1.05, 1] }}
             transition={{ duration: 0.8 }}
           >
@@ -43,7 +43,7 @@ export default function AboutSection() {
           </motion.h2>
           
           <motion.div 
-            className="glass-effect rounded-lg p-8 md:p-12 relative overflow-hidden"
+            className="glass-effect rounded-lg p-6 sm:p-8 md:p-12 relative overflow-hidden"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
@@ -63,14 +63,14 @@ export default function AboutSection() {
             />
             
             <motion.p 
-              className="text-xl leading-relaxed text-gray-800 font-medium relative z-10"
+              className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-800 font-medium relative z-10"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
               Luminous Coreは、
               <motion.span 
-                className="text-blue-800 font-black inline-block mx-1"
+                className="text-blue-800 font-black block sm:inline-block mx-0 sm:mx-1 my-2 sm:my-0"
                 whileHover={{ scale: 1.05, textShadow: "0 0 15px rgba(14, 165, 233, 0.5)" }}
               >
                 デジタル戦略を起点として、クライアントの事業成果を最大化する
@@ -81,14 +81,14 @@ export default function AboutSection() {
             <br/>
             
             <motion.p 
-              className="text-xl leading-relaxed text-gray-800 font-medium relative z-10"
+              className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-800 font-medium relative z-10"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
             >
               独自の
               <motion.span 
-                className="text-blue-900 font-black inline-block mx-1"
+                className="text-blue-900 font-black block sm:inline-block mx-0 sm:mx-1 my-2 sm:my-0"
                 animate={{ 
                   textShadow: [
                     "0 0 10px rgba(147, 51, 234, 0.5)",
@@ -102,7 +102,7 @@ export default function AboutSection() {
               </motion.span>
               を軸に、成果に必要な
               <motion.span 
-                className="text-accent-blue font-semibold inline-block mx-1"
+                className="text-accent-blue font-semibold block sm:inline-block mx-0 sm:mx-1 my-2 sm:my-0"
                 whileInView={{ rotate: [0, 2, -2, 0] }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >

@@ -182,7 +182,7 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
         <div className={`absolute inset-0 bg-gradient-to-br ${service.visual.gradient} opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500`} />
         
         {/* Content container - better proportions */}
-        <div className="relative p-10 lg:p-14 grid grid-cols-12 gap-8 items-start">
+        <div className="relative p-6 sm:p-8 lg:p-14 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           {/* Glow effect */}
           <motion.div
             className={`absolute -inset-10 bg-gradient-to-br ${service.visual.gradient} opacity-0 blur-2xl`}
@@ -191,16 +191,16 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
           />
           
           {/* Left side - Number with better scale */}
-          <div className="col-span-3 lg:col-span-2">
-            <div className="sticky top-10">
-              <span className={`text-6xl lg:text-7xl font-black bg-gradient-to-br ${service.visual.gradient} bg-clip-text text-transparent block leading-none`}>
+          <div className="col-span-1 lg:col-span-2">
+            <div className="lg:sticky lg:top-10">
+              <span className={`text-5xl sm:text-6xl lg:text-7xl font-black bg-gradient-to-br ${service.visual.gradient} bg-clip-text text-transparent block leading-none`}>
                 {service.number}
               </span>
               <div className="text-xs font-medium tracking-[0.2em] uppercase text-gray-400 mt-2">
                 {service.tagline}
               </div>
               <motion.div
-                className="w-16 h-16 mt-6"
+                className="w-12 h-12 sm:w-16 sm:h-16 mt-4 lg:mt-6"
                 animate={{ 
                   scale: isHovered ? 1.1 : 1,
                   opacity: isHovered ? 0.4 : 0.2,
@@ -214,7 +214,7 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
           </div>
           
           {/* Right side - Content with better hierarchy */}
-          <div className="col-span-9 lg:col-span-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="col-span-1 lg:col-span-10 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
             {/* Problem column */}
             <motion.div
               initial={{ opacity: 0.7 }}
@@ -223,13 +223,13 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
               className="relative"
             >
               <div className="absolute -top-2 -left-2 w-20 h-20 bg-red-50 rounded-full opacity-50 blur-xl" />
-              <h4 className="text-base font-bold text-red-600 mb-4 tracking-wider">PROBLEM</h4>
-              <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3 leading-tight">
+              <h4 className="text-sm sm:text-base font-bold text-red-600 mb-3 sm:mb-4 tracking-wider">PROBLEM</h4>
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
                 {service.problem.title}
               </h3>
-              <p className="text-base text-gray-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                 {service.problem.description}
-                <span className="block text-xl lg:text-2xl font-bold text-red-600 mt-3">
+                <span className="block text-lg sm:text-xl lg:text-2xl font-bold text-red-600 mt-2 sm:mt-3">
                   {service.problem.pain}
                 </span>
               </p>
@@ -246,16 +246,16 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
               className="relative"
             >
               <div className={`absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br ${service.visual.gradient} opacity-10 rounded-full blur-xl`} />
-              <h4 className={`text-base font-bold bg-gradient-to-r ${service.visual.gradient} bg-clip-text text-transparent mb-4 tracking-wider`}>SOLUTION</h4>
-              <h3 className={`text-2xl lg:text-3xl font-bold bg-gradient-to-r ${service.visual.gradient} bg-clip-text text-transparent mb-3 leading-tight`}>
+              <h4 className={`text-sm sm:text-base font-bold bg-gradient-to-r ${service.visual.gradient} bg-clip-text text-transparent mb-3 sm:mb-4 tracking-wider`}>SOLUTION</h4>
+              <h3 className={`text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r ${service.visual.gradient} bg-clip-text text-transparent mb-2 sm:mb-3 leading-tight`}>
                 {service.solution.title}
               </h3>
-              <p className="text-base text-gray-700 mb-4 leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-700 mb-4 leading-relaxed">
                 {service.solution.description}
               </p>
               
               {/* Approach list - always visible */}
-              <div className="space-y-2 mt-6">
+              <div className="space-y-2 mt-4 sm:mt-6">
                 {service.solution.approach.map((item, i) => (
                   <motion.div
                     key={i}
@@ -267,15 +267,15 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
                     transition={{ delay: i * 0.1 }}
                     className="flex items-center gap-3"
                   >
-                    <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.visual.gradient} group-hover:scale-125 transition-transform`} />
-                    <span className="text-sm font-medium text-gray-700">{item}</span>
+                    <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-gradient-to-r ${service.visual.gradient} group-hover:scale-125 transition-transform flex-shrink-0`} />
+                    <span className="text-xs sm:text-sm font-medium text-gray-700 break-words">{item}</span>
                   </motion.div>
                 ))}
               </div>
               
               {/* CTA Button - always visible but subtle */}
               <motion.button 
-                className={`mt-6 px-6 py-2.5 rounded-xl bg-gradient-to-r ${service.visual.gradient} text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300`}
+                className={`mt-4 sm:mt-6 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r ${service.visual.gradient} text-white text-xs sm:text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -309,10 +309,10 @@ export default function CoreServices() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-12 sm:mb-16 lg:mb-20 px-4"
         >
           <motion.h2 
-            className="text-5xl md:text-6xl font-black mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 sm:mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -324,19 +324,19 @@ export default function CoreServices() {
             </span>
           </motion.h2>
           <motion.p 
-            className="text-xl text-gray-600 max-w-3xl mx-auto"
+            className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             停滞から飛躍へ。私たちは問題の本質を見抜き、
-            <br />
+            <br className="hidden sm:block" />
             テクノロジーとクリエイティビティで突破口を創ります。
           </motion.p>
         </motion.div>
 
         {/* Service cards */}
-        <div className="flex flex-col gap-8 mt-16 max-w-7xl mx-auto">
+        <div className="flex flex-col gap-6 sm:gap-8 mt-8 sm:mt-12 lg:mt-16 max-w-7xl mx-auto">
           {serviceTransformations.map((service, index) => (
             <ServiceCard key={service.id} service={service} index={index} />
           ))}
