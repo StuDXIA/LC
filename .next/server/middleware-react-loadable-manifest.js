@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST='{"components/HeroSection.tsx -> ./NeuralGrowthBackground":{"id":8527,"files":["static/chunks/b536a0f1.054732ac48051f55.js","static/chunks/527.3b857888bd44b195.js"]},"components/TechShowcase.tsx -> @monaco-editor/react":{"id":2289,"files":["static/chunks/289.51a49341fce7936e.js"]}}';

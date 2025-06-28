@@ -23,7 +23,6 @@ const config: Config = {
         
         // Legacy mappings for compatibility
         'primary-blue': '#0066CC',
-        'primary-dark': '#003D7A',
         'accent-blue': '#0066CC',
         'light-blue': '#E6F2FF',
         'light-gray': '#F8FAFC',
