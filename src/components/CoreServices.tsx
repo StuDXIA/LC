@@ -169,119 +169,123 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 50, scale: 0.95 }}
-      animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.95 }}
-      transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
+      initial={{ opacity: 0, y: 80 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
+      transition={{ duration: 0.8, delay: index * 0.3, ease: "easeOut" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ y: -2, transition: { duration: 0.3 } }}
-      className="relative group block w-full will-change-transform"
+      className="relative group block w-full"
     >
-      <div className="relative rounded-2xl overflow-hidden shadow-md hover:shadow-lg border border-neutral-200 bg-white transition-all duration-300">
-        {/* Background gradient - stronger presence */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${service.visual.gradient} opacity-[0.02] group-hover:opacity-[0.04] transition-opacity duration-500`} />
+      <div className="relative bg-white overflow-hidden">
+        {/* Ultra-large number background */}
+        <div className="absolute -top-20 -left-10 text-[200px] sm:text-[300px] lg:text-[400px] font-black text-neutral-100 leading-none select-none">
+          {service.number}
+        </div>
         
-        {/* Content container - better proportions */}
-        <div className="relative p-6 sm:p-8 lg:p-14 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-          {/* Glow effect */}
-          <motion.div
-            className={`absolute -inset-10 bg-primary/5 opacity-0 blur-xl`}
-            animate={{ opacity: isHovered ? 0.1 : 0 }}
-            transition={{ duration: 0.5 }}
-          />
+        {/* Main content - vertical flow */}
+        <div className="relative z-10 px-8 sm:px-12 lg:px-20 py-16 sm:py-24 lg:py-32">
+          {/* Service tagline */}
+          <motion.div 
+            className="mb-16 sm:mb-20"
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: index * 0.3 + 0.2 }}
+          >
+            <h3 className="text-sm sm:text-base text-neutral-500 font-medium tracking-[0.3em] uppercase mb-4">
+              {service.tagline}
+            </h3>
+            <div className="w-16 h-1 bg-primary" />
+          </motion.div>
           
-          {/* Left side - Number with better scale */}
-          <div className="col-span-1 lg:col-span-2">
-            <div className="lg:sticky lg:top-10">
-              <span className="text-5xl sm:text-6xl lg:text-7xl font-black text-primary block leading-none">
-                {service.number}
-              </span>
-              <div className="text-xs font-medium tracking-[0.2em] uppercase text-gray-400 mt-2">
-                {service.tagline}
-              </div>
-              <motion.div
-                className="w-12 h-12 sm:w-16 sm:h-16 mt-4 lg:mt-6"
-                animate={{ 
-                  scale: isHovered ? 1.05 : 1,
-                  opacity: isHovered ? 0.3 : 0.15
-                }}
-                transition={{ duration: 0.8 }}
-              >
-                {service.visual.icon}
-              </motion.div>
+          {/* Problem Section - Large & Bold */}
+          <motion.div 
+            className="mb-16 sm:mb-24 lg:mb-32"
+            initial={{ opacity: 0, x: -30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: index * 0.3 + 0.3 }}
+          >
+            <h4 className="text-base sm:text-lg text-red-600 font-bold tracking-wider mb-6 sm:mb-8">
+              ― PROBLEM
+            </h4>
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-neutral-900 mb-6 sm:mb-8 leading-tight">
+              {service.problem.title}
+            </h3>
+            <p className="text-lg sm:text-xl lg:text-2xl text-neutral-600 leading-relaxed">
+              {service.problem.description}
+            </p>
+            <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900 mt-6 sm:mt-8">
+              {service.problem.pain}
+            </p>
+          </motion.div>
+          
+          {/* Visual separator - Arrow or transition element */}
+          <motion.div 
+            className="flex justify-center mb-16 sm:mb-24 lg:mb-32"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: index * 0.3 + 0.5 }}
+          >
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-primary/10 flex items-center justify-center">
+              <svg className="w-8 h-8 sm:w-10 sm:h-10 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </div>
-          </div>
+          </motion.div>
           
-          {/* Right side - Content with better hierarchy */}
-          <div className="col-span-1 lg:col-span-10 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-            {/* Problem column */}
-            <motion.div
-              initial={{ opacity: 0.7 }}
-              animate={{ opacity: isHovered ? 0.4 : 0.7 }}
-              transition={{ duration: 0.3 }}
-              className="relative"
-            >
-              <div className="absolute -top-2 -left-2 w-20 h-20 bg-neutral-100 rounded-full opacity-30 blur-xl" />
-              <h4 className="text-sm sm:text-base font-bold text-neutral-500 mb-3 sm:mb-4 tracking-wider">PROBLEM</h4>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
-                {service.problem.title}
-              </h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                {service.problem.description}
-                <span className="block text-lg sm:text-xl lg:text-2xl font-bold text-neutral-900 mt-2 sm:mt-3">
-                  {service.problem.pain}
-                </span>
-              </p>
-            </motion.div>
+          {/* Solution Section - Impactful */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: index * 0.3 + 0.6 }}
+          >
+            <h4 className="text-base sm:text-lg text-primary font-bold tracking-wider mb-6 sm:mb-8">
+              ― SOLUTION
+            </h4>
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-primary-dark mb-6 sm:mb-8 leading-tight">
+              {service.solution.title}
+            </h3>
+            <p className="text-lg sm:text-xl lg:text-2xl text-neutral-700 mb-12 sm:mb-16 leading-relaxed">
+              {service.solution.description}
+            </p>
             
-            {/* Solution column */}
+            {/* Approach points - Larger and clearer */}
+            <div className="space-y-6 sm:space-y-8 mb-12 sm:mb-16">
+              {service.solution.approach.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: index * 0.3 + 0.7 + i * 0.1 }}
+                  className="flex items-start gap-6"
+                >
+                  <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 flex items-center justify-center mt-1">
+                    <span className="text-sm sm:text-base font-bold text-primary">
+                      {i + 1}
+                    </span>
+                  </div>
+                  <span className="text-base sm:text-lg lg:text-xl text-neutral-700 leading-relaxed">
+                    {item}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+            
+            {/* CTA - More prominent */}
             <motion.div
-              initial={{ opacity: 0.8 }}
-              animate={{ 
-                opacity: isHovered ? 1 : 0.8,
-                x: isHovered ? 0 : 10
-              }}
-              transition={{ duration: 0.5 }}
-              className="relative"
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ delay: index * 0.3 + 1 }}
             >
-              <div className={`absolute -top-2 -right-2 w-24 h-24 bg-primary-light opacity-20 rounded-full blur-xl`} />
-              <h4 className="text-sm sm:text-base font-bold text-primary mb-3 sm:mb-4 tracking-wider">SOLUTION</h4>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-primary-dark mb-2 sm:mb-3 leading-tight">
-                {service.solution.title}
-              </h3>
-              <p className="text-sm sm:text-base text-gray-700 mb-4 leading-relaxed">
-                {service.solution.description}
-              </p>
-              
-              {/* Approach list - always visible */}
-              <div className="space-y-2 mt-4 sm:mt-6">
-                {service.solution.approach.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ x: 0, opacity: 0.7 }}
-                    animate={{ 
-                      x: isHovered ? 10 : 0, 
-                      opacity: isHovered ? 1 : 0.7 
-                    }}
-                    transition={{ delay: i * 0.1 }}
-                    className="flex items-center gap-3"
-                  >
-                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary group-hover:scale-110 transition-transform flex-shrink-0" />
-                    <span className="text-xs sm:text-sm font-medium text-gray-700 break-words">{item}</span>
-                  </motion.div>
-                ))}
-              </div>
-              
-              {/* CTA Button - always visible but subtle */}
-              <motion.button 
-                className="mt-4 sm:mt-6 px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg bg-primary text-white text-xs sm:text-sm font-semibold shadow-sm hover:shadow-md hover:bg-primary-dark transition-all duration-300 w-full sm:w-auto"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                詳しく見る →
-              </motion.button>
+              <button className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-primary hover:bg-primary-dark text-white font-bold text-base sm:text-lg rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl">
+                {service.id === 'awareness' && 'SNSグロースの事例を見る'}
+                {service.id === 'conversion' && 'Webサイト/LP制作の事例を見る'}
+                {service.id === 'automation' && 'カスタム開発の事例を見る'}
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.div>
@@ -294,36 +298,35 @@ export default function CoreServices() {
 
 
   return (
-    <section id="services" ref={sectionRef} className="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white">
-      {/* Background elements */}
+    <section id="services" ref={sectionRef} className="py-32 sm:py-40 lg:py-48 relative overflow-hidden bg-gradient-to-b from-neutral-50 to-white">
+      {/* Minimal background accent */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -left-40 w-80 h-80 bg-primary-light rounded-full blur-2xl opacity-20" />
-        <div className="absolute bottom-1/4 -right-40 w-80 h-80 bg-primary-light rounded-full blur-2xl opacity-20" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-primary/[0.02] rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto relative z-10 max-w-7xl">
+      <div className="relative z-10">
         {/* Section header */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12 sm:mb-16 lg:mb-20 px-4"
+          className="text-center mb-24 sm:mb-32 lg:mb-40 px-4"
         >
           <motion.h2 
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 sm:mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 sm:mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="text-gray-900">事業成長を加速する、</span>
+            <span className="text-neutral-900">事業成長を加速する、</span>
             <br />
             <span className="text-primary-dark">
               3つの変革。
             </span>
           </motion.h2>
           <motion.p 
-            className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto"
+            className="text-lg sm:text-xl lg:text-2xl text-neutral-600 max-w-4xl mx-auto"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -334,34 +337,12 @@ export default function CoreServices() {
           </motion.p>
         </motion.div>
 
-        {/* Service cards */}
-        <div className="flex flex-col gap-6 sm:gap-8 mt-8 sm:mt-12 lg:mt-16 max-w-7xl mx-auto">
+        {/* Service cards - with larger gaps */}
+        <div className="flex flex-col gap-24 sm:gap-32 lg:gap-40">
           {serviceTransformations.map((service, index) => (
             <ServiceCard key={service.id} service={service} index={index} />
           ))}
         </div>
-        
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center mt-16"
-        >
-          <p className="text-lg text-gray-700 mb-2">
-            実際の成果をご覧ください
-          </p>
-          <motion.div
-            animate={{ y: [0, 5, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-gray-400"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mx-auto">
-              <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   )
