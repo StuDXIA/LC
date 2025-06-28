@@ -65,7 +65,7 @@ export default function Footer() {
       </section>
 
       {/* Footer */}
-      <footer className="relative py-8 sm:py-12 px-4 sm:px-6 border-t border-gray-800">
+      <footer className="relative py-8 sm:py-12 px-4 sm:px-6 border-t border-neutral-200">
         <div className="container mx-auto relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3">
@@ -74,26 +74,12 @@ export default function Footer() {
                 alt="Luminous Core Logo"
                 width={30}
                 height={30}
-                className="drop-shadow-[0_0_10px_rgba(0,217,255,0.4)]"
+                className="opacity-60"
               />
-              <span className="text-xl font-bold text-gradient">Luminous Core</span>
+              <span className="text-lg font-medium text-neutral-600">Luminous Core</span>
             </div>
             
-            <div className="flex gap-4">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  whileHover={{ scale: 1.2, rotate: 360 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-8 h-8 glass-effect rounded-lg flex items-center justify-center hover:border-primary-blue text-sm text-gray-800"
-                >
-                  <social.icon />
-                </motion.a>
-              ))}
-            </div>
-            
-            <p className="text-gray-700 text-sm font-medium">
+            <p className="text-neutral-500 text-sm">
               © 2024 Luminous Core. All rights reserved.
             </p>
           </div>
