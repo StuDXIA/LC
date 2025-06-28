@@ -75,7 +75,7 @@ export default function AboutSection() {
               >
                 デジタル戦略を起点として、クライアントの事業成果を最大化する
               </motion.span>
-              グローステック・カンパニーです。
+              グローステック・パートナーです。
             </motion.p>
             
             <br/>
@@ -126,7 +126,7 @@ export default function AboutSection() {
                   animate={{ scale: [1, 1.5, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
-                <span className="text-sm text-gray-400">グローステック・カンパニー</span>
+                <span className="text-sm text-gray-400">Growth Tech Partner</span>
               </motion.div>
             </motion.div>
           </motion.div>
