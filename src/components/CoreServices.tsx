@@ -32,16 +32,16 @@ const serviceTransformations: ServiceTransformation[] = [
     tagline: 'Transform Visibility',
     problem: {
       title: '埋もれる価値',
-      description: '素晴らしいサービスも、',
-      pain: '誰にも見つけてもらえない'
+      description: '素晴らしいサービスも、届けたい相手に見つけてもらえなければ、',
+      pain: '存在しないのと同じです。'
     },
     solution: {
-      title: '戦略的露出拡大',
-      description: 'データ駆動のSNS戦略で',
+      title: '戦略的SNSグロース',
+      description: '我々は、AIとデータ分析を駆使し、貴社の"本当のファン"になる層だけに、最適化されたメッセージを届けます。',
       approach: [
-        'AI分析による最適配信',
-        'バイラルコンテンツ設計',
-        'ターゲット精密リーチ'
+        '誰に、何を、いつ届けるか。AIが最適な「勝ち筋」を発見',
+        'ターゲット顧客への精密なリーチで、広告費を無駄にしない',
+        '話題のバイラルコンテンツを企画・制作'
       ]
     },
     visual: {
@@ -90,16 +90,16 @@ const serviceTransformations: ServiceTransformation[] = [
     tagline: 'Transform Visitors',
     problem: {
       title: '失われる機会',
-      description: '訪問者の97%が、',
-      pain: 'そのまま離脱している'
+      description: '訪れた人の97%が、何もせずに離脱する。それは、ウェブサイトが',
+      pain: '"ただのパンフレット"になっている証拠です。'
     },
     solution: {
-      title: 'コンバージョン最適化',
-      description: '心理学×データで設計する',
+      title: 'コンバージョン特化型Webサイト/LP制作',
+      description: '我々は、訪問者が無意識に「欲しい」と感じる、心理学に基づいたサイトを設計します。',
       approach: [
-        '行動心理学UI/UX',
-        'A/Bテスト自動化',
-        'リアルタイム最適化'
+        '行動心理学に基づいた、コンバージョンに繋がるUI/UX設計',
+        'A/Bテストによる、最も効果の出るパターンのデータ証明',
+        '問い合わせや購入に直結する、最適な顧客体験の構築'
       ]
     },
     visual: {
@@ -124,16 +124,16 @@ const serviceTransformations: ServiceTransformation[] = [
     tagline: 'Transform Operations',
     problem: {
       title: '消耗する時間',
-      description: '毎日の繰り返し作業に、',
-      pain: '貴重な人材が埋没している'
+      description: '問い合わせ対応、日報作成、予約管理…。毎日の繰り返し作業に、',
+      pain: 'チームの貴重な才能と時間が埋没していませんか？'
     },
     solution: {
-      title: 'AI業務自動化',
-      description: '人は創造的な仕事に集中',
+      title: 'AIによる業務プロセスの自動化',
+      description: '我々は、定型的な業務をAIで自動化し、あなたのチームを退屈な繰り返し作業から解放します。',
       approach: [
-        'カスタムAI開発',
-        'ワークフロー自動化',
-        '24/7稼働システム'
+        '問い合わせ対応、予約管理などの定型業務をAIで自動化',
+        '貴社専用のカスタムAIツール・業務システムを開発',
+        'チームを単純作業から解放し、創造性を最大化'
       ]
     },
     visual: {
@@ -316,10 +316,10 @@ export default function CoreServices() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="text-gray-900">事業成長を加速する</span>
+            <span className="text-gray-900">事業成長を加速する、</span>
             <br />
             <span className="text-primary-dark">
-              3つの変革
+              3つの変革。
             </span>
           </motion.h2>
           <motion.p 
@@ -330,7 +330,7 @@ export default function CoreServices() {
           >
             停滞から飛躍へ。私たちは問題の本質を見抜き、
             <br className="hidden sm:block" />
-            テクノロジーとクリエイティビティで突破口を創ります。
+            テクノロジーとクリエイティビティで、あなたのビジネスの突破口を創ります。
           </motion.p>
         </motion.div>
 
