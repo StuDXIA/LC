@@ -198,7 +198,7 @@ export default function TechShowcase() {
               <div className="absolute inset-0 rounded-lg border border-primary/10" />
               
               <p className="text-lg leading-relaxed text-gray-800 font-medium mb-6 relative z-10">
-                私たちの技術力とデザイン性は、次世代をリードするコミュニティからの確かな信頼に裏付けられています。
+                私たちの技術力とデザイン性は、大手製薬会社をはじめとするナショナルブランドの厳しい基準をクリアした実績と、次世代をリードするコミュニティからの確かな信頼に裏付けられています。
               </p>
               
               <p className="text-lg leading-relaxed text-gray-800 font-medium mb-6 relative z-10">
