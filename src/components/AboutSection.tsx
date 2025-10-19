@@ -80,9 +80,7 @@ export default function AboutSection() {
                 </h4>
                 
                 <p className="text-lg sm:text-xl text-neutral-700 mb-12 leading-relaxed">
-                  <span className="text-primary-dark font-normal">AI技術と専門チーム</span>による
-                  <br />戦略的なデジタルグロースを軸に、
-                  <br />成果に必要な
+                  <span className="text-primary-dark font-normal">AI技術と専門チーム</span>による戦略的なデジタルグロースを軸に、成果に必要な
                 </p>
                 
                 <div className="space-y-6">

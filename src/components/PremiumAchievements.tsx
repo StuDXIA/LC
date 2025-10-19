@@ -5,30 +5,30 @@ import { motion, useInView } from 'framer-motion'
 import { FaChartLine, FaRocket, FaReact } from 'react-icons/fa'
 
 const achievements = [
-  { 
-    icon: FaChartLine, 
-    name: 'CVR向上', 
+  {
+    icon: FaChartLine,
+    name: 'CVR向上',
     metric: '+15%',
-    description: 'LP改修による\nお問い合わせ転換率\n平均+15%以上',
+    description: 'LP改修によるお問い合わせ転換率\n平均+15%以上',
     gradient: 'from-primary to-primary-dark',
     glowColor: 'primary',
     delay: 0
   },
-  { 
-    icon: FaRocket, 
-    name: 'リード獲得', 
+  {
+    icon: FaRocket,
+    name: 'リード獲得',
     metric: '+30',
     unit: '件/月',
-    description: '戦略的SNS運用による\n月間新規リード獲得\n+30件以上',
+    description: '戦略的SNS運用による\n月間新規リード獲得+30件以上',
     gradient: 'from-primary-dark to-primary',
     glowColor: 'primary-dark',
     delay: 0.2
   },
-  { 
-    icon: FaReact, 
-    name: '業務効率化', 
+  {
+    icon: FaReact,
+    name: '業務効率化',
     metric: '50%',
-    description: 'カスタムツール導入による\n特定業務の作業時間\n50%削減',
+    description: 'カスタムツール導入による\n特定業務の作業時間50%削減',
     gradient: 'from-primary to-primary-dark',
     glowColor: 'primary',
     delay: 0.4
@@ -270,15 +270,13 @@ export default function PremiumAchievements() {
           />
         </motion.h3>
         
-        <motion.p 
+        <motion.p
           className="text-gray-600 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          実際のクライアント様と共に達成した、
-          <span className="text-green-600 font-bold">計測可能な成果</span>
-          の一例をご紹介します。
+          実際のクライアント様と共に達成した、<span className="text-green-600 font-bold">計測可能な成果</span>の一例をご紹介します。
         </motion.p>
       </motion.div>
 

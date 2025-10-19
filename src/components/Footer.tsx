@@ -45,12 +45,11 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 px-4 sm:px-0">
-              <span className="text-gradient">さあ、あなたのビジネスを、<br className="block sm:hidden"/>次世代へ。</span>
+              <span className="text-gradient">さあ、あなたのビジネスを、次世代へ。</span>
             </h2>
             
             <p className="text-base sm:text-lg lg:text-xl text-gray-800 font-medium mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-              まずは30分、貴社の現状と課題をお聞かせください。<br className="hidden sm:block"/>
-              我々が、その未来をどう変えられるかをお見せします。
+              まずは30分、貴社の現状と課題をお聞かせください。我々が、その未来をどう変えられるかをお見せします。
             </p>
             
             <motion.a

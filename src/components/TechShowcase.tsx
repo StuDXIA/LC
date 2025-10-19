@@ -172,19 +172,14 @@ export default function TechShowcase() {
           </motion.h2>
           
           <div className="max-w-4xl mx-auto mb-12">
-            <motion.h3 
+            <motion.h3
               className="text-2xl font-bold text-center mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
               style={{ transform: 'translateZ(0)' }}
             >
-              <span className="inline-block text-gray-800 font-medium">
-                次世代をリードするコミュニティからの、
-              </span>
-              <span className="inline-block text-primary-dark font-bold">
-                確かな信頼。
-              </span>
+              <span className="inline-block text-gray-800 font-medium">次世代をリードするコミュニティからの、</span><span className="inline-block text-primary-dark font-bold">確かな信頼。</span>
             </motion.h3>
             
             <motion.div 
@@ -202,23 +197,11 @@ export default function TechShowcase() {
               </p>
               
               <p className="text-lg leading-relaxed text-gray-800 font-medium mb-6 relative z-10">
-                代表が創設した
-                <span className="text-primary-blue font-bold inline-block mx-1">
-                  『StuDXIA』
-                </span>
-                は、慶應義塾大学を拠点に、東京大学や早稲田大学の有志、さらには上場企業やテック企業とも連携する、
-                <span className="text-gradient font-semibold inline-block mx-1">
-                  国内最大級のDXコミュニティ
-                </span>
-                です。
+                代表が創設した<span className="text-primary-blue font-bold inline-block mx-1">『StuDXIA』</span>は、慶應義塾大学を拠点に、東京大学や早稲田大学の有志、さらには上場企業やテック企業とも連携する、<span className="text-gradient font-semibold inline-block mx-1">国内最大級のDXコミュニティ</span>です。
               </p>
               
               <p className="text-lg leading-relaxed text-gray-800 font-medium relative z-10">
-                また、東京大学のキャリア支援団体
-                <span className="text-primary-dark font-bold inline-block mx-1">
-                  『羅針盤』
-                </span>
-                の公式ウェブサイト制作も担当。これらの実績こそが、我々が信頼できるプロフェッショナルな開発パートナーであることの何よりの証明です。
+                また、東京大学のキャリア支援団体<span className="text-primary-dark font-bold inline-block mx-1">『羅針盤』</span>の公式ウェブサイト制作も担当。これらの実績こそが、我々が信頼できるプロフェッショナルな開発パートナーであることの何よりの証明です。
               </p>
             </motion.div>
           </div>
@@ -379,11 +362,7 @@ export default function TechShowcase() {
                     その経験からデジタル分野の可能性を確信し、多様な才能を集めてDXコミュニティ「StuDXIA」を創設。
                   </p>
                   <p>
-                    現在は、論理的なビジネス・AIの知見と、モデルとしても活動する表現力を掛け合わせ、独自の視点で企業の課題解決に挑む。
-                    <span className="text-primary-blue font-semibold inline-block">
-                      IT資格や簿記資格
-                    </span>
-                    も、その多角的な視点を支えている。
+                    現在は、論理的なビジネス・AIの知見と、モデルとしても活動する表現力を掛け合わせ、独自の視点で企業の課題解決に挑む。<span className="text-primary-blue font-semibold inline-block">IT資格や簿記資格</span>も、その多角的な視点を支えている。
                   </p>
                   <p className="font-semibold">
                     アカデミックな知見とビジネスの最前線を繋ぎ、データとAIを駆使してクライアントの事業価値を最大化することを使命とする。

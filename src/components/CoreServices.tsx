@@ -32,12 +32,12 @@ const serviceTransformations: ServiceTransformation[] = [
     tagline: 'Transform Visibility',
     problem: {
       title: '埋もれる価値',
-      description: '素晴らしいサービスも、届けたい相手に見つけてもらえなければ、',
-      pain: '存在しないのと同じです。'
+      description: '素晴らしいサービスも、届けたい相手に見つけてもらえなければ、存在しないのと同じです。',
+      pain: ''
     },
     solution: {
       title: '戦略的SNSグロース',
-      description: '我々は、AIとデータ分析を駆使し、貴社の"本当のファン"になる層だけに、最適化されたメッセージを届けます。',
+      description: '我々は、AIとデータ分析を駆使し、貴社の"本当のファン"になる層だけに最適化されたメッセージを届けます。',
       approach: [
         '誰に、何を、いつ届けるか。AIが最適な「勝ち筋」を発見',
         'ターゲット顧客への精密なリーチで、広告費を無駄にしない',
@@ -90,8 +90,8 @@ const serviceTransformations: ServiceTransformation[] = [
     tagline: 'Transform Visitors',
     problem: {
       title: '失われる機会',
-      description: '訪れた人の97%が、何もせずに離脱する。それは、ウェブサイトが',
-      pain: '"ただのパンフレット"になっている証拠です。'
+      description: '訪れた人の97%が、何もせずに離脱する。それは、ウェブサイトが"ただのパンフレット"になっている証拠です。',
+      pain: ''
     },
     solution: {
       title: 'コンバージョン特化型Webサイト/LP制作',
@@ -124,8 +124,8 @@ const serviceTransformations: ServiceTransformation[] = [
     tagline: 'Transform Operations',
     problem: {
       title: '消耗する時間',
-      description: '問い合わせ対応、日報作成、予約管理…。毎日の繰り返し作業に、',
-      pain: 'チームの貴重な才能と時間が埋没していませんか？'
+      description: '問い合わせ対応、日報作成、予約管理…。毎日の繰り返し作業に、チームの貴重な才能と時間が埋没していませんか？',
+      pain: ''
     },
     solution: {
       title: 'AIによる業務プロセスの自動化',
@@ -219,9 +219,11 @@ function ServiceCard({ service, index }: { service: ServiceTransformation, index
             <p className="text-lg sm:text-xl lg:text-2xl text-neutral-600 leading-relaxed">
               {service.problem.description}
             </p>
-            <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900 mt-6 sm:mt-8">
-              {service.problem.pain}
-            </p>
+            {service.problem.pain && (
+              <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900 mt-6 sm:mt-8">
+                {service.problem.pain}
+              </p>
+            )}
           </motion.div>
           
           {/* Visual separator - Arrow or transition element */}

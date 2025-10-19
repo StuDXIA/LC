@@ -151,8 +151,7 @@ export default function HeroSection() {
             transition={{ delay: 0.8, duration: 0.8 }}
           >
             <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              デジタル戦略で事業成果を最大化する
-              <span className="font-semibold text-primary"> グローステック・パートナー</span>
+              デジタル戦略で事業成果を最大化する<span className="font-semibold text-primary">グローステック・パートナー</span>
             </p>
             <motion.p
               className="mt-4 text-base text-gray-600 max-w-2xl mx-auto"
@@ -160,8 +159,7 @@ export default function HeroSection() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
             >
-              AI技術と専門チームで、SNSグロース・Web制作・業務効率化を
-              <span className="font-medium">ワンストップ</span>で実現
+              AI技術と専門チームで、SNSグロース・Web制作・業務効率化を<span className="font-medium">ワンストップ</span>で実現
             </motion.p>
           </motion.div>
           
